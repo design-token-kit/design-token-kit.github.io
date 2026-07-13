@@ -1,0 +1,194 @@
+---
+import projectMark from '#/assets/design-token-kit-mark.svg';
+---
+
+<main class="home-page">
+    <section class="hero">
+        <div class="hero-content">
+            <p class="eyebrow">Design Token Kit</p>
+            <h1>Design tokens for consistent AI-native interfaces.</h1>
+            <p class="summary">
+                Validate, convert, and showcase DTCG design tokens from one
+                small toolkit.
+            </p>
+            <div class="actions">
+                <a class="primary-action" href="https://github.com/design-token-kit/design-token-kit">
+                    GitHub
+                </a>
+                <a class="secondary-action" href="https://www.npmjs.com/package/@design-token-kit/cli">
+                    npm package
+                </a>
+            </div>
+        </div>
+        <img class="project-mark" src={projectMark.src} width="160" height="160" alt="" />
+    </section>
+
+    <section class="capabilities" aria-label="Core capabilities">
+        <article>
+            <h2>Validate</h2>
+            <p>Check token files for schema, reference, type, and lint issues.</p>
+        </article>
+        <article>
+            <h2>Convert</h2>
+            <p>Generate CSS, SCSS, DESIGN.md, and Tailwind CSS v4 theme output.</p>
+        </article>
+        <article>
+            <h2>Showcase</h2>
+            <p>Create readable token previews for review, documentation, and QA.</p>
+        </article>
+    </section>
+</main>
+
+<style>
+    .home-page {
+        min-height: 100vh;
+        color: #111827;
+        background: #f8fafc;
+        font-family:
+            Inter,
+            Roboto,
+            "Helvetica Neue",
+            Arial,
+            sans-serif;
+    }
+
+    .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 48px;
+        align-items: center;
+        width: min(1120px, calc(100% - 48px));
+        min-height: 72vh;
+        margin: 0 auto;
+        padding: 64px 0 40px;
+    }
+
+    .hero-content {
+        max-width: 720px;
+    }
+
+    .eyebrow {
+        margin: 0 0 16px;
+        color: #2563eb;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0;
+        text-transform: uppercase;
+    }
+
+    h1 {
+        max-width: 760px;
+        margin: 0;
+        color: #0f172a;
+        font-size: 56px;
+        line-height: 1.02;
+        letter-spacing: 0;
+    }
+
+    .summary {
+        max-width: 620px;
+        margin: 24px 0 0;
+        color: #475569;
+        font-size: 20px;
+        line-height: 1.55;
+        letter-spacing: 0;
+    }
+
+    .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 32px;
+    }
+
+    .actions a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0 18px;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0;
+        text-decoration: none;
+    }
+
+    .primary-action {
+        color: #ffffff;
+        background: #111827;
+    }
+
+    .secondary-action {
+        color: #111827;
+        background: #ffffff;
+        border: 1px solid #cbd5e1;
+    }
+
+    .project-mark {
+        width: 160px;
+        height: 160px;
+    }
+
+    .capabilities {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        width: min(1120px, calc(100% - 48px));
+        margin: 0 auto;
+        padding: 0 0 64px;
+    }
+
+    .capabilities article {
+        min-height: 156px;
+        padding: 24px;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+    }
+
+    .capabilities h2 {
+        margin: 0;
+        color: #0f172a;
+        font-size: 18px;
+        line-height: 1.3;
+        letter-spacing: 0;
+    }
+
+    .capabilities p {
+        margin: 12px 0 0;
+        color: #475569;
+        font-size: 15px;
+        line-height: 1.55;
+        letter-spacing: 0;
+    }
+
+    @media (max-width: 760px) {
+        .hero {
+            grid-template-columns: 1fr;
+            gap: 28px;
+            width: min(100% - 32px, 1120px);
+            min-height: auto;
+            padding: 48px 0 32px;
+        }
+
+        h1 {
+            font-size: 38px;
+            line-height: 1.08;
+        }
+
+        .summary {
+            font-size: 18px;
+        }
+
+        .project-mark {
+            width: 112px;
+            height: 112px;
+        }
+
+        .capabilities {
+            grid-template-columns: 1fr;
+            width: min(100% - 32px, 1120px);
+            padding-bottom: 48px;
+        }
+    }
+</style>
