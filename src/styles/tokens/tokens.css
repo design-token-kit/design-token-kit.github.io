@@ -35,8 +35,8 @@
   --primitive-space-8: 4rem;
   --primitive-space-9: 6rem;
   --primitive-space-10: 8rem;
-  --primitive-font-family-display: Inter, ui-sans-serif, system-ui, sans-serif;
-  --primitive-font-family-body: Inter, ui-sans-serif, system-ui, sans-serif;
+  --primitive-font-family-display: Manrope, ui-sans-serif, system-ui, sans-serif;
+  --primitive-font-family-body: Manrope, ui-sans-serif, system-ui, sans-serif;
   --primitive-font-family-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   --primitive-font-size-xs: 0.75rem;
   --primitive-font-size-sm: 0.875rem;
@@ -207,8 +207,8 @@
   --primitive-space-8: 4rem;
   --primitive-space-9: 6rem;
   --primitive-space-10: 8rem;
-  --primitive-font-family-display: Inter, ui-sans-serif, system-ui, sans-serif;
-  --primitive-font-family-body: Inter, ui-sans-serif, system-ui, sans-serif;
+  --primitive-font-family-display: Manrope, ui-sans-serif, system-ui, sans-serif;
+  --primitive-font-family-body: Manrope, ui-sans-serif, system-ui, sans-serif;
   --primitive-font-family-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   --primitive-font-size-xs: 0.75rem;
   --primitive-font-size-sm: 0.875rem;
