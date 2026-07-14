@@ -33,7 +33,9 @@ The current homepage presents the project as a small landing page with:
 ## Structure
 
 - `src/pages/index.astro` - homepage route
-- `src/components/HomePage.astro` - homepage content and styles
+- `src/components/HomePage/HomePage.astro` - homepage composition
+- `src/components/HomePage/HomePage.module.scss` - homepage layout styles
+- `src/components/*/*.astro` - reusable homepage sections and cards
 - `src/layouts/Layout.astro` - shared document shell and metadata
 - `public/` - static files copied to the final build
 - `dist/` - generated build output, excluded from version control
@@ -89,6 +91,6 @@ from the root URL and does not require an extra `base` path.
 
 ## Content
 
-- Project homepage content: `src/components/HomePage.astro`
+- Project homepage composition: `src/components/HomePage/HomePage.astro`
 - Page entrypoint: `src/pages/index.astro`
 - HTML metadata and favicon links: `src/layouts/Layout.astro`

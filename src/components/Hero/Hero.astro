@@ -1,0 +1,38 @@
+---
+import arrowRightIcon from '#/assets/icon-arrow-right.svg';
+import githubIcon from '#/assets/icon-github.svg';
+import projectMark from '#/assets/logotype-l.svg';
+import styles from '#/components/Hero/Hero.module.scss';
+---
+
+<section class={styles.hero} aria-labelledby="hero-heading">
+    <div class={styles.content}>
+        <p class={styles.eyebrow}>Open source</p>
+        <h1 id="hero-heading">Design Token Kit</h1>
+        <p class={styles.lead}>
+            Validate, convert, showcase, and analyze DTCG design tokens with confidence.
+        </p>
+        <p class={styles.summary}>
+           Give Your LLM a Design Language, not a screenshot.
+        </p>
+        <div class={styles.actions}>
+            <a class={styles.primaryAction} href="#">
+                <span>Get Started</span>
+                <img src={arrowRightIcon.src} width="24" height="24" alt="" />
+            </a>
+            <a class={styles.secondaryAction} href="#">
+                <span>View on GitHub</span>
+                <img src={githubIcon.src} width="24" height="24" alt="" />
+            </a>
+        </div>
+    </div>
+
+    <div class={styles.visual} aria-hidden="true">
+        <img
+            src={projectMark.src}
+            width={projectMark.width}
+            height={projectMark.height}
+            alt=""
+        />
+    </div>
+</section>

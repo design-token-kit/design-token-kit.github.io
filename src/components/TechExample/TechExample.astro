@@ -1,0 +1,82 @@
+---
+import styles from '#/components/TechExample/TechExample.module.scss';
+
+interface TokenPreview {
+    name: string;
+    value: string;
+    tone: 'teal500' | 'teal600' | 'amber500' | 'cream100' | 'neutral900';
+}
+
+interface ProcessingMetric {
+    label: string;
+    value: string;
+}
+
+const tokenPreviews: TokenPreview[] = [
+    { name: 'primary/500', value: '#0D766E', tone: 'teal500' },
+    { name: 'primary/600', value: '#0A5F59', tone: 'teal600' },
+    { name: 'accent/500', value: '#F59E0B', tone: 'amber500' },
+    { name: 'neutral/100', value: '#F8EFE0', tone: 'cream100' },
+    { name: 'neutral/900', value: '#0F172A', tone: 'neutral900' },
+];
+
+const processingMetrics: ProcessingMetric[] = [
+    { label: 'Total tokens', value: '842' },
+    { label: 'Namespaces', value: '12' },
+    { label: 'Formats', value: '6' },
+    { label: 'Last build', value: '2m' },
+];
+---
+
+<section class={styles.techExample} aria-labelledby="tech-example-heading">
+    <div class={styles.codePanel}>
+        <div class={styles.tabs} aria-label="Example files">
+            <span class={styles.activeTab}>tokens.json</span>
+            <span>tokens.css</span>
+            <span>theme.ts</span>
+        </div>
+        <pre aria-label="DTCG JSON example"><code>{`{
+    "color": {
+        "primary": {
+            "500": { "$type": "color", "$value": "#0D766E" },
+            "600": { "$type": "color", "$value": "#0A5F59" }
+        },
+        "accent": {
+            "500": { "$type": "color", "$value": "#F59E0B" }
+        }
+    },
+    "radius": {
+        "md": { "$type": "dimension", "$value": "8px" }
+    }
+}`}</code></pre>
+    </div>
+
+    <div class={styles.previewPanel}>
+        <div class={styles.panelHeader}>
+            <div>
+                <p class={styles.eyebrow}>Token preview</p>
+                <h2 id="tech-example-heading">Processed output, ready for review</h2>
+            </div>
+            <a href="#">View all</a>
+        </div>
+
+        <ul class={styles.swatches} aria-label="Color token previews">
+            {tokenPreviews.map((tokenPreview) => (
+                <li>
+                    <span class={`${styles.swatch} ${styles[tokenPreview.tone]}`}></span>
+                    <strong>{tokenPreview.name}</strong>
+                    <span>{tokenPreview.value}</span>
+                </li>
+            ))}
+        </ul>
+
+        <dl class={styles.metrics}>
+            {processingMetrics.map((processingMetric) => (
+                <div>
+                    <dt>{processingMetric.label}</dt>
+                    <dd>{processingMetric.value}</dd>
+                </div>
+            ))}
+        </dl>
+    </div>
+</section>
