@@ -1,5 +1,5 @@
 ---
-import projectMark from '#/assets/design-token-kit-mark.svg';
+import projectMark from '#/assets/logo/logotype-s.svg';
 import styles from '#/components/Footer/Footer.module.scss';
 
 interface FooterLink {
@@ -70,5 +70,5 @@ const footerGroups: FooterGroup[] = [
         </nav>
     </div>
 
-    <p class={styles.copyright}>© 2026 Design Token Kit. MIT License.</p>
+    <p class={styles.copyright}>© {new Date().getFullYear()} Design Token Kit. Apache-2.0.</p>
 </footer>
