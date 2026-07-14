@@ -1,41 +1,49 @@
 .techExample {
+    --tech-example-border-width: 0.0625rem;
+    --tech-example-code-min-height: 22rem;
+    --tech-example-code-line-height: 1.7;
+    --tech-example-panel-title-max-width: 28rem;
+    --tech-example-panel-title-line-height: 1.25;
+    --tech-example-link-underline-offset: 0.25rem;
+    --tech-example-swatch-height: 3rem;
+
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(20rem, 1fr);
-    width: min(var(--max-width-page), calc(100% - var(--space-6)));
-    margin: var(--space-0) auto;
+    width: min(var(--semantic-size-maxWidthPage), calc(100% - var(--semantic-space-6)));
+    margin: var(--semantic-space-0) auto;
     overflow: hidden;
-    background: var(--color-surface);
-    border: 0.0625rem solid var(--color-border);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-sm);
+    background: var(--semantic-color-surface-default);
+    border: var(--tech-example-border-width) solid var(--semantic-color-border-default);
+    border-radius: var(--semantic-radius-lg);
+    box-shadow: var(--semantic-shadow-sm);
 }
 
 .codePanel,
 .previewPanel {
     min-width: 0;
-    padding: var(--space-5);
+    padding: var(--semantic-space-5);
 }
 
 .codePanel {
-    background: var(--color-surface-muted);
-    border-right: 0.0625rem solid var(--color-border-subtle);
+    background: var(--semantic-color-surface-muted);
+    border-right: var(--tech-example-border-width) solid var(--semantic-color-border-subtle);
 }
 
 .tabs {
     display: flex;
-    gap: var(--space-0);
-    margin-bottom: var(--space-4);
+    gap: var(--semantic-space-0);
+    margin-bottom: var(--semantic-space-4);
     overflow: hidden;
-    color: var(--color-text-muted);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semibold);
-    background: var(--color-surface);
-    border: 0.0625rem solid var(--color-border-subtle);
-    border-radius: var(--border-radius-sm);
+    color: var(--semantic-color-text-muted);
+    font-size: var(--semantic-font-size-xs);
+    font-weight: var(--semantic-font-weight-semibold);
+    background: var(--semantic-color-surface-default);
+    border: var(--tech-example-border-width) solid var(--semantic-color-border-subtle);
+    border-radius: var(--semantic-radius-sm);
 
     span {
-        padding: var(--space-3) var(--space-5);
-        border-right: 0.0625rem solid var(--color-border-subtle);
+        padding: var(--semantic-space-3) var(--semantic-space-5);
+        border-right: var(--tech-example-border-width) solid var(--semantic-color-border-subtle);
     }
 
     span:last-child {
@@ -44,70 +52,70 @@
 }
 
 .activeTab {
-    color: var(--color-text-primary);
-    background: var(--color-bg-soft);
+    color: var(--semantic-color-text-primary);
+    background: var(--semantic-color-bg-soft);
 }
 
 .codePanel pre {
-    min-height: 22rem;
-    margin: var(--space-0);
+    min-height: var(--tech-example-code-min-height);
+    margin: var(--semantic-space-0);
     overflow-x: auto;
-    color: var(--color-accent-primary);
-    font-family: var(--font-family-mono);
-    font-size: var(--font-size-sm);
-    line-height: 1.7;
-    background: var(--color-surface);
-    border: 0.0625rem solid var(--color-border-subtle);
-    border-radius: var(--border-radius-md);
+    color: var(--semantic-color-accent-primary);
+    font-family: var(--semantic-font-family-mono);
+    font-size: var(--semantic-font-size-sm);
+    line-height: var(--tech-example-code-line-height);
+    background: var(--semantic-color-surface-default);
+    border: var(--tech-example-border-width) solid var(--semantic-color-border-subtle);
+    border-radius: var(--semantic-radius-md);
 }
 
 .codePanel code {
     display: block;
-    padding: var(--space-5);
+    padding: var(--semantic-space-5);
 }
 
 .panelHeader {
     display: flex;
-    gap: var(--space-4);
+    gap: var(--semantic-space-4);
     align-items: flex-start;
     justify-content: space-between;
 
     h2 {
-        max-width: 28rem;
-        margin: var(--space-0);
-        color: var(--color-text-primary);
-        font-size: var(--font-size-xl);
-        line-height: 1.25;
+        max-width: var(--tech-example-panel-title-max-width);
+        margin: var(--semantic-space-0);
+        color: var(--semantic-color-text-primary);
+        font-size: var(--semantic-font-size-xl);
+        line-height: var(--tech-example-panel-title-line-height);
     }
 
     a {
-        color: var(--color-link);
-        font-size: var(--font-size-sm);
-        font-weight: var(--font-weight-bold);
+        color: var(--semantic-color-link-default);
+        font-size: var(--semantic-font-size-sm);
+        font-weight: var(--semantic-font-weight-bold);
         text-decoration: none;
         white-space: nowrap;
 
         &:hover {
-            color: var(--color-link-hover);
+            color: var(--semantic-color-link-hover);
             text-decoration: underline;
-            text-underline-offset: 0.25rem;
+            text-underline-offset: var(--tech-example-link-underline-offset);
         }
     }
 }
 
 .eyebrow {
-    margin: var(--space-0) var(--space-0) var(--space-2);
-    color: var(--color-text-muted);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semibold);
+    margin: var(--semantic-space-0) var(--semantic-space-0) var(--semantic-space-2);
+    color: var(--semantic-color-text-muted);
+    font-size: var(--semantic-font-size-xs);
+    font-weight: var(--semantic-font-weight-semibold);
 }
 
 .swatches {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: var(--space-4);
-    margin: var(--space-6) var(--space-0);
-    padding: var(--space-0);
+    gap: var(--semantic-space-4);
+    margin: var(--semantic-space-6) var(--semantic-space-0);
+    padding: var(--semantic-space-0);
     list-style: none;
 
     li {
@@ -120,81 +128,81 @@
     }
 
     strong {
-        margin-top: var(--space-3);
-        color: var(--color-text-secondary);
-        font-size: var(--font-size-xs);
-        font-weight: var(--font-weight-semibold);
+        margin-top: var(--semantic-space-3);
+        color: var(--semantic-color-text-secondary);
+        font-size: var(--semantic-font-size-xs);
+        font-weight: var(--semantic-font-weight-semibold);
     }
 
     span:last-child {
-        margin-top: var(--space-1);
-        color: var(--color-text-muted);
-        font-family: var(--font-family-mono);
-        font-size: var(--font-size-xs);
+        margin-top: var(--semantic-space-1);
+        color: var(--semantic-color-text-muted);
+        font-family: var(--semantic-font-family-mono);
+        font-size: var(--semantic-font-size-xs);
     }
 }
 
 .swatch {
     width: 100%;
-    height: 3rem;
-    border: 0.0625rem solid var(--color-border-subtle);
-    border-radius: var(--border-radius-sm);
+    height: var(--tech-example-swatch-height);
+    border: var(--tech-example-border-width) solid var(--semantic-color-border-subtle);
+    border-radius: var(--semantic-radius-sm);
 }
 
 .teal500 {
-    background: var(--palette-teal-500);
+    background: var(--primitive-color-teal-500);
 }
 
 .teal600 {
-    background: var(--palette-teal-600);
+    background: var(--primitive-color-teal-600);
 }
 
 .amber500 {
-    background: var(--palette-amber-500);
+    background: var(--primitive-color-amber-500);
 }
 
 .cream100 {
-    background: var(--palette-cream-100);
+    background: var(--primitive-color-cream-100);
 }
 
 .neutral900 {
-    background: var(--palette-neutral-900);
+    background: var(--primitive-color-neutral-900);
 }
 
 .metrics {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    margin: var(--space-0);
-    padding: var(--space-4);
-    background: var(--color-surface-muted);
-    border: 0.0625rem solid var(--color-border-subtle);
-    border-radius: var(--border-radius-md);
+    margin: var(--semantic-space-0);
+    padding: var(--semantic-space-4);
+    background: var(--semantic-color-surface-muted);
+    border: var(--tech-example-border-width) solid var(--semantic-color-border-subtle);
+    border-radius: var(--semantic-radius-md);
 
     div {
-        padding: var(--space-0) var(--space-4);
-        border-right: 0.0625rem solid var(--color-border);
+        padding: var(--semantic-space-0) var(--semantic-space-4);
+        border-right: var(--tech-example-border-width) solid var(--semantic-color-border-default);
     }
 
     div:first-child {
-        padding-left: var(--space-0);
+        padding-left: var(--semantic-space-0);
     }
 
     div:last-child {
-        padding-right: var(--space-0);
+        padding-right: var(--semantic-space-0);
         border-right: 0;
     }
 
     dt {
-        color: var(--color-text-muted);
-        font-size: var(--font-size-xs);
-        font-weight: var(--font-weight-semibold);
+        color: var(--semantic-color-text-muted);
+        font-size: var(--semantic-font-size-xs);
+        font-weight: var(--semantic-font-weight-semibold);
     }
 
     dd {
-        margin: var(--space-2) var(--space-0) var(--space-0);
-        color: var(--color-text-primary);
-        font-size: var(--font-size-xl);
-        font-weight: var(--font-weight-bold);
+        margin: var(--semantic-space-2) var(--semantic-space-0) var(--semantic-space-0);
+        color: var(--semantic-color-text-primary);
+        font-size: var(--semantic-font-size-xl);
+        font-weight: var(--semantic-font-weight-bold);
     }
 }
 
@@ -205,13 +213,13 @@
 
     .codePanel {
         border-right: 0;
-        border-bottom: 0.0625rem solid var(--color-border-subtle);
+        border-bottom: var(--tech-example-border-width) solid var(--semantic-color-border-subtle);
     }
 }
 
 @media (max-width: 47.9375rem) {
     .techExample {
-        width: min(var(--max-width-page), calc(100% - var(--space-5)));
+        width: min(var(--semantic-size-maxWidthPage), calc(100% - var(--semantic-space-5)));
     }
 
     .panelHeader,
@@ -225,7 +233,7 @@
     }
 
     .metrics div {
-        padding: var(--space-3);
+        padding: var(--semantic-space-3);
         border-right: 0;
     }
 }
