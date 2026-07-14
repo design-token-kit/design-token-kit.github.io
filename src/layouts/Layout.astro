@@ -1,4 +1,6 @@
 ---
+import '#/styles/global.scss';
+
 interface Props {
     title: string;
     description: string;
@@ -25,11 +27,3 @@ const assetBaseUrl = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
     </body>
 </html>
 
-<style>
-    html,
-    body {
-        margin: 0;
-        width: 100%;
-        min-height: 100%;
-    }
-</style>

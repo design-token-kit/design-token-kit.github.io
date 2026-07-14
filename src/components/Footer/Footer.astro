@@ -1,0 +1,74 @@
+---
+import projectMark from '#/assets/design-token-kit-mark.svg';
+import styles from '#/components/Footer/Footer.module.scss';
+
+interface FooterLink {
+    label: string;
+    href: string;
+}
+
+interface FooterGroup {
+    title: string;
+    links: FooterLink[];
+}
+
+const footerGroups: FooterGroup[] = [
+    {
+        title: 'Product',
+        links: [
+            { label: 'Features', href: '#' },
+            { label: 'CLI', href: '#' },
+            { label: 'API', href: '#' },
+            { label: 'Changelog', href: '#' },
+        ],
+    },
+    {
+        title: 'Resources',
+        links: [
+            { label: 'Documentation', href: '#' },
+            { label: 'Playground', href: '#' },
+            { label: 'Guides', href: '#' },
+            { label: 'Examples', href: '#' },
+        ],
+    },
+    {
+        title: 'Community',
+        links: [
+            { label: 'GitHub', href: '#' },
+            { label: 'Discussions', href: '#' },
+            { label: 'Contributing', href: '#' },
+            { label: 'Code of Conduct', href: '#' },
+        ],
+    },
+];
+---
+
+<footer class={styles.footer}>
+    <div class={styles.inner}>
+        <div class={styles.brandColumn}>
+            <a class={styles.brand} href="#" aria-label="Design Token Kit home">
+                <img src={projectMark.src} width="36" height="36" alt="" />
+                <span>Design Token Kit</span>
+            </a>
+            <p>
+                Open-source toolkit for DTCG design tokens. Built for validation,
+                conversion, showcase generation, and analysis.
+            </p>
+        </div>
+
+        <nav class={styles.groups} aria-label="Footer navigation">
+            {footerGroups.map((footerGroup) => (
+                <div>
+                    <h2>{footerGroup.title}</h2>
+                    <ul>
+                        {footerGroup.links.map((footerLink) => (
+                            <li><a href={footerLink.href}>{footerLink.label}</a></li>
+                        ))}
+                    </ul>
+                </div>
+            ))}
+        </nav>
+    </div>
+
+    <p class={styles.copyright}>© 2026 Design Token Kit. MIT License.</p>
+</footer>
