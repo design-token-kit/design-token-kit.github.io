@@ -1,4 +1,7 @@
 ---
+import benefitFormatAgnosticIcon from '#/assets/icons/benefit-format-agnostic.svg';
+import benefitProductionReadyIcon from '#/assets/icons/benefit-production-ready.svg';
+import benefitTypeSafeIcon from '#/assets/icons/benefit-type-safe.svg';
 import styles from '#/components/BenefitList/BenefitList.module.scss';
 import type { ImageMetadata } from 'astro';
 
@@ -7,11 +10,20 @@ interface BenefitItem {
     icon: ImageMetadata;
 }
 
-interface Props {
-    items: BenefitItem[];
-}
-
-const { items } = Astro.props;
+const items: BenefitItem[] = [
+    {
+        title: 'Type-safe',
+        icon: benefitTypeSafeIcon,
+    },
+    {
+        title: 'Format agnostic',
+        icon: benefitFormatAgnosticIcon,
+    },
+    {
+        title: 'Production ready',
+        icon: benefitProductionReadyIcon,
+    },
+];
 ---
 
 <section class={styles.benefits} aria-label="Short benefits">
