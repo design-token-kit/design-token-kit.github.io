@@ -111,6 +111,12 @@
     }
 }
 
+@media (min-width: 82rem) {
+    .inner {
+        width: min(var(--semantic-size-maxWidthPageWide), calc(100% - var(--semantic-space-6)));
+    }
+}
+
 @media (max-width: 32rem) {
     .inner {
         width: min(var(--semantic-size-maxWidthPage), calc(100% - var(--semantic-space-5)));
