@@ -1,0 +1,81 @@
+.card {
+    display: grid;
+    gap: var(--semantic-space-4);
+    min-width: 0;
+    height: 100%;
+    padding: var(--semantic-space-6);
+    background: color-mix(in srgb, var(--semantic-color-surface-default) 94%, transparent);
+    border: var(--primitive-size-borderWidthSm) solid var(--semantic-color-border-subtle);
+    border-radius: var(--semantic-radius-md);
+    box-shadow: var(--semantic-shadow-sm);
+}
+
+.meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--semantic-space-2) var(--semantic-space-3);
+    align-items: center;
+
+    time {
+        color: var(--semantic-color-text-muted);
+        font-size: var(--semantic-font-size-sm);
+        font-weight: var(--semantic-font-weight-medium);
+        line-height: var(--semantic-font-lineHeight-normal);
+    }
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--semantic-space-5);
+    padding: 0 var(--semantic-space-2);
+    color: var(--semantic-color-accent-secondaryHover);
+    font-size: var(--semantic-font-size-xs);
+    font-weight: var(--semantic-font-weight-bold);
+    letter-spacing: var(--semantic-font-letterSpacing-wide);
+    text-transform: uppercase;
+    background: var(--semantic-color-accent-wash);
+    border-radius: var(--semantic-radius-full);
+}
+
+.title {
+    margin: 0;
+    color: var(--semantic-color-text-primary);
+    font-family: var(--semantic-font-family-display);
+    font-size: clamp(1.45rem, 2.2vw, 1.85rem);
+    line-height: var(--semantic-font-lineHeight-tight);
+    letter-spacing: var(--semantic-font-letterSpacing-tight);
+
+    a {
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: var(--semantic-color-link-hover);
+    }
+}
+
+.description {
+    max-width: var(--primitive-size-copyMaxWidthLg);
+    margin: 0;
+    color: var(--semantic-color-text-secondary);
+    font-size: var(--semantic-font-size-base);
+    line-height: var(--semantic-font-lineHeight-relaxed);
+}
+
+.link {
+    color: var(--semantic-color-link-default);
+    font-size: var(--semantic-font-size-sm);
+    font-weight: var(--semantic-font-weight-bold);
+    text-decoration: none;
+
+    &:hover {
+        color: var(--semantic-color-link-hover);
+    }
+}
+
+@media (max-width: 47.9375rem) {
+    .card {
+        padding: var(--semantic-space-5);
+    }
+}

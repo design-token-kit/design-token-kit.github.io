@@ -45,6 +45,12 @@
     }
 }
 
+@media (min-width: 82rem) {
+    .benefits {
+        width: min(var(--semantic-size-maxWidthPageWide), calc(100% - var(--semantic-space-6)));
+    }
+}
+
 @media (max-width: 56rem) {
     .benefits ul {
         align-items: flex-start;

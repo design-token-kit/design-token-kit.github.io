@@ -83,8 +83,7 @@
     transition:
         border-color var(--semantic-duration-fast) var(--semantic-easing-default),
         background var(--semantic-duration-fast) var(--semantic-easing-default),
-        color var(--semantic-duration-fast) var(--semantic-easing-default),
-        transform var(--semantic-duration-fast) var(--semantic-easing-default);
+        color var(--semantic-duration-fast) var(--semantic-easing-default);
 
     img {
         width: var(--semantic-space-5);
@@ -100,7 +99,6 @@
 
     &:hover {
         background: var(--semantic-color-accent-primaryHover);
-        transform: translateY(-0.0625rem);
     }
 }
 
@@ -112,7 +110,6 @@
     &:hover {
         color: var(--semantic-color-accent-secondaryHover);
         border-color: var(--semantic-color-accent-secondaryHover);
-        transform: translateY(-0.0625rem);
     }
 }
 
@@ -126,6 +123,12 @@
         max-width: 100%;
         height: auto;
         filter: drop-shadow(var(--semantic-shadow-logo));
+    }
+}
+
+@media (min-width: 82rem) {
+    .hero {
+        width: min(var(--semantic-size-maxWidthPageWide), calc(100% - var(--semantic-space-6)));
     }
 }
 

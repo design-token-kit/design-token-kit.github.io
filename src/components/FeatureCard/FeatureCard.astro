@@ -10,32 +10,41 @@ interface FeatureCardItem {
     title: string;
     description: string;
     icon: ImageMetadata;
+    href: string;
     tone: 'teal' | 'amber';
 }
+
+const baseUrl = import.meta.env.BASE_URL.endsWith('/')
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
 
 const items: FeatureCardItem[] = [
     {
         title: 'Validate',
         description: 'Catch issues early with a robust validation engine for structure, types, and naming.',
         icon: featureValidateIcon,
+        href: `${baseUrl}docs/cli/validate/`,
         tone: 'teal',
     },
     {
         title: 'Convert',
         description: 'Transform tokens between popular formats and frameworks in a single command.',
         icon: featureConvertIcon,
+        href: `${baseUrl}docs/cli/convert/`,
         tone: 'amber',
     },
     {
         title: 'Showcase',
         description: 'Generate beautiful, interactive documentation for your tokens automatically.',
         icon: featureShowcaseIcon,
+        href: `${baseUrl}docs/cli/showcase/`,
         tone: 'teal',
     },
     {
         title: 'Analyze',
         description: 'Inspect token usage, detect duplicates, and measure coverage across a system.',
         icon: featureAnalyzeIcon,
+        href: `${baseUrl}docs/cli/stats/`,
         tone: 'amber',
     },
 ];
@@ -53,7 +62,7 @@ const items: FeatureCardItem[] = [
                 <h3>{item.title}</h3>
             </div>
             <p>{item.description}</p>
-            <a href="#">Learn more <span aria-hidden="true">→</span></a>
+            <a href={item.href}>Learn more <span aria-hidden="true">→</span></a>
         </article>
     );
 })}
