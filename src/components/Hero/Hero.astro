@@ -2,7 +2,11 @@
 import arrowRightIcon from '#/assets/icons/icon-arrow-right.svg';
 import githubIcon from '#/assets/icons/icon-github.svg';
 import projectMark from '#/assets/logo/logotype-l.svg';
-import styles from '#/components/hero/Hero.module.scss';
+import styles from '#/components/Hero/Hero.module.scss';
+
+const baseUrl = import.meta.env.BASE_URL.endsWith('/')
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
 ---
 
 <section class={styles.hero} aria-labelledby="hero-heading">
@@ -16,11 +20,14 @@ import styles from '#/components/hero/Hero.module.scss';
            Give Your LLM a Design Language, not a screenshot.
         </p>
         <div class={styles.actions}>
-            <a class={styles.primaryAction} href="#">
+            <a class={styles.primaryAction} href={`${baseUrl}docs/getting-started/`}>
                 <span>Get Started</span>
                 <img src={arrowRightIcon.src} width="24" height="24" alt="" />
             </a>
-            <a class={styles.secondaryAction} href="#">
+            <a
+                class={styles.secondaryAction}
+                href="https://github.com/design-token-kit/design-token-kit"
+            >
                 <span>View on GitHub</span>
                 <img src={githubIcon.src} width="24" height="24" alt="" />
             </a>
@@ -59,7 +66,7 @@ import styles from '#/components/hero/Hero.module.scss';
                 <span class={`${styles.railItem} ${styles.itemCube} ${styles.itemTeal}`}></span>
             </span>
             <span class={`${styles.rail} ${styles.railFront} ${styles.railEight}`}>
-                <span class={`${styles.railItem} ${styles.itemDiamond} ${styles.itemAmber}`}></span>
+                <span class={`${styles.railItem} ${styles.itemCube} ${styles.itemAmber}`}></span>
             </span>
             <span class={`${styles.rail} ${styles.railFront} ${styles.railNine}`}>
                 <span class={`${styles.railItem} ${styles.itemSmallDot} ${styles.itemAmber}`}></span>
