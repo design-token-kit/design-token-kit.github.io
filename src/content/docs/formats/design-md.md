@@ -39,8 +39,7 @@ A simplified document shape:
 ```md
 ---
 colors:
-  brand:
-    primary: "#2549f6"
+  brand-primary: "#2549f6"
 spacing:
   small: "8px"
 ---
@@ -58,13 +57,9 @@ The exact token data is normalized into the internal DTCG model before other DTK
 dtokens check DESIGN.md --inform design-md
 ```
 
-Use the extended schema when required:
+DESIGN.md uses its own frontmatter schema. The CLI `--schema` option is for DTCG JSON schema selection and does not change DESIGN.md validation.
 
-```bash
-dtokens check DESIGN.md \
-  --inform design-md \
-  --schema 2025.10-design.md
-```
+Use `--inform design-md` when the file name or content shape is ambiguous.
 
 ## Convert DESIGN.md
 
@@ -109,11 +104,11 @@ Use:
 - `DesignMdWriter` to write DESIGN.md;
 - `DtcgToDesignMdMapper` to flatten DTCG token trees into the DESIGN.md layout.
 
-Common DTCG layers such as `primitive`, `semantic`, and `component` are mapped to the flatter DESIGN.md structure.
+Common DTCG layers such as `primitive`, `semantic`, and `component` are mapped to the flatter DESIGN.md structure. The mapping is lossy for token types that DESIGN.md does not model directly.
 
 ## Related pages
 
-- [DTCG JSON](/docs/formats/dtcg/)
-- [HRDT YAML](/docs/formats/hrdt/)
-- [Core parsing](/docs/core/parsing/)
-- [CLI conversion](/docs/cli/convert/)
+- [DTCG JSON](../../formats/dtcg/)
+- [HRDT YAML](../../formats/hrdt/)
+- [Core parsing](../../core/parsing/)
+- [CLI conversion](../../cli/convert/)

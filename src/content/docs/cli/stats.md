@@ -76,6 +76,6 @@ cat tokens.yaml | dtokens stats
 
 ## Related pages
 
-- [Generate a showcase](/docs/cli/showcase/)
-- [Core overview](/docs/core/overview/)
-- [Core validation](/docs/core/validation/)
+- [Generate a showcase](../../cli/showcase/)
+- [Core overview](../../core/overview/)
+- [Core validation](../../core/validation/)

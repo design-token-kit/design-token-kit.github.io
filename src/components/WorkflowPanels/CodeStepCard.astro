@@ -1,0 +1,22 @@
+---
+import StepCard from '#/components/WorkflowPanels/StepCard.astro';
+import styles from '#/components/WorkflowPanels/WorkflowPanels.module.scss';
+
+interface Props {
+    stepNumber: string;
+    title: string;
+    languageLabel: string;
+    ariaLabel: string;
+    codeHtml: string;
+}
+
+const { stepNumber, title, languageLabel, ariaLabel, codeHtml } = Astro.props;
+---
+
+<StepCard stepNumber={stepNumber} title={title}>
+    <div class={styles.codeBlock}>
+        <span class={styles.codeLabel}>{languageLabel}</span>
+        <pre aria-label={ariaLabel}><code set:html={codeHtml}></code></pre>
+    </div>
+    <slot />
+</StepCard>

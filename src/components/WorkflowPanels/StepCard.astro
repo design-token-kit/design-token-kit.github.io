@@ -1,0 +1,18 @@
+---
+import styles from '#/components/WorkflowPanels/WorkflowPanels.module.scss';
+
+interface Props {
+    stepNumber: string;
+    title: string;
+}
+
+const { stepNumber, title } = Astro.props;
+---
+
+<article class={styles.stepCard}>
+    <header class={styles.stepHeader}>
+        <span class={styles.stepNumber}>{stepNumber}</span>
+        <h3>{title}</h3>
+    </header>
+    <slot />
+</article>

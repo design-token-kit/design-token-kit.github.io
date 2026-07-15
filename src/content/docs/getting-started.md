@@ -77,7 +77,7 @@ The `validate` command is an alias for `check`:
 npx @design-token-kit/cli validate tokens.json
 ```
 
-Learn more in [CLI validation](/docs/cli/validate/).
+Learn more in [CLI validation](../cli/validate/).
 
 ## Generate CSS
 
@@ -95,7 +95,7 @@ The base token set is emitted under `:root`. Theme overrides are emitted under s
 }
 ```
 
-Learn more in [CLI conversion](/docs/cli/convert/).
+Learn more in [CLI conversion](../cli/convert/).
 
 ## Generate other outputs
 
@@ -135,12 +135,12 @@ npx @design-token-kit/cli stats tokens.json \
 
 Design Token Kit accepts:
 
-- [DTCG JSON](/docs/formats/dtcg/)
-- [HRDT YAML](/docs/formats/hrdt/)
-- [DESIGN.md](/docs/formats/design-md/)
+- [DTCG JSON](../formats/dtcg/)
+- [HRDT YAML](../formats/hrdt/)
+- [DESIGN.md](../formats/design-md/)
 - local files
 - URLs
-- raw token content
+- raw token content with the `content:` prefix
 - standard input
 
 Use `-` or omit source arguments to read from standard input:
@@ -160,12 +160,11 @@ npx @design-token-kit/cli convert \
   --out ./tokens.css
 ```
 
-Multiple sources are supported for CSS, SCSS, and Tailwind CSS v4 output.
+Multiple sources are supported for CSS and Tailwind CSS v4 output. SCSS supports multiple themes, but emits separate files or a tar archive.
 
 ## Next steps
 
-- [Validate token files](/docs/cli/validate/)
-- [Convert token files](/docs/cli/convert/)
-- [Use the Core API](/docs/core/overview/)
-- [Generate Tailwind CSS v4 output](/docs/guides/tailwind-v4/)
-- [Generate SCSS output](/docs/guides/scss/)
+- [Validate token files](../cli/validate/)
+- [Convert token files](../cli/convert/)
+- [Use the Core API](../core/overview/)
+- [Use supported formats](../formats/dtcg/)

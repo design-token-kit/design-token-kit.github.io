@@ -79,6 +79,8 @@ cat tokens.yaml | dtokens showcase - --out ./showcase.html
 - `-o, --out <file>` — output HTML file name or path;
 - `--open` — open the generated file in the default browser.
 
+When `--out` is only a file name, the CLI writes the showcase to the system temp directory. Pass a path with a directory segment, such as `./dist/showcase.html`, to control the output location.
+
 ## Typical package script
 
 ```json
@@ -91,6 +93,6 @@ cat tokens.yaml | dtokens showcase - --out ./showcase.html
 
 ## Related pages
 
-- [Token statistics](/docs/cli/stats/)
-- [Core overview](/docs/core/overview/)
-- [DTCG JSON](/docs/formats/dtcg/)
+- [Token statistics](../../cli/stats/)
+- [Core overview](../../core/overview/)
+- [DTCG JSON](../../formats/dtcg/)

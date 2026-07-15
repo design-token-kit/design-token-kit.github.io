@@ -4,6 +4,8 @@ import featureConvertIcon from '#/assets/icons/feature-convert.svg';
 import featureShowcaseIcon from '#/assets/icons/feature-showcase.svg';
 import featureValidateIcon from '#/assets/icons/feature-validate.svg';
 import documentIcon from '#/assets/icons/icon-document.svg';
+import CodeStepCard from '#/components/WorkflowPanels/CodeStepCard.astro';
+import StepCard from '#/components/WorkflowPanels/StepCard.astro';
 import styles from '#/components/WorkflowPanels/WorkflowPanels.module.scss';
 import type { ImageMetadata } from 'astro';
 
@@ -59,7 +61,7 @@ const methodsCodeHtml = `<span class="${syntax.keyword}">import</span> <span cla
 <span class="${syntax.keyword}">from</span> <span class="${syntax.string}">'@design-token-kit/core'</span><span class="${syntax.punctuation}">;</span>
 
 <span class="${syntax.keyword}">const</span> <span class="${syntax.variable}">css</span> <span class="${syntax.operator}">=</span> <span class="${syntax.keyword}">await</span>
-<div><span class="${syntax.keyword}">new</span> <span class="${syntax.function}">DtcgTokenCssConverter</span></div></span><span class="${syntax.punctuation}">(</span><span class="${syntax.punctuation}">)</span><span class="${syntax.punctuation}">.</span><span class="${syntax.function}">convert</span><span class="${syntax.punctuation}">(</span><span class="${syntax.punctuation}">[</span>
+<span class="${syntax.keyword}">new</span> <span class="${syntax.function}">DtcgTokenCssConverter</span><span class="${syntax.punctuation}">(</span><span class="${syntax.punctuation}">)</span><span class="${syntax.punctuation}">.</span><span class="${syntax.function}">convert</span><span class="${syntax.punctuation}">(</span><span class="${syntax.punctuation}">[</span>
   <span class="${syntax.string}">'./tokens.json'</span><span class="${syntax.punctuation}">,</span>
 <span class="${syntax.punctuation}">]</span><span class="${syntax.punctuation}">);</span>`;
 
@@ -75,26 +77,26 @@ const methodsCodeHtml = `<span class="${syntax.keyword}">import</span> <span cla
     <div class={styles.workflowTabs} role="tablist" aria-label="Design Token Kit workflow modes">
         <button
             class={styles.workflowTab}
-            id="workflow-tab-cli"
-            type="button"
-            role="tab"
-            aria-selected="true"
-            aria-controls="workflow-panel-cli"
-            data-workflow-tab="cli"
-        >
-            CLI
-        </button>
-        <button
-            class={styles.workflowTab}
             id="workflow-tab-core"
             type="button"
             role="tab"
-            aria-selected="false"
+            aria-selected="true"
             aria-controls="workflow-panel-core"
-            tabindex="-1"
             data-workflow-tab="core"
         >
             Core API
+        </button>
+        <button
+            class={styles.workflowTab}
+            id="workflow-tab-cli"
+            type="button"
+            role="tab"
+            aria-selected="false"
+            aria-controls="workflow-panel-cli"
+            tabindex="-1"
+            data-workflow-tab="cli"
+        >
+            CLI
         </button>
     </div>
 
@@ -105,13 +107,10 @@ const methodsCodeHtml = `<span class="${syntax.keyword}">import</span> <span cla
             role="tabpanel"
             aria-labelledby="workflow-tab-cli"
             data-workflow-panel="cli"
+            hidden
         >
             <div class={styles.workflowGrid}>
-                <article class={styles.stepCard}>
-                    <header class={styles.stepHeader}>
-                        <span class={styles.stepNumber}>1</span>
-                        <h3>Add tokens</h3>
-                    </header>
+                <StepCard stepNumber="1" title="Add tokens">
                     <div class={styles.fileVisual} aria-hidden="true">
                         <span class={styles.folderIcon}></span>
                     </div>
@@ -123,23 +122,15 @@ const methodsCodeHtml = `<span class="${syntax.keyword}">import</span> <span cla
                             </li>
                         ))}
                     </ul>
-                </article>
+                </StepCard>
 
-                <article class={styles.stepCard}>
-                    <header class={styles.stepHeader}>
-                        <span class={styles.stepNumber}>2</span>
-                        <h3>Run DTK</h3>
-                    </header>
+                <StepCard stepNumber="2" title="Run DTK">
                     <div class={styles.codeBlock}>
                         <pre aria-label="CLI validate command"><code>{cliCommand}</code></pre>
                     </div>
-                </article>
+                </StepCard>
 
-                <article class={styles.stepCard}>
-                    <header class={styles.stepHeader}>
-                        <span class={styles.stepNumber}>3</span>
-                        <h3>Choose an action</h3>
-                    </header>
+                <StepCard stepNumber="3" title="Choose an action">
                     <ul class={styles.actionList} aria-label="Available CLI actions">
                         {actions.map((action) => (
                             <li>
@@ -148,19 +139,15 @@ const methodsCodeHtml = `<span class="${syntax.keyword}">import</span> <span cla
                             </li>
                         ))}
                     </ul>
-                </article>
+                </StepCard>
 
-                <article class={styles.stepCard}>
-                    <header class={styles.stepHeader}>
-                        <span class={styles.stepNumber}>4</span>
-                        <h3>Get results</h3>
-                    </header>
+                <StepCard stepNumber="4" title="Get results">
                     <ul class={styles.checkList}>
                         {cliResults.map((result) => (
                             <li>{result}</li>
                         ))}
                     </ul>
-                </article>
+                </StepCard>
             </div>
             <p class={styles.workflowNote}>The same workflow is available through Core API.</p>
         </section>
@@ -171,14 +158,9 @@ const methodsCodeHtml = `<span class="${syntax.keyword}">import</span> <span cla
             role="tabpanel"
             aria-labelledby="workflow-tab-core"
             data-workflow-panel="core"
-            hidden
         >
             <div class={styles.workflowGrid}>
-                <article class={styles.stepCard}>
-                    <header class={styles.stepHeader}>
-                        <span class={styles.stepNumber}>1</span>
-                        <h3>Add tokens</h3>
-                    </header>
+                <StepCard stepNumber="1" title="Add tokens">
                     <div class={styles.fileVisual} aria-hidden="true">
                         <span class={styles.folderIcon}></span>
                     </div>
@@ -190,28 +172,23 @@ const methodsCodeHtml = `<span class="${syntax.keyword}">import</span> <span cla
                             </li>
                         ))}
                     </ul>
-                </article>
+                </StepCard>
 
-                <article class={styles.stepCard}>
-                    <header class={styles.stepHeader}>
-                        <span class={styles.stepNumber}>2</span>
-                        <h3>Validate tokens</h3>
-                    </header>
-                    <div class={styles.codeBlock}>
-                        <span class={styles.codeLabel}>TS</span>
-                        <pre aria-label="Core API validation example"><code set:html={parseCodeHtml}></code></pre>
-                    </div>
-                </article>
+                <CodeStepCard
+                    stepNumber="2"
+                    title="Validate tokens"
+                    languageLabel="TS"
+                    ariaLabel="Core API validation example"
+                    codeHtml={parseCodeHtml}
+                />
 
-                <article class={styles.stepCard}>
-                    <header class={styles.stepHeader}>
-                        <span class={styles.stepNumber}>3</span>
-                        <h3>Convert to CSS</h3>
-                    </header>
-                    <div class={styles.codeBlock}>
-                        <span class={styles.codeLabel}>TS</span>
-                        <pre aria-label="Core API conversion example"><code set:html={methodsCodeHtml}></code></pre>
-                    </div>
+                <CodeStepCard
+                    stepNumber="3"
+                    title="Convert to CSS"
+                    languageLabel="TS"
+                    ariaLabel="Core API conversion example"
+                    codeHtml={methodsCodeHtml}
+                >
                     <ul class={styles.actionLabels} aria-label="Available Core API methods">
                         {actions.map((action) => (
                             <li>
@@ -220,19 +197,15 @@ const methodsCodeHtml = `<span class="${syntax.keyword}">import</span> <span cla
                             </li>
                         ))}
                     </ul>
-                </article>
+                </CodeStepCard>
 
-                <article class={styles.stepCard}>
-                    <header class={styles.stepHeader}>
-                        <span class={styles.stepNumber}>4</span>
-                        <h3>Use results</h3>
-                    </header>
+                <StepCard stepNumber="4" title="Use results">
                     <ul class={styles.checkList}>
                         {coreResults.map((result) => (
                             <li>{result}</li>
                         ))}
                     </ul>
-                </article>
+                </StepCard>
             </div>
             <p class={styles.workflowNote}>The same workflow is available through CLI.</p>
         </section>

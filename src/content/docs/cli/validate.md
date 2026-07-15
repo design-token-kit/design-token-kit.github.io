@@ -179,7 +179,7 @@ The command uses these exit codes:
 
 - `0` — success;
 - `1` — unexpected error;
-- `2` — issues found.
+- `2` — errors found.
 
 This makes `check` suitable for CI pipelines and package scripts.
 
@@ -193,8 +193,8 @@ This makes `check` suitable for CI pipelines and package scripts.
 
 ## Related pages
 
-- [Getting started](/docs/getting-started/)
-- [DTCG JSON](/docs/formats/dtcg/)
-- [HRDT YAML](/docs/formats/hrdt/)
-- [DESIGN.md](/docs/formats/design-md/)
-- [Core validation API](/docs/core/validation/)
+- [Getting started](../../getting-started/)
+- [DTCG JSON](../../formats/dtcg/)
+- [HRDT YAML](../../formats/hrdt/)
+- [DESIGN.md](../../formats/design-md/)
+- [Core validation API](../../core/validation/)
