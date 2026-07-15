@@ -117,12 +117,257 @@
     display: grid;
     place-items: center;
     min-height: var(--primitive-size-copyMaxWidthMd);
+}
+
+.visualInner {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
 
     img {
+        position: relative;
+        z-index: 2;
         width: 100%;
         max-width: 100%;
         height: auto;
         filter: drop-shadow(var(--semantic-shadow-logo));
+    }
+}
+
+.rail {
+    position: absolute;
+    display: block;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.railBack {
+    z-index: 1;
+}
+
+.railFront {
+    z-index: 3;
+}
+
+.railItem {
+    display: block;
+    animation: rail-glide 8s ease-in-out infinite alternate;
+    will-change: transform;
+}
+
+.itemTeal {
+    color: var(--semantic-color-accent-primary);
+}
+
+.itemAmber {
+    color: var(--semantic-color-accent-secondary);
+}
+
+.itemDot,
+.itemSmallDot,
+.itemRing {
+    border-radius: var(--semantic-radius-full);
+}
+
+.itemDot {
+    width: var(--semantic-space-3);
+    height: var(--semantic-space-3);
+    background: var(--semantic-color-accent-secondary);
+    box-shadow: var(--semantic-shadow-sm);
+}
+
+.itemSmallDot {
+    width: var(--primitive-size-microLg);
+    height: var(--primitive-size-microLg);
+    background: var(--semantic-color-accent-secondary);
+}
+
+.itemRing {
+    width: var(--semantic-space-3);
+    height: var(--semantic-space-3);
+    border: var(--primitive-size-borderWidthSm) solid var(--semantic-color-accent-secondary);
+    background: transparent;
+}
+
+.itemDiamond {
+    width: var(--primitive-size-iconXs);
+    height: var(--primitive-size-iconXs);
+    background: color-mix(in srgb, var(--semantic-color-accent-primary) 28%, var(--semantic-color-surface-default));
+    border: var(--primitive-size-borderWidthSm) solid var(--semantic-color-accent-primary);
+    border-radius: var(--semantic-radius-sm);
+    transform: rotate(45deg);
+}
+
+.itemDiamond,
+.itemHex,
+.itemCube {
+    box-shadow: var(--semantic-shadow-sm);
+}
+
+.itemHex {
+    width: var(--primitive-size-iconSmPlus);
+    height: var(--primitive-size-iconSmPlus);
+    background: color-mix(in srgb, var(--semantic-color-accent-primary) 36%, var(--semantic-color-surface-default));
+    border: var(--primitive-size-borderWidthSm) solid var(--semantic-color-accent-primaryHover);
+    clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0 50%);
+}
+
+.itemTriangle {
+    position: relative;
+    width: var(--primitive-size-iconSmPlus);
+    height: var(--primitive-size-iconSmPlus);
+    background: var(--semantic-color-accent-primaryHover);
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+
+    &::after {
+        position: absolute;
+        top: var(--primitive-size-borderWidthSm);
+        left: var(--primitive-size-borderWidthSm);
+        width: calc(100% - var(--primitive-size-borderWidthSm) * 2);
+        height: calc(100% - var(--primitive-size-borderWidthSm) * 2);
+        content: "";
+        background: color-mix(in srgb, var(--semantic-color-accent-primary) 36%, var(--semantic-color-surface-default));
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    }
+}
+
+.itemCube {
+    width: var(--semantic-space-5);
+    height: var(--semantic-space-4);
+    background: color-mix(in srgb, var(--semantic-color-accent-primary) 42%, var(--semantic-color-surface-default));
+    border: var(--primitive-size-borderWidthSm) solid var(--semantic-color-accent-primaryHover);
+    border-radius: var(--semantic-radius-sm);
+}
+
+.railOne {
+    top: 16%;
+    left: -8%;
+    width: 46%;
+    transform: rotate(-27deg);
+}
+
+.railTwo {
+    top: 25%;
+    left: -26%;
+    width: 128%;
+    transform: rotate(-33deg);
+}
+
+.railThree {
+    top: 54%;
+    left: -14%;
+    width: 54%;
+    transform: rotate(-34deg);
+}
+
+.railFour {
+    top: 46%;
+    right: 2%;
+    width: 26%;
+    transform: rotate(90deg);
+}
+
+.railFive {
+    top: 49%;
+    left: -24%;
+    width: 132%;
+    transform: rotate(-31deg);
+}
+
+.railSix {
+    top: 73%;
+    left: -2%;
+    width: 92%;
+    transform: rotate(-31deg);
+}
+
+.railSeven {
+    top: 86%;
+    right: -6%;
+    width: 42%;
+    transform: rotate(-34deg);
+}
+
+.railEight {
+    top: 18%;
+    right: 4%;
+    width: 28%;
+    transform: rotate(-48deg);
+}
+
+.railNine {
+    top: 12%;
+    right: 27%;
+    width: 18%;
+    transform: rotate(90deg);
+}
+
+.railOne .railItem {
+    animation-duration: 7s;
+}
+
+.railTwo .railItem {
+    animation-duration: 10s;
+}
+
+.railThree .railItem {
+    animation-duration: 6.5s;
+}
+
+.railFour .railItem {
+    animation-duration: 5.5s;
+}
+
+.railFive .railItem {
+    animation-duration: 9s;
+}
+
+.railSix .railItem {
+    animation-duration: 7.5s;
+}
+
+.railSeven .railItem {
+    animation-duration: 6s;
+}
+
+.railFive .itemRing {
+    border: var(--primitive-size-borderWidthSm) solid var(--semantic-color-accent-secondaryHover);
+}
+
+.railEight .itemDiamond {
+    background: color-mix(in srgb, var(--semantic-color-accent-secondaryHover) 28%, var(--semantic-color-surface-default));
+    border: var(--primitive-size-borderWidthSm) solid var(--semantic-color-accent-secondaryHover);
+}
+
+.railSeven .itemCube {
+    background: color-mix(in srgb, var(--semantic-color-accent-secondary) 42%, var(--semantic-color-surface-default));
+    border-color: var(--semantic-color-accent-secondaryHover);
+}
+
+.railEight .railItem {
+    animation-duration: 5s;
+}
+
+.railNine .railItem {
+    animation-duration: 6.8s;
+}
+
+@keyframes rail-glide {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .railItem {
+        animation: none;
     }
 }
 
@@ -141,6 +386,17 @@
 
     .visual {
         min-height: var(--primitive-size-copyMaxWidthSm);
+    }
+
+    .railTwo,
+    .railFive {
+        left: -14%;
+        width: 110%;
+    }
+
+    .railSix {
+        left: -2%;
+        width: 78%;
     }
 }
 

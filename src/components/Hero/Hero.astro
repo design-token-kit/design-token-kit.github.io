@@ -28,11 +28,42 @@ import styles from '#/components/hero/Hero.module.scss';
     </div>
 
     <div class={styles.visual} aria-hidden="true">
-        <img
-            src={projectMark.src}
-            width={projectMark.width}
-            height={projectMark.height}
-            alt=""
-        />
+        <div class={styles.visualInner}>
+            <span class={`${styles.rail} ${styles.railBack} ${styles.railOne}`}>
+                <span class={`${styles.railItem} ${styles.itemTriangle} ${styles.itemTeal}`}></span>
+            </span>
+            <span class={`${styles.rail} ${styles.railBack} ${styles.railTwo}`}>
+                <span class={`${styles.railItem} ${styles.itemDot} ${styles.itemAmber}`}></span>
+            </span>
+            <span class={`${styles.rail} ${styles.railBack} ${styles.railThree}`}>
+                <span class={`${styles.railItem} ${styles.itemDiamond} ${styles.itemTeal}`}></span>
+            </span>
+            <span class={`${styles.rail} ${styles.railBack} ${styles.railFour}`}>
+                <span class={`${styles.railItem} ${styles.itemCube} ${styles.itemTeal}`}></span>
+            </span>
+
+            <img
+                src={projectMark.src}
+                width={projectMark.width}
+                height={projectMark.height}
+                alt=""
+            />
+
+            <span class={`${styles.rail} ${styles.railFront} ${styles.railFive}`}>
+                <span class={`${styles.railItem} ${styles.itemRing} ${styles.itemAmber}`}></span>
+            </span>
+            <span class={`${styles.rail} ${styles.railFront} ${styles.railSix}`}>
+                <span class={`${styles.railItem} ${styles.itemDot} ${styles.itemAmber}`}></span>
+            </span>
+            <span class={`${styles.rail} ${styles.railFront} ${styles.railSeven}`}>
+                <span class={`${styles.railItem} ${styles.itemCube} ${styles.itemTeal}`}></span>
+            </span>
+            <span class={`${styles.rail} ${styles.railFront} ${styles.railEight}`}>
+                <span class={`${styles.railItem} ${styles.itemDiamond} ${styles.itemAmber}`}></span>
+            </span>
+            <span class={`${styles.rail} ${styles.railFront} ${styles.railNine}`}>
+                <span class={`${styles.railItem} ${styles.itemSmallDot} ${styles.itemAmber}`}></span>
+            </span>
+        </div>
     </div>
 </section>
