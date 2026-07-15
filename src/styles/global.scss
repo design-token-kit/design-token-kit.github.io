@@ -2,12 +2,6 @@
     box-sizing: border-box;
 }
 
-:root {
-    --site-min-width: 20rem;
-    --focus-outline-width: 0.125rem;
-    --focus-outline-offset: 0.25rem;
-}
-
 html,
 body {
     margin: var(--semantic-space-0);
@@ -24,7 +18,7 @@ html {
 }
 
 body {
-    min-width: var(--site-min-width);
+    min-width: var(--primitive-size-siteMinWidth);
 }
 
 img,
@@ -38,7 +32,7 @@ a {
 }
 
 :focus-visible {
-    outline: var(--focus-outline-width) solid var(--semantic-color-border-focus);
-    outline-offset: var(--focus-outline-offset);
+    outline: var(--primitive-size-borderWidthMd) solid var(--semantic-color-border-focus);
+    outline-offset: var(--semantic-space-1);
     box-shadow: var(--semantic-shadow-focus);
 }

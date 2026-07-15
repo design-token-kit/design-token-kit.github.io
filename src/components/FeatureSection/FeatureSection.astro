@@ -1,0 +1,14 @@
+---
+import FeatureCard from '#/components/FeatureCard/FeatureCard.astro';
+import styles from '#/components/FeatureSection/FeatureSection.module.scss';
+---
+
+<section class={styles.features} aria-labelledby="features-heading">
+    <div class={styles.sectionHeader}>
+        <p class={styles.eyebrow}>Everything you need</p>
+        <h2 id="features-heading">Built for modern design systems</h2>
+    </div>
+    <div class={styles.featureGrid}>
+        <FeatureCard/>
+    </div>
+</section>

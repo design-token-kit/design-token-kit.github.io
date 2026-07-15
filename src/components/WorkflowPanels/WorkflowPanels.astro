@@ -1,0 +1,289 @@
+---
+import featureAnalyzeIcon from '#/assets/icons/feature-analyze.svg';
+import featureConvertIcon from '#/assets/icons/feature-convert.svg';
+import featureShowcaseIcon from '#/assets/icons/feature-showcase.svg';
+import featureValidateIcon from '#/assets/icons/feature-validate.svg';
+import documentIcon from '#/assets/icons/icon-document.svg';
+import styles from '#/components/WorkflowPanels/WorkflowPanels.module.scss';
+import type { ImageMetadata } from 'astro';
+
+interface ActionItem {
+    title: string;
+    icon: ImageMetadata;
+}
+
+const tokenFiles = ['tokens.json', 'tokens.dark.json', 'tokens.red.json', 'tokens.yaml', 'DESIGN.md'];
+
+const actions: ActionItem[] = [
+    { title: 'Validate', icon: featureValidateIcon },
+    { title: 'Convert', icon: featureConvertIcon },
+    { title: 'Showcase', icon: featureShowcaseIcon },
+    { title: 'Analyze', icon: featureAnalyzeIcon },
+];
+
+const cliResults = [
+    'Validation passed',
+    'CSS generated',
+    'Showcase created',
+    'Report ready',
+];
+
+const coreResults = [
+    'Validation report',
+    'Converted output',
+    'Showcase HTML',
+    'Stats and analysis',
+];
+
+const cliCommand = 'npx @design-token-kit/cli check tokens.json';
+
+const syntax = {
+    keyword: styles.syntaxKeyword,
+    function: styles.syntaxFunction,
+    string: styles.syntaxString,
+    variable: styles.syntaxVariable,
+    property: styles.syntaxProperty,
+    operator: styles.syntaxOperator,
+    punctuation: styles.syntaxPunctuation,
+};
+
+const parseCodeHtml = `<span class="${syntax.keyword}">import</span> <span class="${syntax.punctuation}">{</span> <span class="${syntax.function}">DtcgChecker</span> <span class="${syntax.punctuation}">}</span>
+<span class="${syntax.keyword}">from</span> <span class="${syntax.string}">'@design-token-kit/core'</span><span class="${syntax.punctuation}">;</span>
+
+<span class="${syntax.keyword}">const</span> <span class="${syntax.variable}">issues</span> <span class="${syntax.operator}">=</span> <span class="${syntax.keyword}">await</span>
+<span class="${syntax.keyword}">new</span> <span class="${syntax.function}">DtcgChecker</span><span class="${syntax.punctuation}">(</span><span class="${syntax.punctuation}">)</span><span class="${syntax.punctuation}">.</span><span class="${syntax.function}">validate</span><span class="${syntax.punctuation}">(</span><span class="${syntax.punctuation}">[</span>
+  <span class="${syntax.string}">'./tokens.json'</span><span class="${syntax.punctuation}">,</span>
+<span class="${syntax.punctuation}">]</span><span class="${syntax.punctuation}">);</span>`;
+
+const methodsCodeHtml = `<span class="${syntax.keyword}">import</span> <span class="${syntax.punctuation}">{</span> <span class="${syntax.function}">DtcgTokenCssConverter</span> <span class="${syntax.punctuation}">}</span>
+<span class="${syntax.keyword}">from</span> <span class="${syntax.string}">'@design-token-kit/core'</span><span class="${syntax.punctuation}">;</span>
+
+<span class="${syntax.keyword}">const</span> <span class="${syntax.variable}">css</span> <span class="${syntax.operator}">=</span> <span class="${syntax.keyword}">await</span>
+<div><span class="${syntax.keyword}">new</span> <span class="${syntax.function}">DtcgTokenCssConverter</span></div></span><span class="${syntax.punctuation}">(</span><span class="${syntax.punctuation}">)</span><span class="${syntax.punctuation}">.</span><span class="${syntax.function}">convert</span><span class="${syntax.punctuation}">(</span><span class="${syntax.punctuation}">[</span>
+  <span class="${syntax.string}">'./tokens.json'</span><span class="${syntax.punctuation}">,</span>
+<span class="${syntax.punctuation}">]</span><span class="${syntax.punctuation}">);</span>`;
+
+---
+
+<section class={styles.workflow} aria-labelledby="workflow-heading" data-workflow>
+    <div class={styles.sectionHeader}>
+        <p class={styles.eyebrow}>HOW IT WORKS</p>
+        <h2 id="workflow-heading">From tokens to production</h2>
+        <p>Use the CLI in scripts and CI, or the Core API in your own tools.</p>
+    </div>
+
+    <div class={styles.workflowTabs} role="tablist" aria-label="Design Token Kit workflow modes">
+        <button
+            class={styles.workflowTab}
+            id="workflow-tab-cli"
+            type="button"
+            role="tab"
+            aria-selected="true"
+            aria-controls="workflow-panel-cli"
+            data-workflow-tab="cli"
+        >
+            CLI
+        </button>
+        <button
+            class={styles.workflowTab}
+            id="workflow-tab-core"
+            type="button"
+            role="tab"
+            aria-selected="false"
+            aria-controls="workflow-panel-core"
+            tabindex="-1"
+            data-workflow-tab="core"
+        >
+            Core API
+        </button>
+    </div>
+
+    <div class={styles.workflowPanels}>
+        <section
+            class={styles.workflowPanel}
+            id="workflow-panel-cli"
+            role="tabpanel"
+            aria-labelledby="workflow-tab-cli"
+            data-workflow-panel="cli"
+        >
+            <div class={styles.workflowGrid}>
+                <article class={styles.stepCard}>
+                    <header class={styles.stepHeader}>
+                        <span class={styles.stepNumber}>1</span>
+                        <h3>Add tokens</h3>
+                    </header>
+                    <div class={styles.fileVisual} aria-hidden="true">
+                        <span class={styles.folderIcon}></span>
+                    </div>
+                    <ul class={styles.fileList} aria-label="Token source files">
+                        {tokenFiles.map((file) => (
+                            <li>
+                                <img src={documentIcon.src} width="24" height="24" alt="" />
+                                <code>{file}</code>
+                            </li>
+                        ))}
+                    </ul>
+                </article>
+
+                <article class={styles.stepCard}>
+                    <header class={styles.stepHeader}>
+                        <span class={styles.stepNumber}>2</span>
+                        <h3>Run DTK</h3>
+                    </header>
+                    <div class={styles.codeBlock}>
+                        <pre aria-label="CLI validate command"><code>{cliCommand}</code></pre>
+                    </div>
+                </article>
+
+                <article class={styles.stepCard}>
+                    <header class={styles.stepHeader}>
+                        <span class={styles.stepNumber}>3</span>
+                        <h3>Choose an action</h3>
+                    </header>
+                    <ul class={styles.actionList} aria-label="Available CLI actions">
+                        {actions.map((action) => (
+                            <li>
+                                <img src={action.icon.src} width="20" height="20" alt="" />
+                                <span>{action.title}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </article>
+
+                <article class={styles.stepCard}>
+                    <header class={styles.stepHeader}>
+                        <span class={styles.stepNumber}>4</span>
+                        <h3>Get results</h3>
+                    </header>
+                    <ul class={styles.checkList}>
+                        {cliResults.map((result) => (
+                            <li>{result}</li>
+                        ))}
+                    </ul>
+                </article>
+            </div>
+            <p class={styles.workflowNote}>The same workflow is available through Core API.</p>
+        </section>
+
+        <section
+            class={styles.workflowPanel}
+            id="workflow-panel-core"
+            role="tabpanel"
+            aria-labelledby="workflow-tab-core"
+            data-workflow-panel="core"
+            hidden
+        >
+            <div class={styles.workflowGrid}>
+                <article class={styles.stepCard}>
+                    <header class={styles.stepHeader}>
+                        <span class={styles.stepNumber}>1</span>
+                        <h3>Add tokens</h3>
+                    </header>
+                    <div class={styles.fileVisual} aria-hidden="true">
+                        <span class={styles.folderIcon}></span>
+                    </div>
+                    <ul class={styles.fileList} aria-label="Token source files">
+                        {tokenFiles.map((file) => (
+                            <li>
+                                <img src={documentIcon.src} width="24" height="24" alt="" />
+                                <code>{file}</code>
+                            </li>
+                        ))}
+                    </ul>
+                </article>
+
+                <article class={styles.stepCard}>
+                    <header class={styles.stepHeader}>
+                        <span class={styles.stepNumber}>2</span>
+                        <h3>Validate tokens</h3>
+                    </header>
+                    <div class={styles.codeBlock}>
+                        <span class={styles.codeLabel}>TS</span>
+                        <pre aria-label="Core API validation example"><code set:html={parseCodeHtml}></code></pre>
+                    </div>
+                </article>
+
+                <article class={styles.stepCard}>
+                    <header class={styles.stepHeader}>
+                        <span class={styles.stepNumber}>3</span>
+                        <h3>Convert to CSS</h3>
+                    </header>
+                    <div class={styles.codeBlock}>
+                        <span class={styles.codeLabel}>TS</span>
+                        <pre aria-label="Core API conversion example"><code set:html={methodsCodeHtml}></code></pre>
+                    </div>
+                    <ul class={styles.actionLabels} aria-label="Available Core API methods">
+                        {actions.map((action) => (
+                            <li>
+                                <img src={action.icon.src} width="16" height="16" alt="" />
+                                <span>{action.title}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </article>
+
+                <article class={styles.stepCard}>
+                    <header class={styles.stepHeader}>
+                        <span class={styles.stepNumber}>4</span>
+                        <h3>Use results</h3>
+                    </header>
+                    <ul class={styles.checkList}>
+                        {coreResults.map((result) => (
+                            <li>{result}</li>
+                        ))}
+                    </ul>
+                </article>
+            </div>
+            <p class={styles.workflowNote}>The same workflow is available through CLI.</p>
+        </section>
+    </div>
+</section>
+
+<script>
+    const workflows = document.querySelectorAll<HTMLElement>('[data-workflow]');
+
+    workflows.forEach((workflow) => {
+        const tabs = Array.from(workflow.querySelectorAll<HTMLButtonElement>('[data-workflow-tab]'));
+        const panels = Array.from(workflow.querySelectorAll<HTMLElement>('[data-workflow-panel]'));
+
+        const selectTab = (selectedTab: HTMLButtonElement) => {
+            const selectedMode = selectedTab.getAttribute('data-workflow-tab');
+
+            tabs.forEach((tab) => {
+                const isSelected = tab === selectedTab;
+
+                tab.setAttribute('aria-selected', String(isSelected));
+                tab.setAttribute('tabindex', isSelected ? '0' : '-1');
+            });
+
+            panels.forEach((panel) => {
+                panel.hidden = panel.getAttribute('data-workflow-panel') !== selectedMode;
+            });
+        };
+
+        tabs.forEach((tab, tabIndex) => {
+            tab.addEventListener('click', () => selectTab(tab));
+            tab.addEventListener('keydown', (event) => {
+                const keyActions: Partial<Record<string, () => number>> = {
+                    ArrowLeft: () => (tabIndex - 1 + tabs.length) % tabs.length,
+                    ArrowRight: () => (tabIndex + 1) % tabs.length,
+                    Home: () => 0,
+                    End: () => tabs.length - 1,
+                };
+
+                const getNextIndex = keyActions[event.key];
+
+                if (!getNextIndex) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                const nextTab = tabs[getNextIndex()];
+
+                nextTab.focus();
+                selectTab(nextTab);
+            });
+        });
+    });
+</script>
