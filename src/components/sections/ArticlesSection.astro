@@ -11,15 +11,14 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/')
 
 {articles.length > 0 && (
     <section class={styles.articles} aria-labelledby="articles-heading">
-        <div class={styles.header}>
-            <div class={styles.copy}>
-                <p class={styles.eyebrow}>ARTICLES</p>
+        <div class={styles.headerRow}>
+            <div class={styles.sectionHeader}>
+                <p class={styles.eyebrow}>Blog</p>
                 <h2 id="articles-heading">Articles</h2>
                 <p class={styles.description}>
                     Guides, notes, and practical articles about design tokens and DTK.
                 </p>
             </div>
-
             <a class={styles.allLink} href={`${baseUrl}articles/`}>View all articles →</a>
         </div>
 

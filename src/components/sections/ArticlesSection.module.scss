@@ -1,27 +1,24 @@
 .articles {
     width: min(var(--semantic-size-maxWidthPage), calc(100% - var(--semantic-space-6)));
-    margin: 0 auto;
-    padding: var(--semantic-space-7) 0 var(--semantic-space-8);
+    margin: var(--semantic-space-0) auto;
+    padding: var(--semantic-space-8) var(--semantic-space-0) var(--semantic-space-6);
 }
 
-.header {
+.headerRow {
     display: flex;
-    gap: var(--semantic-space-5);
     align-items: end;
-    justify-content: space-between;
     margin-bottom: var(--semantic-space-5);
 }
 
-.copy {
-    max-width: var(--primitive-size-copyMaxWidth3xl);
-
-    h2,
-    p {
-        margin: 0;
-    }
+.sectionHeader {
+    flex: 1;
+    max-width: var(--primitive-size-contentMaxWidthWide);
+    margin: var(--semantic-space-0) auto;
+    text-align: center;
 
     h2 {
-        color: var(--semantic-color-text-primary);
+        margin: var(--semantic-space-0);
+        color: var(--semantic-color-accent-primary);
         font-size: clamp(1.7rem, 4vw, 2.25rem);
         line-height: var(--semantic-font-lineHeight-tight);
         letter-spacing: var(--semantic-font-letterSpacing-tight);
@@ -29,7 +26,7 @@
 }
 
 .eyebrow {
-    margin-bottom: var(--semantic-space-3);
+    margin: var(--semantic-space-0) var(--semantic-space-0) var(--semantic-space-3);
     color: var(--semantic-color-accent-secondaryHover);
     font-size: var(--semantic-font-size-xs);
     font-weight: var(--semantic-font-weight-bold);
@@ -38,10 +35,14 @@
 }
 
 .description {
-    margin-top: var(--semantic-space-3);
+    max-width: var(--primitive-size-copyMaxWidthXl);
+    margin: var(--semantic-space-3) auto var(--semantic-space-0);
     color: var(--semantic-color-text-secondary);
-    font-size: var(--semantic-font-size-base);
-    line-height: var(--semantic-font-lineHeight-relaxed);
+    font-size: var(--semantic-font-size-sm);
+    font-weight: var(--semantic-font-weight-semibold);
+    line-height: var(--semantic-font-lineHeight-normal);
+    text-align: center;
+    text-wrap: balance;
 }
 
 .allLink {
@@ -62,15 +63,16 @@
     gap: var(--semantic-space-5);
 }
 
+@media (min-width: 82rem) {
+    .articles {
+        width: min(var(--semantic-size-maxWidthPageWide), calc(100% - var(--semantic-space-6)));
+    }
+}
+
 @media (max-width: 47.9375rem) {
     .articles {
         width: min(var(--semantic-size-maxWidthPage), calc(100% - var(--semantic-space-5)));
         padding-top: var(--semantic-space-6);
-    }
-
-    .header {
-        align-items: start;
-        flex-direction: column;
     }
 
     .grid {

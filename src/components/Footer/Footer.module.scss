@@ -80,6 +80,13 @@
     font-size: var(--semantic-font-size-xs);
 }
 
+@media (min-width: 82rem) {
+    .inner,
+    .copyright {
+        width: min(var(--semantic-size-maxWidthPageWide), calc(100% - var(--semantic-space-6)));
+    }
+}
+
 @media (max-width: 52rem) {
     .inner {
         grid-template-columns: 1fr;

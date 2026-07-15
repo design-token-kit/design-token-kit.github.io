@@ -1,8 +1,8 @@
 ---
 title: "Design Token Kit: A Practical Toolkit for Design Tokens"
 description: "Why Design Token Kit exists, what problems it solves, and how validation, conversion, and showcase fit together."
-date: 2026-07-14
-category: Product
+date: 2026-06-16
+category: Design Token Kit
 ---
 
 # Design Token Kit: A Practical Toolkit for Design Tokens
@@ -11,6 +11,8 @@ Design tokens help keep colors, spacing, radius values, shadows, and other UI
 values in one place. It sounds simple: you create a JSON file, and things get
 better. In real work, validation, links between tokens, CSS variables, themes,
 showcase pages, and manual editing quickly appear around this simple idea.
+
+![Design Token Kit](intro-design-token-kit-EN.jpg)
 
 ## What problem we wanted to solve
 
