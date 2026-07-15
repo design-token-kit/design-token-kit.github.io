@@ -7,9 +7,13 @@ interface NavigationLink {
     href: string;
 }
 
+const baseUrl = import.meta.env.BASE_URL.endsWith('/')
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
+
 const navigationLinks: NavigationLink[] = [
-    { label: 'Home', href: 'https://design-token-kit.github.io/' },
-    { label: 'Docs', href: '#' },
+    { label: 'Home', href: baseUrl },
+    { label: 'Docs', href: `${baseUrl}docs/` },
     // { label: 'Playground', href: '#' },
     // { label: 'Showcase', href: '#' },
     { label: 'GitHub', href: 'https://github.com/design-token-kit/design-token-kit' },
@@ -18,7 +22,7 @@ const navigationLinks: NavigationLink[] = [
 
 <header class={styles.header}>
     <div class={styles.inner}>
-        <a class={styles.brand} href="https://design-token-kit.github.io/" aria-label="Design Token Kit home">
+        <a class={styles.brand} href={baseUrl} aria-label="Design Token Kit home">
             <img src={projectMark.src} width="40" height="37" alt=""/>
             <span>Design Token Kit</span>
         </a>
@@ -29,6 +33,6 @@ const navigationLinks: NavigationLink[] = [
             ))}
         </nav>
 
-        <a class={styles.action} href="#">Get Started</a>
+        <a class={styles.action} href={`${baseUrl}docs/getting-started/`}>Get Started</a>
     </div>
 </header>

@@ -76,8 +76,6 @@ const outputs = await new DtcgTokenScssConverter().convertThemes([
 
 This returns one stylesheet for the base source and one for each theme.
 
-See the [SCSS guide](/docs/guides/scss/).
-
 ## Tailwind CSS v4
 
 Use `DtcgTailwindCssConverter`.
@@ -97,6 +95,8 @@ Default output contains:
 - one `@theme` block for base values;
 - theme selectors for overrides.
 
+Dimension tokens map to spacing by default. Names containing `breakpoint`, `radius`, `font-size`, `line-height`, or `letter-spacing` map to the matching Tailwind namespaces. The only explicit `design-token-kit.tailwindNamespace` value currently supported is `breakpoint`.
+
 Configure selectors when the output is used in Shadow DOM or another scoped environment:
 
 ```ts
@@ -108,8 +108,6 @@ const css = await new DtcgTailwindCssConverter({
   "./tokens.dark.json",
 ]);
 ```
-
-See the [Tailwind CSS v4 guide](/docs/guides/tailwind-v4/).
 
 ## Convert token documents
 
@@ -131,7 +129,7 @@ Available writers:
 - `HrdtTokenWriter`;
 - `DesignMdWriter`.
 
-Use `DtcgToDesignMdMapper` when mapping a DTCG tree to the flat DESIGN.md model.
+Use `DtcgToDesignMdMapper` when mapping a DTCG tree to the flat DESIGN.md model. This mapping is intentionally lossy: unsupported DTCG token types such as `border`, `shadow`, `transition`, `gradient`, `duration`, `fontFamily`, `fontWeight`, `cubicBezier`, and `strokeStyle` are skipped.
 
 ## Generate a showcase
 
@@ -145,6 +143,8 @@ const html = await createTokenHtmlShowcase().showcase([
 
 The showcase pipeline accepts token sources and existing CSS.
 
+Existing CSS is rendered directly only when it is the single source.
+
 ## Generate statistics
 
 ```ts
@@ -157,8 +157,6 @@ const stats = await createTokenStats().stats([
 
 ## Related pages
 
-- [Parse and load tokens](/docs/core/parsing/)
-- [Core validation](/docs/core/validation/)
-- [CLI conversion](/docs/cli/convert/)
-- [Tailwind CSS v4 guide](/docs/guides/tailwind-v4/)
-- [SCSS guide](/docs/guides/scss/)
+- [Parse and load tokens](../../core/parsing/)
+- [Core validation](../../core/validation/)
+- [CLI conversion](../../cli/convert/)

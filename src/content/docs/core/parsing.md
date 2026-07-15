@@ -69,7 +69,7 @@ The library supports source values such as:
 
 - local file paths;
 - URLs;
-- raw content strings;
+- raw content strings prefixed with `content:`;
 - standard input.
 
 This lets the same processing pipeline work in CLIs, servers, build tools, and custom applications.
@@ -128,8 +128,8 @@ Use `DtcgListLoader` when:
 
 ## Related pages
 
-- [DTCG JSON](/docs/formats/dtcg/)
-- [HRDT YAML](/docs/formats/hrdt/)
-- [DESIGN.md](/docs/formats/design-md/)
-- [Core validation](/docs/core/validation/)
-- [Core conversion](/docs/core/conversion/)
+- [DTCG JSON](../../formats/dtcg/)
+- [HRDT YAML](../../formats/hrdt/)
+- [DESIGN.md](../../formats/design-md/)
+- [Core validation](../../core/validation/)
+- [Core conversion](../../core/conversion/)

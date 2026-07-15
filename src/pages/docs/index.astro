@@ -1,0 +1,28 @@
+---
+import DocsPage from '#/components/DocsPage/DocsPage.astro';
+import Footer from '#/components/Footer/Footer.astro';
+import Header from '#/components/Header/Header.astro';
+import Layout from '#/layouts/Layout.astro';
+import { getDocBySlug, getDocs } from '#/utils/docs';
+
+const docs = await getDocs();
+const currentDoc = await getDocBySlug('getting-started');
+
+if (!currentDoc) {
+    throw new Error('Missing getting-started documentation page.');
+}
+---
+
+<Layout
+    title={`${currentDoc.frontmatter.title} | Design Token Kit`}
+    description={currentDoc.frontmatter.description}
+>
+    <Header />
+    <DocsPage
+        docs={docs}
+        currentSlug={currentDoc.slug}
+        frontmatter={currentDoc.frontmatter}
+        Content={currentDoc.Content}
+    />
+    <Footer />
+</Layout>

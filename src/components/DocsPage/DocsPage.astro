@@ -1,0 +1,60 @@
+---
+import styles from '#/components/DocsPage/DocsPage.module.scss';
+import type { DocEntry, DocFrontmatter } from '#/utils/docs';
+import type { MarkdownInstance } from 'astro';
+
+interface Props {
+    docs: DocEntry[];
+    currentSlug: string;
+    frontmatter: DocFrontmatter;
+    Content: MarkdownInstance<DocFrontmatter>['Content'];
+}
+
+const { docs, currentSlug, frontmatter, Content } = Astro.props;
+
+const groupedDocs = docs.reduce<Record<string, DocEntry[]>>((groups, doc) => {
+    const sectionDocs = groups[doc.frontmatter.section] ?? [];
+    sectionDocs.push(doc);
+    groups[doc.frontmatter.section] = sectionDocs;
+
+    return groups;
+}, {});
+---
+
+<main class={styles.docsPage}>
+    <div class={styles.inner}>
+        <aside class={styles.sidebar} aria-label="Documentation navigation">
+            <p class={styles.sidebarTitle}>Documentation</p>
+            <nav>
+                {Object.entries(groupedDocs).map(([section, sectionDocs]) => (
+                    <section class={styles.navGroup}>
+                        <h2>{section}</h2>
+                        <ul>
+                            {sectionDocs.map((doc) => (
+                                <li>
+                                    <a
+                                        href={doc.href}
+                                        aria-current={doc.slug === currentSlug ? 'page' : undefined}
+                                    >
+                                        {doc.frontmatter.title}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
+                ))}
+            </nav>
+        </aside>
+
+        <article class={styles.article}>
+            <header class={styles.articleHeader}>
+                <p>{frontmatter.section}</p>
+                <h1>{frontmatter.title}</h1>
+                <span>{frontmatter.description}</span>
+            </header>
+            <div class={styles.content}>
+                <Content />
+            </div>
+        </article>
+    </div>
+</main>

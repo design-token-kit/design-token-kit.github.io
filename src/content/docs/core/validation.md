@@ -135,6 +135,6 @@ if (!hasErrors) {
 
 ## Related pages
 
-- [CLI validation](/docs/cli/validate/)
-- [Parse and load tokens](/docs/core/parsing/)
-- [Convert with the Core API](/docs/core/conversion/)
+- [CLI validation](../../cli/validate/)
+- [Parse and load tokens](../../core/parsing/)
+- [Convert with the Core API](../../core/conversion/)

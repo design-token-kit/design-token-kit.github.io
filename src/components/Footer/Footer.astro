@@ -12,29 +12,33 @@ interface FooterGroup {
     links: FooterLink[];
 }
 
+const baseUrl = import.meta.env.BASE_URL.endsWith('/')
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
+
 const footerGroups: FooterGroup[] = [
     {
         title: 'Product',
         links: [
-            { label: 'Features', href: '#' },
-            { label: 'CLI', href: '#' },
-            { label: 'API', href: '#' },
+            { label: 'Features', href: baseUrl },
+            { label: 'CLI', href: `${baseUrl}docs/cli/validate/` },
+            { label: 'API', href: `${baseUrl}docs/core/overview/` },
             { label: 'Changelog', href: '#' },
         ],
     },
     {
         title: 'Resources',
         links: [
-            { label: 'Documentation', href: '#' },
+            { label: 'Documentation', href: `${baseUrl}docs/` },
             { label: 'Playground', href: '#' },
-            { label: 'Guides', href: '#' },
-            { label: 'Examples', href: '#' },
+            { label: 'Formats', href: `${baseUrl}docs/formats/dtcg/` },
+            { label: 'Examples', href: `${baseUrl}docs/cli/convert/` },
         ],
     },
     {
         title: 'Community',
         links: [
-            { label: 'GitHub', href: '#' },
+            { label: 'GitHub', href: 'https://github.com/design-token-kit/design-token-kit' },
             { label: 'Discussions', href: '#' },
             { label: 'Contributing', href: '#' },
             { label: 'Code of Conduct', href: '#' },
@@ -46,7 +50,7 @@ const footerGroups: FooterGroup[] = [
 <footer class={styles.footer}>
     <div class={styles.inner}>
         <div class={styles.brandColumn}>
-            <a class={styles.brand} href="#" aria-label="Design Token Kit home">
+            <a class={styles.brand} href={baseUrl} aria-label="Design Token Kit home">
                 <img src={projectMark.src} width="36" height="36" alt="" />
                 <span>Design Token Kit</span>
             </a>

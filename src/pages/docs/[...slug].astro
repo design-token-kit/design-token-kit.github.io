@@ -1,0 +1,37 @@
+---
+import DocsPage from '#/components/DocsPage/DocsPage.astro';
+import Footer from '#/components/Footer/Footer.astro';
+import Header from '#/components/Header/Header.astro';
+import Layout from '#/layouts/Layout.astro';
+import { getDocs } from '#/utils/docs';
+
+export async function getStaticPaths() {
+    const docs = await getDocs();
+
+    return docs.map((doc) => ({
+        params: { slug: doc.slug },
+        props: { currentSlug: doc.slug },
+    }));
+}
+
+const docs = await getDocs();
+const currentDoc = docs.find((doc) => doc.slug === Astro.props.currentSlug);
+
+if (!currentDoc) {
+    throw new Error(`Missing documentation page for "${Astro.props.currentSlug}".`);
+}
+---
+
+<Layout
+    title={`${currentDoc.frontmatter.title} | Design Token Kit`}
+    description={currentDoc.frontmatter.description}
+>
+    <Header />
+    <DocsPage
+        docs={docs}
+        currentSlug={currentDoc.slug}
+        frontmatter={currentDoc.frontmatter}
+        Content={currentDoc.Content}
+    />
+    <Footer />
+</Layout>

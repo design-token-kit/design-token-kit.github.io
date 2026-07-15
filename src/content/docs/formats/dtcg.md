@@ -124,7 +124,7 @@ Use:
 
 ## Related pages
 
-- [HRDT YAML](/docs/formats/hrdt/)
-- [DESIGN.md](/docs/formats/design-md/)
-- [Validate tokens](/docs/cli/validate/)
-- [Parse and load tokens](/docs/core/parsing/)
+- [HRDT YAML](../../formats/hrdt/)
+- [DESIGN.md](../../formats/design-md/)
+- [Validate tokens](../../cli/validate/)
+- [Parse and load tokens](../../core/parsing/)

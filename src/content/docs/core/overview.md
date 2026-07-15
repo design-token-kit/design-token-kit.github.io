@@ -102,7 +102,7 @@ Core APIs can work with:
 - local files;
 - standard input;
 - URLs;
-- raw token content strings.
+- raw token content strings prefixed with `content:`.
 
 Supported token formats:
 
@@ -128,7 +128,7 @@ Avoid loading the same sources again when a parsed document or list is already a
 
 ## Related pages
 
-- [Parsing and loading](/docs/core/parsing/)
-- [Validation](/docs/core/validation/)
-- [Conversion](/docs/core/conversion/)
-- [CLI getting started](/docs/getting-started/)
+- [Parsing and loading](../../core/parsing/)
+- [Validation](../../core/validation/)
+- [Conversion](../../core/conversion/)
+- [CLI getting started](../../getting-started/)

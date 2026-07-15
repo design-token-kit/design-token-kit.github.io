@@ -58,7 +58,7 @@ dtokens convert tokens.json \
   --out ./tokens.yaml
 ```
 
-Without `--out`, regular text output is written to stdout.
+Without `--out`, regular text output is written to stdout. Multi-theme SCSS is the exception: it writes a tar archive to stdout.
 
 ## Convert token documents
 
@@ -81,6 +81,8 @@ dtokens convert tokens.yaml \
 ```bash
 dtokens convert tokens.json --outform design-md
 ```
+
+This conversion is intentionally lossy. DESIGN.md supports a compact flat model, so unsupported DTCG token types such as `border`, `shadow`, `transition`, `gradient`, `duration`, `fontFamily`, `fontWeight`, `cubicBezier`, and `strokeStyle` are skipped.
 
 ### DESIGN.md to DTCG JSON
 
@@ -132,7 +134,17 @@ dtokens convert tokens.json \
   --separator _
 ```
 
-For multi-theme behavior, see the [SCSS guide](/docs/guides/scss/).
+For multiple themes, SCSS emits separate outputs instead of one stylesheet:
+
+```bash
+dtokens convert \
+  tokens.json \
+  tokens.dark.json \
+  --outform scss \
+  --out ./tokens.scss
+```
+
+This creates `tokens.base.scss` and `tokens.dark.scss`. The output directory must already exist. Without `--out`, multi-theme SCSS writes a tar archive to stdout. With `--out ./tokens.tar`, it writes that archive to a file.
 
 ## Generate Tailwind CSS v4
 
@@ -163,7 +175,7 @@ dtokens convert \
   --theme-selector ":host([data-theme='{theme}'])"
 ```
 
-See the [Tailwind CSS v4 guide](/docs/guides/tailwind-v4/).
+Default Tailwind output contains `@import 'tailwindcss';`, one `@theme` block for base values, and theme selectors for overrides. Dimension tokens map to spacing by default, but names containing `breakpoint`, `radius`, `font-size`, `line-height`, or `letter-spacing` map to the matching Tailwind namespaces. The only explicit `design-token-kit.tailwindNamespace` value currently supported is `breakpoint`.
 
 ## Read from standard input
 
@@ -191,7 +203,5 @@ The first source is the base token set. Remaining sources are theme overrides.
 
 ## Related pages
 
-- [Validate tokens](/docs/cli/validate/)
-- [SCSS guide](/docs/guides/scss/)
-- [Tailwind CSS v4 guide](/docs/guides/tailwind-v4/)
-- [Core conversion API](/docs/core/conversion/)
+- [Validate tokens](../../cli/validate/)
+- [Core conversion API](../../core/conversion/)

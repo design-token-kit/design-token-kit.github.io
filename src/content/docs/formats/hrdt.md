@@ -27,12 +27,19 @@ Choose HRDT YAML when:
 A compact layered source can look like this:
 
 ```yaml
-primitive.color.white: "#ffffff"
-primitive.color.brand-500: "#2549f6"
+primitive:
+  color:
+    white: "#ffffff"
+    brand-500: "#2549f6"
 
-semantic.color.action-primary: "{primitive.color.brand-500}"
+semantic:
+  color:
+    action-primary: "{primitive.color.brand-500}"
 
-component.button.primary.background: "{semantic.color.action-primary}"
+component:
+  button:
+    primary:
+      background: "{semantic.color.action-primary}"
 ```
 
 HRDT keeps token paths and references visible while reducing structural noise.
@@ -114,7 +121,7 @@ Use:
 
 ## Related pages
 
-- [DTCG JSON](/docs/formats/dtcg/)
-- [DESIGN.md](/docs/formats/design-md/)
-- [CLI conversion](/docs/cli/convert/)
-- [Core parsing](/docs/core/parsing/)
+- [DTCG JSON](../../formats/dtcg/)
+- [DESIGN.md](../../formats/design-md/)
+- [CLI conversion](../../cli/convert/)
+- [Core parsing](../../core/parsing/)
