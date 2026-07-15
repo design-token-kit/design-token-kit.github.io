@@ -203,7 +203,8 @@
 
 .itemDiamond,
 .itemHex,
-.itemCube {
+.itemCube,
+.itemParallelogram {
     box-shadow: var(--semantic-shadow-sm);
 }
 
@@ -232,6 +233,13 @@
         background: color-mix(in srgb, var(--semantic-color-accent-primary) 36%, var(--semantic-color-surface-default));
         clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
     }
+}
+
+.itemParallelogram {
+    width: var(--semantic-space-5);
+    height: var(--semantic-space-4);
+    background: color-mix(in srgb, var(--semantic-color-accent-primary) 42%, var(--semantic-color-surface-default));
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
 }
 
 .itemCube {
@@ -305,6 +313,13 @@
     transform: rotate(90deg);
 }
 
+.railTen {
+    top: 100%;
+    left: 37%;
+    width: 22%;
+    transform: rotate(-12deg);
+}
+
 .railOne .railItem {
     animation-duration: 7s;
 }
@@ -337,9 +352,14 @@
     border: var(--primitive-size-borderWidthSm) solid var(--semantic-color-accent-secondaryHover);
 }
 
-.railEight .itemDiamond {
-    background: color-mix(in srgb, var(--semantic-color-accent-secondaryHover) 28%, var(--semantic-color-surface-default));
+.railEight .itemDot {
+    background: color-mix(in srgb, var(--semantic-color-accent-secondaryHover) 60%, var(--semantic-color-surface-default));
     border: var(--primitive-size-borderWidthSm) solid var(--semantic-color-accent-secondaryHover);
+}
+
+.railFour .itemCube {
+    width: calc(var(--semantic-space-5) / 2);
+    height: calc(var(--semantic-space-4) / 2);
 }
 
 .railSeven .itemCube {
@@ -353,6 +373,10 @@
 
 .railNine .railItem {
     animation-duration: 6.8s;
+}
+
+.railTen .railItem {
+    animation-duration: 8s;
 }
 
 @keyframes rail-glide {

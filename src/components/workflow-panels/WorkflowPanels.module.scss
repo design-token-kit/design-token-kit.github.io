@@ -60,6 +60,11 @@
         border-color var(--semantic-duration-fast) var(--semantic-easing-default),
         color var(--semantic-duration-fast) var(--semantic-easing-default);
 
+    &:hover {
+        color: var(--semantic-color-accent-primary);
+        border-color: var(--semantic-color-accent-primary);
+    }
+
     &[aria-selected="true"] {
         color: var(--semantic-color-text-inverse);
         background: var(--semantic-color-accent-primary);
