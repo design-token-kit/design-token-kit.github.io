@@ -1,5 +1,5 @@
 .workflow {
-    width: min(86rem, calc(100% - var(--semantic-space-6)));
+    width: min(var(--semantic-size-maxWidthPageWide), calc(100% - var(--semantic-space-6)));
     margin: var(--semantic-space-0) auto;
     padding: var(--semantic-space-8) var(--semantic-space-0) var(--semantic-space-6);
 }

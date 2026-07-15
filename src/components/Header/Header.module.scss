@@ -90,12 +90,10 @@
     border-radius: var(--semantic-radius-sm);
     box-shadow: var(--semantic-shadow-sm);
     transition:
-        background var(--semantic-duration-fast) var(--semantic-easing-default),
-        transform var(--semantic-duration-fast) var(--semantic-easing-default);
+        background var(--semantic-duration-fast) var(--semantic-easing-default);
 
     &:hover {
         background: var(--semantic-color-accent-primaryHover);
-        transform: translateY(-0.0625rem);
     }
 }
 

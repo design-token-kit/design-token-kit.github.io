@@ -1,0 +1,33 @@
+---
+import ArticleCard from '#/components/articles/ArticleCard.astro';
+import Footer from '#/components/Footer/Footer.astro';
+import Header from '#/components/Header/Header.astro';
+import Layout from '#/layouts/Layout.astro';
+import styles from '#/pages/articles/articles.module.scss';
+import { getArticles } from '#/utils/articles';
+
+const articles = await getArticles();
+---
+
+<Layout
+    title="Articles | Design Token Kit"
+    description="Guides, notes, and practical articles about design tokens and Design Token Kit."
+>
+    <Header />
+
+    <main class={styles.page}>
+        <section class={styles.hero}>
+            <p class={styles.eyebrow}>ARTICLES</p>
+            <h1>Articles</h1>
+            <p class={styles.description}>
+                Guides, notes, and practical articles about design tokens and DTK.
+            </p>
+        </section>
+
+        <section class={styles.grid} aria-label="All articles">
+            {articles.map((article) => <ArticleCard article={article} />)}
+        </section>
+    </main>
+
+    <Footer />
+</Layout>

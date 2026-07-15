@@ -45,6 +45,7 @@
   --primitive-font-size-md: 1.125rem;
   --primitive-font-size-lg: 1.25rem;
   --primitive-font-size-xl: 1.5rem;
+  --primitive-font-size-2xl-sm: 3.25rem;
   --primitive-font-size-2xl: 4.75rem;
   --primitive-font-weight-normal: 400;
   --primitive-font-weight-medium: 500;
@@ -103,6 +104,7 @@
   --primitive-size-contentMaxWidthWide: 48rem;
   --primitive-size-surfaceMaxWidth: 80rem;
   --primitive-size-maxWidthPage: 72rem;
+  --primitive-size-maxWidthPageWide: 86rem;
   --primitive-radius-sm: 0.5rem;
   --primitive-radius-md: 0.875rem;
   --primitive-radius-lg: 1.25rem;
@@ -163,6 +165,7 @@
   --semantic-font-size-md: var(--primitive-font-size-md);
   --semantic-font-size-lg: var(--primitive-font-size-lg);
   --semantic-font-size-xl: var(--primitive-font-size-xl);
+  --semantic-font-size-2xl-sm: var(--primitive-font-size-2xl-sm);
   --semantic-font-size-2xl: var(--primitive-font-size-2xl);
   --semantic-font-weight-normal: var(--primitive-font-weight-normal);
   --semantic-font-weight-medium: var(--primitive-font-weight-medium);
@@ -174,6 +177,7 @@
   --semantic-font-letterSpacing-tight: var(--primitive-font-letterSpacing-tight);
   --semantic-font-letterSpacing-wide: var(--primitive-font-letterSpacing-wide);
   --semantic-size-maxWidthPage: var(--primitive-size-maxWidthPage);
+  --semantic-size-maxWidthPageWide: var(--primitive-size-maxWidthPageWide);
   --semantic-radius-sm: var(--primitive-radius-sm);
   --semantic-radius-md: var(--primitive-radius-md);
   --semantic-radius-lg: var(--primitive-radius-lg);

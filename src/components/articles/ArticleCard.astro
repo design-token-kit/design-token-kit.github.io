@@ -1,0 +1,27 @@
+---
+import styles from '#/components/articles/ArticleCard.module.scss';
+import { formatEnglishDate } from '#/utils/dates';
+import { getArticleHref, getArticleSlug, type ArticleEntry } from '#/utils/articles';
+
+interface Props {
+    article: ArticleEntry;
+}
+
+const { article } = Astro.props;
+const href = getArticleHref(getArticleSlug(article));
+---
+
+<article class={styles.card}>
+    <div class={styles.meta}>
+        {article.data.category && <span class={styles.badge}>{article.data.category}</span>}
+        <time datetime={article.data.date.toISOString()}>{formatEnglishDate(article.data.date)}</time>
+    </div>
+
+    <h3 class={styles.title}>
+        <a href={href}>{article.data.title}</a>
+    </h3>
+
+    <p class={styles.description}>{article.data.description}</p>
+
+    <a class={styles.link} href={href}>Read article →</a>
+</article>

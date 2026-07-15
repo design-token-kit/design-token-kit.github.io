@@ -74,12 +74,10 @@
     border-radius: var(--semantic-radius-sm);
     box-shadow: var(--semantic-shadow-sm);
     transition:
-        background var(--semantic-duration-fast) var(--semantic-easing-default),
-        transform var(--semantic-duration-fast) var(--semantic-easing-default);
+        background var(--semantic-duration-fast) var(--semantic-easing-default);
 
     &:hover {
         background: var(--semantic-color-accent-primaryHover);
-        transform: translateY(calc(-1 * var(--primitive-size-offsetXs)));
     }
 }
 
@@ -161,7 +159,7 @@
 
 @media (min-width: 82rem) {
     .documentation {
-        width: min(86rem, calc(100% - var(--semantic-space-6)));
+        width: min(var(--semantic-size-maxWidthPageWide), calc(100% - var(--semantic-space-6)));
     }
 }
 
