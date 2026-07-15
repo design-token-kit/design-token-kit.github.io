@@ -1,18 +1,4 @@
 .hero {
-    --hero-content-max-width: 43rem;
-    --hero-eyebrow-marker-size: 0.625rem;
-    --hero-eyebrow-marker-border-width: 0.125rem;
-    --hero-eyebrow-marker-radius: 0.125rem;
-    --hero-heading-max-width: 48rem;
-    --hero-lead-max-width: 40rem;
-    --hero-lead-line-height: 1.35;
-    --hero-summary-max-width: 36rem;
-    --hero-action-min-height: 3.25rem;
-    --hero-action-min-width: 11.5rem;
-    --hero-action-icon-size: 1.5rem;
-    --hero-action-border-width: 0.0625rem;
-    --hero-visual-min-height: 24rem;
-
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(18rem, 28rem);
     gap: var(--semantic-space-8);
@@ -23,7 +9,7 @@
 }
 
 .content {
-    max-width: var(--hero-content-max-width);
+    max-width: var(--primitive-size-contentMaxWidth);
 }
 
 .eyebrow {
@@ -39,16 +25,16 @@
 }
 
 .eyebrow::before {
-    width: var(--hero-eyebrow-marker-size);
-    height: var(--hero-eyebrow-marker-size);
+    width: var(--primitive-size-micro);
+    height: var(--primitive-size-micro);
     content: "";
-    border: var(--hero-eyebrow-marker-border-width) solid var(--semantic-color-accent-secondaryHover);
-    border-radius: var(--hero-eyebrow-marker-radius);
+    border: var(--primitive-size-borderWidthMd) solid var(--semantic-color-accent-secondaryHover);
+    border-radius: var(--primitive-size-borderWidthMd);
     transform: rotate(45deg);
 }
 
 .content h1 {
-    max-width: var(--hero-heading-max-width);
+    max-width: var(--primitive-size-contentMaxWidthWide);
     margin: var(--semantic-space-0);
     color: var(--semantic-color-accent-primary);
     font-size: var(--semantic-font-size-2xl);
@@ -58,16 +44,16 @@
 }
 
 .lead {
-    max-width: var(--hero-lead-max-width);
+    max-width: var(--primitive-size-copyMaxWidth3xl);
     margin: var(--semantic-space-5) var(--semantic-space-0) var(--semantic-space-0);
     color: var(--semantic-color-text-secondary);
     font-size: clamp(1.25rem, 2.5vw, 1.625rem);
     font-weight: var(--semantic-font-weight-semibold);
-    line-height: var(--hero-lead-line-height);
+    line-height: var(--primitive-font-lineHeight-cozy);
 }
 
 .summary {
-    max-width: var(--hero-summary-max-width);
+    max-width: var(--primitive-size-copyMaxWidthXl);
     margin: var(--semantic-space-4) var(--semantic-space-0) var(--semantic-space-0);
     color: var(--semantic-color-text-secondary);
     font-size: var(--semantic-font-size-base);
@@ -87,8 +73,8 @@
     gap: var(--semantic-space-5);
     align-items: center;
     justify-content: space-between;
-    min-height: var(--hero-action-min-height);
-    min-width: var(--hero-action-min-width);
+    min-height: var(--primitive-size-heroActionMinHeight);
+    min-width: var(--primitive-size-heroActionMinWidth);
     padding: var(--semantic-space-0) var(--semantic-space-5);
     font-size: var(--semantic-font-size-sm);
     font-weight: var(--semantic-font-weight-bold);
@@ -101,15 +87,15 @@
         transform var(--semantic-duration-fast) var(--semantic-easing-default);
 
     img {
-        width: var(--hero-action-icon-size);
-        height: var(--hero-action-icon-size);
+        width: var(--semantic-space-5);
+        height: var(--semantic-space-5);
     }
 }
 
 .primaryAction {
     color: var(--semantic-color-text-inverse);
     background: var(--semantic-color-accent-primary);
-    border: var(--hero-action-border-width) solid var(--semantic-color-accent-primary);
+    border: var(--primitive-size-borderWidthSm) solid var(--semantic-color-accent-primary);
     box-shadow: var(--semantic-shadow-sm);
 
     &:hover {
@@ -121,7 +107,7 @@
 .secondaryAction {
     color: var(--semantic-color-accent-secondaryHover);
     background: var(--semantic-color-surface-default);
-    border: var(--hero-action-border-width) solid var(--semantic-color-accent-secondary);
+    border: var(--primitive-size-borderWidthSm) solid var(--semantic-color-accent-secondary);
 
     &:hover {
         color: var(--semantic-color-accent-secondaryHover);
@@ -133,7 +119,7 @@
 .visual {
     display: grid;
     place-items: center;
-    min-height: var(--hero-visual-min-height);
+    min-height: var(--primitive-size-copyMaxWidthMd);
 
     img {
         width: 100%;
@@ -145,11 +131,13 @@
 
 @media (max-width: 56rem) {
     .hero {
-        --hero-visual-min-height: 17rem;
-
         grid-template-columns: 1fr;
         gap: var(--semantic-space-6);
         padding-top: var(--semantic-space-7);
+    }
+
+    .visual {
+        min-height: var(--primitive-size-copyMaxWidthSm);
     }
 }
 

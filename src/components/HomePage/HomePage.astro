@@ -1,12 +1,11 @@
 ---
 import BenefitList from '#/components/BenefitList/BenefitList.astro';
-import DocsPlayground from '#/components/DocsPlayground/DocsPlayground.astro';
-import FeatureCard from '#/components/FeatureCard/FeatureCard.astro';
+import FeatureSection from '#/components/FeatureSection/FeatureSection.astro';
 import Footer from '#/components/Footer/Footer.astro';
 import Header from '#/components/Header/Header.astro';
 import Hero from '#/components/Hero/Hero.astro';
-import TechExample from '#/components/TechExample/TechExample.astro';
 import styles from '#/components/HomePage/HomePage.module.scss';
+import WorkflowPanels from '#/components/WorkflowPanels/WorkflowPanels.astro';
 ---
 
 <Header/>
@@ -14,19 +13,8 @@ import styles from '#/components/HomePage/HomePage.module.scss';
 <main class={styles.homePage}>
     <Hero/>
     <BenefitList/>
-
-    <section class={styles.features} aria-labelledby="features-heading">
-        <div class={styles.sectionHeader}>
-            <p class={styles.eyebrow}>Everything you need</p>
-            <h2 id="features-heading">Built for modern design systems</h2>
-        </div>
-        <div class={styles.featureGrid}>
-            <FeatureCard/>
-        </div>
-    </section>
-
-    <TechExample/>
-    <DocsPlayground/>
+    <FeatureSection/>
+    <WorkflowPanels/>
 </main>
 
 <Footer/>

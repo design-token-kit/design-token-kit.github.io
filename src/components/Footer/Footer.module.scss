@@ -1,11 +1,6 @@
 .footer {
-    --footer-brand-copy-max-width: 25rem;
-    --footer-logo-size: 2.25rem;
-    --footer-heading-line-height: 1.3;
-    --footer-link-underline-offset: 0.25rem;
-
     background: var(--semantic-color-surface-default);
-    border-top: 0.0625rem solid var(--semantic-color-border-subtle);
+    border-top: var(--primitive-size-borderWidthSm) solid var(--semantic-color-border-subtle);
 }
 
 .inner {
@@ -18,7 +13,7 @@
 }
 
 .brandColumn p {
-    max-width: var(--footer-brand-copy-max-width);
+    max-width: var(--primitive-size-brandCopyMaxWidth);
     margin: var(--semantic-space-4) var(--semantic-space-0) var(--semantic-space-0);
     color: var(--semantic-color-text-secondary);
     font-size: var(--semantic-font-size-sm);
@@ -35,8 +30,8 @@
     text-decoration: none;
 
     img {
-        width: var(--footer-logo-size);
-        height: var(--footer-logo-size);
+        width: var(--primitive-size-footerLogo);
+        height: var(--primitive-size-footerLogo);
     }
 
     &:hover {
@@ -53,7 +48,7 @@
         margin: var(--semantic-space-0);
         color: var(--semantic-color-accent-primary);
         font-size: var(--semantic-font-size-sm);
-        line-height: var(--footer-heading-line-height);
+        line-height: var(--primitive-font-lineHeight-cozy);
     }
 
     ul {
@@ -72,7 +67,7 @@
         &:hover {
             color: var(--semantic-color-link-hover);
             text-decoration: underline;
-            text-underline-offset: var(--footer-link-underline-offset);
+            text-underline-offset: var(--semantic-space-1);
         }
     }
 }

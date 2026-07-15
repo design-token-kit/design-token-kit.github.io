@@ -18,6 +18,12 @@ export default {
             },
         ],
         'selector-class-pattern': null,
+        'selector-pseudo-class-no-unknown': [
+            true,
+            {
+                ignorePseudoClasses: ['global'],
+            },
+        ],
         'value-keyword-case': null,
         'scale-unlimited/declaration-strict-value': [
             [
