@@ -53,7 +53,7 @@
     border: var(--primitive-size-borderWidthSm) solid var(--semantic-color-border-default);
     border-radius: var(--semantic-radius-sm);
     cursor: pointer;
-    min-width: 150px;
+    min-width: var(--primitive-size-tabMinWidth);
     transition:
         background var(--semantic-duration-fast) var(--semantic-easing-default),
         border-color var(--semantic-duration-fast) var(--semantic-easing-default),
