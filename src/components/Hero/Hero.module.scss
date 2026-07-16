@@ -39,7 +39,7 @@
     color: var(--semantic-color-accent-primary);
     font-size: var(--semantic-font-size-2xl);
     font-weight: var(--semantic-font-weight-bold);
-    line-height: var(--semantic-font-lineHeight-tight);
+    line-height: 1.16;
     letter-spacing: var(--semantic-font-letterSpacing-tight);
 }
 
@@ -135,6 +135,15 @@
         height: auto;
         filter: drop-shadow(var(--semantic-shadow-logo));
     }
+}
+
+.projectMark {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(var(--semantic-shadow-logo));
 }
 
 .rail {
@@ -403,7 +412,7 @@
     }
 
     .visual {
-        min-height: var(--primitive-size-copyMaxWidthSm);
+        display: none;
     }
 
     .railTwo,
@@ -421,6 +430,10 @@
 @media (max-width: 32rem) {
     .hero {
         width: min(var(--semantic-size-maxWidthPage), calc(100% - var(--semantic-space-5)));
+    }
+
+    .content h1 {
+        font-size: var(--semantic-font-size-2xl-sm);
     }
 
     .actions {

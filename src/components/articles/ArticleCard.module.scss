@@ -43,7 +43,7 @@
     color: var(--semantic-color-text-primary);
     font-family: var(--semantic-font-family-display);
     font-size: clamp(1.45rem, 2.2vw, 1.85rem);
-    line-height: var(--semantic-font-lineHeight-tight);
+    line-height: var(--component-articleCard-title-lineHeight);
     letter-spacing: var(--semantic-font-letterSpacing-tight);
 
     a {
