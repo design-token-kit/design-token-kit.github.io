@@ -39,7 +39,7 @@
     color: var(--semantic-color-accent-primary);
     font-size: var(--semantic-font-size-2xl);
     font-weight: var(--semantic-font-weight-bold);
-    line-height: 1.16;
+    line-height: var(--semantic-font-lineHeight-heroTitle);
     letter-spacing: var(--semantic-font-letterSpacing-tight);
 }
 

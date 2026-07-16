@@ -108,8 +108,7 @@
         grid-column: 1 / -1;
         justify-content: flex-start;
         order: 3;
-        overflow-x: auto;
-        overflow-y: hidden;
+        overflow: auto hidden;
         max-width: 100%;
         padding-bottom: var(--semantic-space-1);
     }
