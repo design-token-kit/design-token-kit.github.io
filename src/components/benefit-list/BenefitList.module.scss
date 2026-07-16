@@ -52,6 +52,10 @@
 }
 
 @media (max-width: 56rem) {
+    .benefits {
+        margin-top: var(--semantic-space-5);
+    }
+
     .benefits ul {
         align-items: flex-start;
         flex-direction: column;

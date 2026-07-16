@@ -45,7 +45,7 @@
   --primitive-font-size-md: 1.125rem;
   --primitive-font-size-lg: 1.25rem;
   --primitive-font-size-xl: 1.5rem;
-  --primitive-font-size-2xl-sm: 3.25rem;
+  --primitive-font-size-2xl-sm: 2.5rem;
   --primitive-font-size-2xl: 4.75rem;
   --primitive-font-weight-normal: 400;
   --primitive-font-weight-medium: 500;
@@ -201,6 +201,7 @@
   --component-card-bg: var(--semantic-color-surface-default);
   --component-card-border: var(--semantic-color-border-default);
   --component-card-radius: var(--semantic-radius-lg);
+  --component-articleCard-title-lineHeight: var(--primitive-font-lineHeight-cozy);
   --component-header-bg: var(--semantic-color-header-surface);
   --component-header-border: var(--semantic-color-header-border);
 }
