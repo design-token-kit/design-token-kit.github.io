@@ -389,12 +389,6 @@
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .railItem {
-        animation: none;
-    }
-}
-
 @media (min-width: 82rem) {
     .hero {
         width: min(var(--semantic-size-maxWidthPageWide), calc(100% - var(--semantic-space-6)));
