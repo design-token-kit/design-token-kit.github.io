@@ -51,6 +51,7 @@
   --primitive-font-weight-semibold: 650;
   --primitive-font-weight-bold: 750;
   --primitive-font-lineHeight-tight: 1.08;
+  --primitive-font-lineHeight-heroTitle: 1.16;
   --primitive-font-lineHeight-cozy: 1.3;
   --primitive-font-lineHeight-normal: 1.55;
   --primitive-font-lineHeight-relaxed: 1.7;
@@ -170,6 +171,7 @@
   --semantic-font-weight-semibold: var(--primitive-font-weight-semibold);
   --semantic-font-weight-bold: var(--primitive-font-weight-bold);
   --semantic-font-lineHeight-tight: var(--primitive-font-lineHeight-tight);
+  --semantic-font-lineHeight-heroTitle: var(--primitive-font-lineHeight-heroTitle);
   --semantic-font-lineHeight-normal: var(--primitive-font-lineHeight-normal);
   --semantic-font-lineHeight-relaxed: var(--primitive-font-lineHeight-relaxed);
   --semantic-font-letterSpacing-tight: var(--primitive-font-letterSpacing-tight);
