@@ -23,7 +23,6 @@
   --primitive-color-status-success: #3a8f5a;
   --primitive-color-status-successWash: color(srgb 0.227451 0.560784 0.352941 / 0.08);
   --primitive-color-status-successBorder: color(srgb 0.227451 0.560784 0.352941 / 0.24);
-  --primitive-color-status-error: #c7413c;
   --primitive-color-inset-light: color(srgb 1 1 1 / 0.24);
   --primitive-space-0: 0rem;
   --primitive-space-1: 0.25rem;
@@ -143,7 +142,6 @@
   --semantic-color-status-success: var(--primitive-color-status-success);
   --semantic-color-status-successWash: var(--primitive-color-status-successWash);
   --semantic-color-status-successBorder: var(--primitive-color-status-successBorder);
-  --semantic-color-status-error: var(--primitive-color-status-error);
   --semantic-color-inset-light: var(--primitive-color-inset-light);
   --semantic-space-0: var(--primitive-space-0);
   --semantic-space-1: var(--primitive-space-1);
