@@ -19,6 +19,7 @@
 
 .brand {
     display: inline-flex;
+    min-width: 0;
     gap: var(--semantic-space-3);
     align-items: center;
     color: var(--semantic-color-text-primary);
@@ -35,6 +36,7 @@
 
 .navigation {
     display: flex;
+    min-width: 0;
     gap: var(--semantic-space-5);
     align-items: center;
     justify-content: center;
@@ -107,6 +109,8 @@
         justify-content: flex-start;
         order: 3;
         overflow-x: auto;
+        overflow-y: hidden;
+        max-width: 100%;
         padding-bottom: var(--semantic-space-1);
     }
 }
