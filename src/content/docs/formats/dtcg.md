@@ -100,6 +100,7 @@ dtokens convert tokens.json --outform design-md
 dtokens convert tokens.json --outform css
 dtokens convert tokens.json --outform scss
 dtokens convert tokens.json --outform tailwind-v4
+dtokens convert tokens.json --outform swiftui
 ```
 
 ## Themes

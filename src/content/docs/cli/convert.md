@@ -1,6 +1,6 @@
 ---
 title: Convert tokens
-description: Convert token documents and generate CSS, SCSS, or Tailwind CSS v4 output.
+description: Convert token documents and generate CSS, SCSS, Tailwind CSS v4, or SwiftUI output.
 section: CLI
 order: 2
 ---
@@ -45,6 +45,7 @@ Use `--outform` or `-f`:
 - `css`
 - `scss`
 - `tailwind-v4`
+- `swiftui`
 
 ```bash
 dtokens convert tokens.json --outform hrdt
@@ -177,6 +178,31 @@ dtokens convert \
 
 Default Tailwind output contains `@import 'tailwindcss';`, one `@theme` block for base values, and theme selectors for overrides. Dimension tokens map to spacing by default, but names containing `breakpoint`, `radius`, `font-size`, `line-height`, or `letter-spacing` map to the matching Tailwind namespaces. The only explicit `design-token-kit.tailwindNamespace` value currently supported is `breakpoint`.
 
+## Generate SwiftUI
+
+```bash
+dtokens convert tokens.json \
+  --outform swiftui \
+  --out ./DesignTokens.swift
+```
+
+Default SwiftUI output contains nested enums with typed `static let` members.
+Token references are preserved as Swift constant paths.
+
+Use `--swift-type struct` to add a `Theme` struct layer:
+
+```bash
+dtokens convert \
+  tokens.json \
+  tokens.dark.json \
+  --outform swiftui \
+  --swift-type struct \
+  --out ./DesignTokens.swift
+```
+
+With multiple sources, the first file is the base token set.
+Remaining files are emitted as theme variants.
+
 ## Read from standard input
 
 Use `-`:
@@ -198,6 +224,7 @@ Multiple sources are supported when generating:
 - CSS;
 - SCSS;
 - Tailwind CSS v4.
+- SwiftUI.
 
 The first source is the base token set. Remaining sources are theme overrides.
 

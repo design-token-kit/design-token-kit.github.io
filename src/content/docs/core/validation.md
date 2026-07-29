@@ -115,7 +115,7 @@ A common application flow is:
 import {
   DtcgChecker,
   DtcgListLoader,
-  DtcgTokenCssConverter,
+  CssTokenConverter,
 } from "@design-token-kit/core";
 
 const sources = ["./tokens.json"];
@@ -127,7 +127,7 @@ const hasErrors = issues.some(
 
 if (!hasErrors) {
   const list = await new DtcgListLoader().load(sources);
-  const css = new DtcgTokenCssConverter().convertList(list);
+  const css = new CssTokenConverter().convertList(list);
 
   console.log(css);
 }

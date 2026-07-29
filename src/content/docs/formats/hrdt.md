@@ -103,6 +103,15 @@ dtokens convert tokens.yaml \
   --out ./tokens.tailwind.css
 ```
 
+### To SwiftUI
+
+```bash
+dtokens convert tokens.yaml \
+  --inform hrdt \
+  --outform swiftui \
+  --out ./DesignTokens.swift
+```
+
 ## Generate reports
 
 ```bash

@@ -1,6 +1,6 @@
 ---
 title: Convert with the Core API
-description: Generate CSS, SCSS, Tailwind CSS v4, and serialized token documents.
+description: Generate CSS, SCSS, Tailwind CSS v4, SwiftUI, and serialized token documents.
 section: Core API
 order: 4
 ---
@@ -12,18 +12,19 @@ The Core API can generate:
 - CSS custom properties;
 - SCSS variables;
 - Tailwind CSS v4 theme output;
+- SwiftUI source;
 - DTCG JSON;
 - HRDT YAML;
 - DESIGN.md.
 
 ## CSS custom properties
 
-Use `DtcgTokenCssConverter`.
+Use `CssTokenConverter`.
 
 ```ts
-import { DtcgTokenCssConverter } from "@design-token-kit/core";
+import { CssTokenConverter } from "@design-token-kit/core";
 
-const css = await new DtcgTokenCssConverter().convert([
+const css = await new CssTokenConverter().convert([
   "./tokens.json",
   "./tokens.dark.json",
 ]);
@@ -41,17 +42,17 @@ When a parsed document or `DtcgList` is already available, use:
 - `convertList()`.
 
 ```ts
-const css = new DtcgTokenCssConverter().convertList(list);
+const css = new CssTokenConverter().convertList(list);
 ```
 
 ## SCSS variables
 
-Use `DtcgTokenScssConverter`.
+Use `ScssTokenConverter`.
 
 ```ts
-import { DtcgTokenScssConverter } from "@design-token-kit/core";
+import { ScssTokenConverter } from "@design-token-kit/core";
 
-const scss = await new DtcgTokenScssConverter().convert([
+const scss = await new ScssTokenConverter().convert([
   "./tokens.json",
 ]);
 ```
@@ -68,7 +69,7 @@ Aliases are emitted as SCSS variable references.
 For multiple themes, use `convertThemes()`:
 
 ```ts
-const outputs = await new DtcgTokenScssConverter().convertThemes([
+const outputs = await new ScssTokenConverter().convertThemes([
   "./tokens.json",
   "./tokens.dark.json",
 ]);
@@ -78,12 +79,12 @@ This returns one stylesheet for the base source and one for each theme.
 
 ## Tailwind CSS v4
 
-Use `DtcgTailwindCssConverter`.
+Use `TailwindTokenConverter`.
 
 ```ts
-import { DtcgTailwindCssConverter } from "@design-token-kit/core";
+import { TailwindTokenConverter } from "@design-token-kit/core";
 
-const css = await new DtcgTailwindCssConverter().convert([
+const css = await new TailwindTokenConverter().convert([
   "./tokens.json",
   "./tokens.dark.json",
 ]);
@@ -100,7 +101,7 @@ Dimension tokens map to spacing by default. Names containing `breakpoint`, `radi
 Configure selectors when the output is used in Shadow DOM or another scoped environment:
 
 ```ts
-const css = await new DtcgTailwindCssConverter({
+const css = await new TailwindTokenConverter({
   baseSelector: ":host",
   themeSelector: ":host([data-theme='{theme}'])",
 }).convert([
@@ -108,6 +109,33 @@ const css = await new DtcgTailwindCssConverter({
   "./tokens.dark.json",
 ]);
 ```
+
+## Generate SwiftUI source
+
+Use `SwiftUiTokenConverter`.
+
+```ts
+import { SwiftUiTokenConverter } from "@design-token-kit/core";
+
+const swift = new SwiftUiTokenConverter().convertList(list);
+```
+
+The default output is a nested enum API with typed `static let` members.
+Token references are preserved as Swift constant paths.
+
+Use `swiftType: "struct"` to add a `Theme` struct layer on top of the enum
+API:
+
+```ts
+import { SwiftUiTokenConverter } from "@design-token-kit/core";
+
+const swift = new SwiftUiTokenConverter({ swiftType: "struct" })
+  .convertList(list);
+```
+
+Older `Dtcg*` converter names are still exported as compatibility aliases, but
+new code should use `CssTokenConverter`, `ScssTokenConverter`,
+`TailwindTokenConverter`, and `SwiftUiTokenConverter`.
 
 ## Convert token documents
 
