@@ -25,8 +25,9 @@ npm install @design-token-kit/core
 import {
   DtcgChecker,
   DtcgListLoader,
-  DtcgTokenCssConverter,
-  DtcgTokenScssConverter,
+  CssTokenConverter,
+  ScssTokenConverter,
+  SwiftUiTokenConverter,
   createTokenHtmlShowcase,
   createTokenStats,
 } from "@design-token-kit/core";
@@ -45,16 +46,18 @@ if (issues.some((issue) => issue.severity === "error")) {
 
 const list = await new DtcgListLoader().load(sources);
 
-const css = new DtcgTokenCssConverter().convertList(list);
-const scss = await new DtcgTokenScssConverter().convert([
+const css = new CssTokenConverter().convertList(list);
+const scss = await new ScssTokenConverter().convert([
   "./tokens.json",
 ]);
+const swift = new SwiftUiTokenConverter().convertList(list);
 
 const html = await createTokenHtmlShowcase().showcase(sources);
 const stats = await createTokenStats().stats(sources);
 
 console.log(css);
 console.log(scss);
+console.log(swift.slice(0, 120));
 console.log(html.slice(0, 120));
 console.log(stats);
 ```
@@ -83,12 +86,17 @@ console.log(stats);
 
 ### Generating outputs
 
-- `DtcgTokenCssConverter`
-- `DtcgTokenScssConverter`
-- `DtcgTailwindCssConverter`
+- `CssTokenConverter`
+- `ScssTokenConverter`
+- `TailwindTokenConverter`
+- `SwiftUiTokenConverter`
+- `SwiftUiColorValueConverter`
 - `createTokenCssConverter()`
 - `createTokenScssConverter()`
 - `createTailwindCssConverter()`
+
+Compatibility aliases for older `Dtcg*` converter names are still exported.
+Use the primary names above in new code and documentation.
 
 ### Reports and previews
 

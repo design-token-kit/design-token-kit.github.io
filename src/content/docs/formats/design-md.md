@@ -89,6 +89,13 @@ dtokens convert DESIGN.md \
 ```
 
 ```bash
+dtokens convert DESIGN.md \
+  --inform design-md \
+  --outform swiftui \
+  --out ./DesignTokens.swift
+```
+
+```bash
 dtokens showcase DESIGN.md --out ./showcase.html
 ```
 

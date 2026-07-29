@@ -53,7 +53,7 @@ Import the APIs you need:
 import {
   DtcgChecker,
   DtcgListLoader,
-  DtcgTokenCssConverter,
+  CssTokenConverter,
 } from "@design-token-kit/core";
 ```
 
@@ -115,6 +115,14 @@ npx @design-token-kit/cli convert tokens.json \
   --out ./tokens.tailwind.css
 ```
 
+### SwiftUI
+
+```bash
+npx @design-token-kit/cli convert tokens.json \
+  --outform swiftui \
+  --out ./DesignTokens.swift
+```
+
 ### Static showcase
 
 ```bash
@@ -160,7 +168,8 @@ npx @design-token-kit/cli convert \
   --out ./tokens.css
 ```
 
-Multiple sources are supported for CSS and Tailwind CSS v4 output. SCSS supports multiple themes, but emits separate files or a tar archive.
+Multiple sources are supported for CSS, Tailwind CSS v4, and SwiftUI output.
+SCSS supports multiple themes, but emits separate files or a tar archive.
 
 ## Next steps
 
