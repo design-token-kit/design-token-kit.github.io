@@ -12,6 +12,8 @@ it: don't write `style="color: red"`, move your styles into a separate file. And
 yet almost every modern CSS framework offers utility classes like `text-red-500`
 that do essentially the same thing: they push presentation back into the markup.
 
+![Utility Classes. New Name, Old Problem](utility-classes-new-name-old-problem.jpg)
+
 The observation isn't new. The argument that "utility classes are just inline
 styles" is one of the most worn-out in the CSS community, and utility-first
 defenders call it "the most tired, overused cliché." The debate usually stalls: one
