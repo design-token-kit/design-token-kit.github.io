@@ -105,8 +105,8 @@ Specificity, the cascade, the `!important` war, names bound to the DOM structure
 that's the real pain. But it isn't about the "number of classes," it's about the
 mechanics of CSS itself. Wathan blames that pain on the number of names and
 prescribes a cure - remove the names. But the names were never what hurt. Removing
-them won't cure the cascade. It'll only blind you: the map of the domain scatters
-across the markup.
+them won't cure the cascade. It'll only blind you: the map of the domain is
+scattered across the markup.
 
 ## What's Really Different, and What Isn't
 
@@ -153,9 +153,9 @@ high-level intent ("this action is the primary one") is mixed with a low-level
 detail ("color 500 from the red scale"). Utility classes don't remove inline styles
 as an anti-pattern. They cement it at the tooling level and give it a nice name.
 
-## But What About the Long String of Classes? It Hasn't Gone Anywhere
+## But What About the Long String of Classes? It's Still There
 
-Here an objection comes up. Our danger-action button is
+Here's an objection. Our danger-action button is
 `class="size-big color-red padding-4"` - a string of utility classes with values
 straight in the markup. Translate it to semantics:
 
@@ -174,7 +174,7 @@ There's only one logical conclusion - collapse the combination into a single cla
 <button class="danger-button">Delete</button>
 ```
 
-Now the class list is short again. It was collapsed by a component class - one
+Now the class list is short. It was collapsed by a component class - one
 semantic class in place of N utility classes. This is the very semantic CSS whose
 class count grows with the number of components, and we've already established that
 this isn't a pain but an honest map of the domain. The long class list is collapsed
@@ -219,7 +219,8 @@ Two things here are easy to conflate. On the surface, the circle has closed: we
 moved away from `style="color: red"` for the sake of
 separation of concerns, declared inline styles an anti-pattern - and came back to
 the same thing under the name `class="text-red-500"`, declaring it best practice.
-The name and the attribute changed, the place for presentation stayed - the markup.
+The name and the attribute changed, the place for presentation stayed the same - the
+markup.
 
 But in substance there's no circle, because there's nothing to close. The value sat
 this whole time at the lowest level of abstraction, where "which color" and "what
