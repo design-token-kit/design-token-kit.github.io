@@ -1,13 +1,13 @@
 ---
-title: "Utility Classes. New Name, Old Problem"
+title: "Utility-First CSS. New Name, Old Problem"
 description: "The industry spent twenty years moving away from inline styles for the sake of separation of concerns, then came back to them under the name of utility classes. The history of an anti-pattern and what to do about it."
 date: 2026-07-28
 category: CSS and Architecture
 ---
 
-# Utility Classes. New Name, Old Problem
+# Utility-First CSS. New Name, Old Problem
 
-![Utility Classes. New Name, Old Problem](utility-classes-new-name-old-problem.jpg)
+![Utility-First CSS. New Name, Old Problem](utility-classes-new-name-old-problem.jpg)
 
 Inline styles have long been considered an anti-pattern. Every beginner guide says
 it: don't write `style="color: red"`, move your styles into a separate file. And
