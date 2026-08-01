@@ -1,3 +1,0 @@
-#!/bin/sh
-
-npm run check:import-case && npm run lint:styles && npm run build
