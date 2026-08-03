@@ -4,6 +4,7 @@ description: "Why design tokens give language models a clearer and more consiste
 date: 2026-07-01
 category: AI and Design Tokens
 image: LLM-Thinks-Tokens.jpg
+canonicalUrl: https://medium.com/@bychinskidm/an-llm-thinks-in-tokens-39507bc97cb7
 ---
 
 # LLM Thinks in Tokens
