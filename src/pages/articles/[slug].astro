@@ -7,6 +7,20 @@ import styles from '#/pages/articles/article.module.scss';
 import { getArticleSlug, getArticles } from '#/utils/articles';
 import { formatEnglishDate } from '#/utils/dates';
 
+const imageModules = import.meta.glob<{ default: { src: string } }>(
+    '/src/content/articles/*.{jpg,png,webp}',
+    { eager: true },
+);
+
+function resolveOgImage(filename: string | undefined): string | undefined {
+    if (!filename) return undefined;
+
+    const entry = Object.entries(imageModules).find(([path]) => path.endsWith(`/${filename}`));
+    if (!entry) return undefined;
+
+    return new URL(entry[1].default.src, Astro.site).href;
+}
+
 export async function getStaticPaths() {
     const articles = await getArticles();
 
@@ -21,11 +35,14 @@ const { Content } = await render(article);
 const baseUrl = import.meta.env.BASE_URL.endsWith('/')
     ? import.meta.env.BASE_URL
     : `${import.meta.env.BASE_URL}/`;
+const ogImage = resolveOgImage(article.data.image);
 ---
 
 <Layout
     title={`${article.data.title} | Design Token Kit`}
     description={article.data.description}
+    image={ogImage}
+    ogType="article"
 >
     <Header />
 
