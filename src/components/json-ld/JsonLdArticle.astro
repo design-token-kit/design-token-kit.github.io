@@ -1,0 +1,28 @@
+---
+/**
+ * JSON-LD structured data for an Article page.
+ *
+ * Renders a `<script type="application/ld+json">` tag that Google uses for rich
+ * snippets (headline, description, author, date, image) in search results.
+ */
+interface Props {
+    headline: string;
+    description: string;
+    datePublished: string;
+    image?: string;
+    url: string;
+    author?: string;
+}
+const { headline, description, datePublished, image, url, author } = Astro.props;
+const jsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline,
+    description,
+    datePublished,
+    author: author ? { '@type': 'Person', name: author } : undefined,
+    image,
+    url,
+});
+---
+<script type="application/ld+json" set:html={jsonLd} />

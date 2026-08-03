@@ -1,6 +1,7 @@
 ---
 import Footer from '#/components/Footer/Footer.astro';
 import Header from '#/components/Header/Header.astro';
+import JsonLdArticle from '#/components/json-ld/JsonLdArticle.astro';
 import Layout from '#/layouts/Layout.astro';
 import { render } from 'astro:content';
 import styles from '#/pages/articles/article.module.scss';
@@ -45,6 +46,15 @@ const ogImage = resolveOgImage(article.data.image);
     ogType="article"
     canonicalUrl={article.data.canonicalUrl}
 >
+    <JsonLdArticle
+        headline={article.data.title}
+        description={article.data.description}
+        datePublished={article.data.date.toISOString()}
+        image={ogImage}
+        url={new URL(`articles/${getArticleSlug(article)}/`, Astro.site).href}
+        author={article.data.author}
+    />
+
     <Header />
 
     <main class={styles.page}>
