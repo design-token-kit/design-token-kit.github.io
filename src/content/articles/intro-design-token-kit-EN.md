@@ -4,6 +4,7 @@ description: "Why Design Token Kit exists, what problems it solves, and how vali
 date: 2026-06-16
 category: Design Token Kit
 image: intro-design-token-kit-EN.jpg
+canonicalUrl: https://medium.com/@bychinskidm/how-we-made-design-token-kit-an-npm-tool-for-design-tokens-fccf36bd2c65
 ---
 
 # Design Token Kit: A Practical Toolkit for Design Tokens

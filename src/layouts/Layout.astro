@@ -8,9 +8,10 @@ interface Props {
     description: string;
     image?: string;
     ogType?: string;
+    canonicalUrl?: string;
 }
 
-const { title, description, image, ogType = 'website' } = Astro.props;
+const { title, description, image, ogType = 'website', canonicalUrl } = Astro.props;
 const baseUrl = import.meta.env.BASE_URL;
 const assetBaseUrl = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
 const pageUrl = Astro.url.href;
@@ -27,6 +28,7 @@ const imageUrl = image ? new URL(image, Astro.site).href : undefined;
         <meta name="description" content={description} />
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
+        {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
