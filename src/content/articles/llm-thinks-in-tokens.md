@@ -5,6 +5,7 @@ date: 2026-07-01
 category: AI and Design Tokens
 image: LLM-Thinks-Tokens.jpg
 canonicalUrl: https://medium.com/@bychinskidm/an-llm-thinks-in-tokens-39507bc97cb7
+author: Dmitry Bychinsky
 ---
 
 # LLM Thinks in Tokens

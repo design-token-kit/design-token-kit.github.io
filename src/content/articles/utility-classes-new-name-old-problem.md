@@ -5,6 +5,7 @@ date: 2026-07-28
 category: CSS and Architecture
 image: utility-classes-new-name-old-problem.jpg
 canonicalUrl: https://medium.com/@anton_98217/utility-first-css-new-name-old-problem-da7740abac48
+author: Anton Pechinsky
 ---
 
 # Utility-First CSS. New Name, Old Problem
