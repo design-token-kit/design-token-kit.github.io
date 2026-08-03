@@ -3,6 +3,7 @@ title: "Design Token Kit: A Practical Toolkit for Design Tokens"
 description: "Why Design Token Kit exists, what problems it solves, and how validation, conversion, and showcase fit together."
 date: 2026-06-16
 category: Design Token Kit
+image: intro-design-token-kit-EN.jpg
 ---
 
 # Design Token Kit: A Practical Toolkit for Design Tokens
