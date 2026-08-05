@@ -1,0 +1,132 @@
+---
+import bitcoinQrCode from '#/assets/support/bitcoin-qr.svg';
+import bitcoinIcon from '#/assets/support/bitcoin-icon.svg';
+import usdtIcon from '#/assets/support/usdt-icon.svg';
+import usdtTrc20QrCode from '#/assets/support/usdt-trc20-qr.svg';
+import Footer from '#/components/Footer/Footer.astro';
+import Header from '#/components/Header/Header.astro';
+import SupportMethodCard from '#/components/support-method-card/SupportMethodCard.astro';
+import Layout from '#/layouts/Layout.astro';
+import styles from '#/pages/support/support.module.scss';
+
+const supportMethods = [
+    {
+        title: 'Bitcoin',
+        network: 'Bitcoin',
+        address: 'bc1qkjhl3pnyd93kl56ul7cx42emv2wzag4f9t56m2',
+        icon: bitcoinIcon,
+        iconAlt: 'Bitcoin logo',
+        qrCode: bitcoinQrCode,
+        qrCodeAlt: 'QR code for Bitcoin address',
+    },
+    {
+        title: 'USDT',
+        network: 'TRON (TRC20)',
+        address: 'TWZiyJxxLkkxvWM1KpBF2QeTqdNTEivAWZ',
+        icon: usdtIcon,
+        iconAlt: 'USDT logo',
+        qrCode: usdtTrc20QrCode,
+        qrCodeAlt: 'QR code for USDT TRON TRC20 address',
+    },
+];
+---
+
+<Layout
+    title="Sponsor Design Token Kit"
+    description="Support the open-source development, maintenance, documentation, and infrastructure of Design Token Kit."
+>
+    <Header />
+
+    <main class={styles.page}>
+        <section class={styles.hero}>
+            <p class={styles.eyebrow}>SPONSOR</p>
+            <h1>Sponsor Design Token Kit</h1>
+            <p class={styles.description}>
+                Design Token Kit is an open-source project. Your support helps cover
+                development, maintenance, documentation, and infrastructure costs.
+            </p>
+        </section>
+
+        <section class={styles.methods} aria-label="Support methods">
+            {supportMethods.map((supportMethod) => (
+                <SupportMethodCard
+                    title={supportMethod.title}
+                    network={supportMethod.network}
+                    address={supportMethod.address}
+                    icon={supportMethod.icon}
+                    iconAlt={supportMethod.iconAlt}
+                    qrCode={supportMethod.qrCode}
+                    qrCodeAlt={supportMethod.qrCodeAlt}
+                />
+            ))}
+        </section>
+
+        <aside class={styles.warning} aria-label="Network warning">
+            Make sure you select the correct network before sending funds. Transfers made
+            through another network may be permanently lost.
+        </aside>
+    </main>
+
+    <Footer />
+
+    <script is:inline>
+        function copyAddressWithSelection(address) {
+            const textarea = document.createElement('textarea');
+            textarea.value = address;
+            textarea.setAttribute('readonly', '');
+            textarea.style.position = 'fixed';
+            textarea.style.top = '0';
+            textarea.style.left = '0';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+
+            try {
+                const didCopy = document.execCommand('copy');
+
+                if (!didCopy) {
+                    throw new Error('Copy command was rejected.');
+                }
+
+                return Promise.resolve();
+            } finally {
+                document.body.removeChild(textarea);
+            }
+        }
+
+        async function copyAddress(address) {
+            if (!navigator.clipboard || !window.isSecureContext) {
+                return copyAddressWithSelection(address);
+            }
+
+            try {
+                return await navigator.clipboard.writeText(address);
+            } catch {
+                return copyAddressWithSelection(address);
+            }
+        }
+
+        function showCopiedState(button) {
+            const defaultLabel = button.dataset.copyDefaultLabel || 'Copy address';
+            button.textContent = 'Copied';
+
+            window.setTimeout(() => {
+                button.textContent = defaultLabel;
+            }, 1800);
+        }
+
+        document.querySelectorAll('[data-copy-address]').forEach((button) => {
+            button.addEventListener('click', async () => {
+                const address = button.dataset.copyAddress;
+
+                if (!address) {
+                    return;
+                }
+
+                await copyAddress(address);
+                showCopiedState(button);
+            });
+        });
+    </script>
+</Layout>

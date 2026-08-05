@@ -1,0 +1,52 @@
+---
+import type { ImageMetadata } from 'astro';
+import styles from '#/components/support-method-card/SupportMethodCard.module.scss';
+
+interface Props {
+    title: string;
+    network: string;
+    address: string;
+    icon?: ImageMetadata;
+    iconAlt?: string;
+    qrCode: ImageMetadata;
+    qrCodeAlt: string;
+}
+
+const { title, network, address, icon, iconAlt = '', qrCode, qrCodeAlt } = Astro.props;
+---
+
+<article class={styles.card}>
+    <div class={styles.header}>
+        <div class={styles.titleRow}>
+            {icon && <img class={styles.icon} src={icon.src} width="32" height="32" alt={iconAlt} />}
+            <h2>{title}</h2>
+        </div>
+        <p><span>Network:</span> {network}</p>
+    </div>
+
+    <div class={styles.addressBlock}>
+        <div class={styles.addressText}>
+            <span>Address:</span>
+            <code>{address}</code>
+        </div>
+
+        <img
+            class={styles.qrCode}
+            src={qrCode.src}
+            width="132"
+            height="132"
+            alt={qrCodeAlt}
+            loading="lazy"
+        />
+    </div>
+
+    <button
+        class={styles.copyButton}
+        type="button"
+        data-copy-address={address}
+        data-copy-default-label="Copy address"
+        aria-label={`Copy ${title} address`}
+    >
+        Copy address
+    </button>
+</article>
