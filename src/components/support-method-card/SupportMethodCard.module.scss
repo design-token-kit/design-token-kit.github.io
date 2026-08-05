@@ -1,0 +1,130 @@
+.card {
+    display: grid;
+    gap: var(--semantic-space-6);
+    min-width: 0;
+    padding: var(--semantic-space-7) var(--semantic-space-6) var(--semantic-space-6);
+    background: var(--semantic-color-surface-default);
+    border: var(--primitive-size-borderWidthSm) solid var(--semantic-color-border-default);
+    border-radius: var(--semantic-radius-lg);
+    box-shadow: var(--semantic-shadow-sm);
+
+    h2,
+    p {
+        margin: var(--semantic-space-0);
+    }
+
+    h2 {
+        color: var(--semantic-color-accent-primary);
+        font-size: var(--semantic-font-size-xl);
+        line-height: var(--primitive-font-lineHeight-cozy);
+    }
+
+    p {
+        margin-top: var(--semantic-space-3);
+        color: var(--semantic-color-text-secondary);
+        font-size: var(--semantic-font-size-sm);
+        line-height: var(--semantic-font-lineHeight-normal);
+    }
+
+    span {
+        color: var(--semantic-color-text-primary);
+        font-weight: var(--semantic-font-weight-bold);
+    }
+}
+
+.header {
+    display: grid;
+    gap: var(--semantic-space-2);
+}
+
+.titleRow {
+    display: flex;
+    gap: var(--semantic-space-3);
+    align-items: center;
+}
+
+.icon {
+    width: var(--primitive-size-cardIcon);
+    height: var(--primitive-size-cardIcon);
+}
+
+.addressBlock {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--semantic-space-5);
+    align-items: center;
+    min-width: 0;
+    padding: var(--semantic-space-5);
+    background: var(--semantic-color-surface-muted);
+    border: var(--primitive-size-borderWidthSm) solid var(--semantic-color-border-subtle);
+    border-radius: var(--semantic-radius-md);
+
+}
+
+.addressText {
+    display: grid;
+    gap: var(--semantic-space-2);
+    min-width: 0;
+}
+
+.addressText code {
+    min-width: 0;
+    color: var(--semantic-color-text-primary);
+    font-family: var(--semantic-font-family-mono);
+    font-size: var(--semantic-font-size-sm);
+    line-height: var(--semantic-font-lineHeight-normal);
+    overflow-wrap: anywhere;
+}
+
+.qrCode {
+    width: calc(var(--semantic-space-10) - var(--semantic-space-4));
+    height: calc(var(--semantic-space-10) - var(--semantic-space-4));
+    padding: var(--semantic-space-2);
+    background: var(--semantic-color-surface-default);
+    border: var(--primitive-size-borderWidthSm) solid var(--semantic-color-border-subtle);
+    border-radius: var(--semantic-radius-sm);
+    box-shadow: var(--semantic-shadow-sm);
+}
+
+.copyButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: start;
+    min-height: var(--primitive-size-controlMinHeight);
+    padding: var(--semantic-space-0) var(--semantic-space-5);
+    color: var(--component-button-primary-text);
+    font: inherit;
+    font-size: var(--semantic-font-size-sm);
+    font-weight: var(--semantic-font-weight-bold);
+    cursor: pointer;
+    background: var(--component-button-primary-bg);
+    border: none;
+    border-radius: var(--component-button-primary-radius);
+    box-shadow: var(--semantic-shadow-sm);
+    transition: background var(--semantic-duration-fast) var(--semantic-easing-default);
+
+    &:hover {
+        background: var(--component-button-primary-bgHover);
+    }
+}
+
+@media (max-width: 47.9375rem) {
+    .card {
+        gap: var(--semantic-space-5);
+        padding: var(--semantic-space-5);
+    }
+
+    .addressBlock {
+        grid-template-columns: 1fr;
+        padding: var(--semantic-space-4);
+    }
+
+    .qrCode {
+        justify-self: start;
+    }
+
+    .copyButton {
+        justify-self: stretch;
+    }
+}
