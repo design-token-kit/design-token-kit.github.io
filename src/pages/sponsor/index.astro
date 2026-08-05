@@ -1,13 +1,13 @@
 ---
-import bitcoinQrCode from '#/assets/support/bitcoin-qr.svg';
 import bitcoinIcon from '#/assets/support/bitcoin-icon.svg';
+import bitcoinQrCode from '#/assets/support/bitcoin-qr.svg';
 import usdtIcon from '#/assets/support/usdt-icon.svg';
 import usdtTrc20QrCode from '#/assets/support/usdt-trc20-qr.svg';
 import Footer from '#/components/Footer/Footer.astro';
 import Header from '#/components/Header/Header.astro';
 import SupportMethodCard from '#/components/support-method-card/SupportMethodCard.astro';
 import Layout from '#/layouts/Layout.astro';
-import styles from '#/pages/support/support.module.scss';
+import styles from '#/pages/sponsor/sponsor.module.scss';
 
 const supportMethods = [
     {
@@ -47,7 +47,7 @@ const supportMethods = [
             </p>
         </section>
 
-        <section class={styles.methods} aria-label="Support methods">
+        <section class={styles.methods} aria-label="Sponsor methods">
             {supportMethods.map((supportMethod) => (
                 <SupportMethodCard
                     title={supportMethod.title}
