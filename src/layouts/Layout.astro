@@ -1,4 +1,6 @@
 ---
+import OpenGraph from '#/components/seo/OpenGraph.astro';
+import TwitterCard from '#/components/seo/TwitterCard.astro';
 import '#/styles/fonts.scss';
 import '#/styles/tokens/tokens.css';
 import '#/styles/global.scss';
@@ -6,11 +8,16 @@ import '#/styles/global.scss';
 interface Props {
     title: string;
     description: string;
+    image?: string;
+    ogType?: string;
+    canonicalUrl?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, image, ogType = 'website', canonicalUrl } = Astro.props;
 const baseUrl = import.meta.env.BASE_URL;
 const assetBaseUrl = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+const pageUrl = Astro.url.href;
+const imageUrl = image ? new URL(image, Astro.site).href : undefined;
 ---
 
 <!doctype html>
@@ -23,6 +30,22 @@ const assetBaseUrl = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
         <meta name="description" content={description} />
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
+        {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+
+        <OpenGraph
+            title={title}
+            description={description}
+            url={pageUrl}
+            type={ogType}
+            image={imageUrl}
+            imageAlt={title}
+        />
+
+        <TwitterCard
+            title={title}
+            description={description}
+            image={imageUrl}
+        />
     </head>
     <body>
         <slot />

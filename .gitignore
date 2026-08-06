@@ -18,6 +18,7 @@ cli/bin/
 cli/node_modules/
 *.tgz
 *.log
+package-lock.json
 .env*
 out/
 logs/
