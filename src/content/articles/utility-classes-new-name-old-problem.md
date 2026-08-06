@@ -3,6 +3,9 @@ title: "Utility-First CSS. New Name, Old Problem"
 description: "The industry spent twenty years moving away from inline styles for the sake of separation of concerns, then came back to them under the name of utility classes. The history of an anti-pattern and what to do about it."
 date: 2026-07-28
 category: CSS and Architecture
+image: utility-classes-new-name-old-problem.jpg
+canonicalUrl: https://medium.com/@anton_98217/utility-first-css-new-name-old-problem-da7740abac48
+author: Anton Pechinsky
 ---
 
 # Utility-First CSS. New Name, Old Problem

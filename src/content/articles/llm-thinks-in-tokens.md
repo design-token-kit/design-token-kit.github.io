@@ -3,6 +3,9 @@ title: "An LLM Thinks in Tokens"
 description: "Why design tokens give language models a clearer and more consistent way to understand, generate, and maintain design than screenshots or raw CSS."
 date: 2026-07-01
 category: AI and Design Tokens
+image: LLM-Thinks-Tokens.jpg
+canonicalUrl: https://medium.com/@bychinskidm/an-llm-thinks-in-tokens-39507bc97cb7
+author: Dmitry Bychinsky
 ---
 
 # LLM Thinks in Tokens

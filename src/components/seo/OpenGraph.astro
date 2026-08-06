@@ -1,0 +1,32 @@
+---
+/**
+ * Open Graph meta tags for link previews in social media and messengers.
+ *
+ * Renders `og:title`, `og:description`, `og:url`, `og:type`, and optional
+ * `og:image` with dimensions and alt text.
+ */
+interface Props {
+    title: string;
+    description: string;
+    url: string;
+    type: string;
+    image?: string;
+    imageAlt?: string;
+}
+const { title, description, url, type, image, imageAlt = title } = Astro.props;
+---
+
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={url} />
+<meta property="og:type" content={type} />
+{
+    image && (
+        <>
+            <meta property="og:image" content={image} />
+            <meta property="og:image:alt" content={imageAlt} />
+            <meta property="og:image:width" content="1200" />
+            <meta property="og:image:height" content="630" />
+        </>
+    )
+}
