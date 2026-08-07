@@ -1,0 +1,68 @@
+---
+import arrowRightIcon from '#/assets/icons/icon-arrow-right.svg';
+import figmaPluginFlow from '#/assets/figma-plugin.png';
+import styles from '#/components/figma-plugin-section/FigmaPluginSection.module.scss';
+
+const baseUrl = import.meta.env.BASE_URL.endsWith('/')
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
+
+const outputFormats = [
+    'DTCG JSON',
+    'CSS',
+    'SCSS',
+    'Tailwind v4',
+    'SwiftUI',
+    'Base file',
+    'Theme files',
+];
+
+---
+
+<section class={styles.figmaPlugin} aria-labelledby="figma-plugin-heading">
+    <div class={styles.sectionHeader}>
+        <p class={styles.eyebrow}>Figma plugin</p>
+        <h2 id="figma-plugin-heading">Export Figma tokens with Design Token Kit</h2>
+        <p>
+            Export Figma Variables and Styles to DTCG JSON and convert them into CSS, SCSS, Tailwind v4,
+            and SwiftUI outputs. Supports a base file and theme files generated from Figma modes.
+        </p>
+    </div>
+
+    <div class={styles.pluginBlock}>
+        <div class={styles.visual}>
+            <img
+                src={figmaPluginFlow.src}
+                width={figmaPluginFlow.width}
+                height={figmaPluginFlow.height}
+                alt="Figma Variables and Styles exported to DTCG JSON, then converted to CSS, SCSS, Tailwind v4, and SwiftUI."
+            />
+        </div>
+
+        <div class={styles.copy}>
+            <h3>Export flow for code-ready tokens</h3>
+            <p>
+                Keep Figma as the source for variables and styles, export DTCG token files, then convert those files
+                into implementation formats for product teams.
+            </p>
+            <div class={styles.actions}>
+                <a class={styles.primaryAction} href="https://www.figma.com/community/plugin/1661669063434861129/design-token-kit">
+                    <span>Explore plugin</span>
+                    <img src={arrowRightIcon.src} width="20" height="20" alt="" />
+                </a>
+                <a class={styles.secondaryAction} href="https://design-token-kit.github.io/docs/guides/figma-plugin/">
+                    <span>Learn more</span>
+                    <img src={arrowRightIcon.src} width="20" height="20" alt="" />
+                </a>
+            </div>
+            <div class={styles.formatSummary}>
+                <strong>Outputs and files</strong>
+                <ul class={styles.formats} aria-label="Supported export and output formats">
+                    {outputFormats.map((format) => (
+                        <li>{format}</li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
