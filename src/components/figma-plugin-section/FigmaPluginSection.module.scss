@@ -1,0 +1,197 @@
+.figmaPlugin {
+    width: min(var(--semantic-size-maxWidthPage), calc(100% - var(--semantic-space-6)));
+    margin: var(--semantic-space-0) auto;
+    padding: var(--semantic-space-8) var(--semantic-space-0) var(--semantic-space-6);
+}
+
+.sectionHeader {
+    max-width: var(--primitive-size-contentMaxWidthWide);
+    margin: var(--semantic-space-0) auto var(--semantic-space-5);
+    text-align: center;
+
+    h2 {
+        margin: var(--semantic-space-0);
+        color: var(--semantic-color-accent-primary);
+        font-size: clamp(1.7rem, 4vw, 2.25rem);
+        line-height: var(--semantic-font-lineHeight-tight);
+        letter-spacing: var(--semantic-font-letterSpacing-tight);
+    }
+
+    p:last-child {
+        max-width: var(--primitive-size-copyMaxWidthXl);
+        margin: var(--semantic-space-3) auto var(--semantic-space-0);
+        color: var(--semantic-color-text-secondary);
+        font-size: var(--semantic-font-size-sm);
+        font-weight: var(--semantic-font-weight-semibold);
+        line-height: var(--semantic-font-lineHeight-normal);
+        text-wrap: balance;
+    }
+}
+
+.eyebrow {
+    margin: var(--semantic-space-0) var(--semantic-space-0) var(--semantic-space-3);
+    color: var(--semantic-color-accent-secondaryHover);
+    font-size: var(--semantic-font-size-xs);
+    font-weight: var(--semantic-font-weight-bold);
+    letter-spacing: var(--semantic-font-letterSpacing-wide);
+    text-transform: uppercase;
+}
+
+.pluginBlock {
+    display: grid;
+    grid-template-columns: minmax(0, 0.62fr) minmax(var(--primitive-size-copyMaxWidthSm), 0.38fr);
+    gap: var(--semantic-space-7);
+    align-items: center;
+    padding: var(--semantic-space-6);
+    background: color-mix(in srgb, var(--semantic-color-surface-default) 86%, var(--semantic-color-bg-soft));
+    border: var(--primitive-size-borderWidthSm) solid var(--semantic-color-border-default);
+    border-radius: var(--semantic-radius-xl);
+    box-shadow: var(--semantic-shadow-sm);
+}
+
+.visual {
+    width: 80%;
+    justify-self: center;
+    overflow: hidden;
+    background: var(--semantic-color-bg-soft);
+    border-radius: var(--semantic-radius-lg);
+
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}
+
+.copy {
+    h3 {
+        margin: var(--semantic-space-0);
+        color: var(--semantic-color-accent-primary);
+        font-size: var(--semantic-font-size-xl);
+        line-height: var(--semantic-font-lineHeight-tight);
+        letter-spacing: var(--semantic-font-letterSpacing-tight);
+    }
+
+    p {
+        max-width: var(--primitive-size-copyMaxWidthLg);
+        margin: var(--semantic-space-4) var(--semantic-space-0) var(--semantic-space-0);
+        color: var(--semantic-color-text-secondary);
+        font-size: var(--semantic-font-size-md);
+        line-height: var(--semantic-font-lineHeight-relaxed);
+    }
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--semantic-space-4);
+    margin-top: var(--semantic-space-6);
+}
+
+.formatSummary {
+    display: grid;
+    gap: var(--semantic-space-3);
+    margin-top: var(--semantic-space-5);
+    padding-top: var(--semantic-space-4);
+    border-top: var(--primitive-size-borderWidthSm) solid var(--semantic-color-border-subtle);
+
+    strong {
+        color: var(--semantic-color-text-primary);
+        font-size: var(--semantic-font-size-sm);
+        font-weight: var(--semantic-font-weight-bold);
+    }
+}
+
+.primaryAction,
+.secondaryAction {
+    display: inline-flex;
+    gap: var(--semantic-space-3);
+    align-items: center;
+    justify-content: center;
+    min-height: var(--primitive-size-buttonMinHeight);
+    padding: var(--semantic-space-0) var(--semantic-space-5);
+    font-size: var(--semantic-font-size-sm);
+    font-weight: var(--semantic-font-weight-bold);
+    text-decoration: none;
+    border-radius: var(--semantic-radius-sm);
+    transition:
+        border-color var(--semantic-duration-fast) var(--semantic-easing-default),
+        background var(--semantic-duration-fast) var(--semantic-easing-default),
+        color var(--semantic-duration-fast) var(--semantic-easing-default);
+
+    img {
+        width: var(--semantic-space-5);
+        height: var(--semantic-space-5);
+    }
+}
+
+.primaryAction {
+    color: var(--semantic-color-text-inverse);
+    background: var(--semantic-color-accent-primary);
+    border: var(--primitive-size-borderWidthSm) solid var(--semantic-color-accent-primary);
+    box-shadow: var(--semantic-shadow-sm);
+
+    &:hover {
+        background: var(--semantic-color-accent-primaryHover);
+    }
+}
+
+.secondaryAction {
+    color: var(--semantic-color-accent-secondaryHover);
+    background: var(--semantic-color-surface-default);
+    border: var(--primitive-size-borderWidthSm) solid var(--semantic-color-accent-secondary);
+
+    &:hover {
+        color: var(--semantic-color-accent-secondaryHover);
+        border-color: var(--semantic-color-accent-secondaryHover);
+    }
+}
+
+.formats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--semantic-space-2);
+    justify-content: flex-start;
+    margin: 0;
+    padding: var(--semantic-space-0);
+    list-style: none;
+
+    li {
+        padding: var(--semantic-space-1) var(--semantic-space-3);
+        color: var(--semantic-color-text-primary);
+        font-size: var(--semantic-font-size-xs);
+        font-weight: var(--semantic-font-weight-bold);
+        background: color-mix(in srgb, var(--semantic-color-surface-muted) 72%, var(--semantic-color-bg-soft));
+        border: var(--primitive-size-borderWidthSm) solid var(--semantic-color-border-subtle);
+        border-radius: var(--semantic-radius-sm);
+    }
+}
+
+@media (min-width: 82rem) {
+    .figmaPlugin {
+        width: min(var(--semantic-size-maxWidthPageWide), calc(100% - var(--semantic-space-6)));
+    }
+}
+
+@media (max-width: 70rem) {
+    .pluginBlock {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 47.9375rem) {
+    .figmaPlugin {
+        width: min(var(--semantic-size-maxWidthPage), calc(100% - var(--semantic-space-5)));
+        padding-top: var(--semantic-space-7);
+    }
+
+    .pluginBlock {
+        gap: var(--semantic-space-5);
+        padding: var(--semantic-space-5);
+    }
+
+    .visual {
+        width: 100%;
+        border-radius: var(--semantic-radius-md);
+    }
+}
