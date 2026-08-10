@@ -1,6 +1,6 @@
 ---
 title: Convert tokens
-description: Convert token documents and generate CSS, SCSS, Tailwind CSS v4, or SwiftUI output.
+description: Convert token documents and generate CSS, SCSS, Tailwind CSS v4, SwiftUI, Figma script, or Android resource XML output.
 section: CLI
 order: 2
 ---
@@ -46,6 +46,8 @@ Use `--outform` or `-f`:
 - `scss`
 - `tailwind-v4`
 - `swiftui`
+- `figma-script`
+- `android`
 
 ```bash
 dtokens convert tokens.json --outform hrdt
@@ -59,7 +61,7 @@ dtokens convert tokens.json \
   --out ./tokens.yaml
 ```
 
-Without `--out`, regular text output is written to stdout. Multi-theme SCSS is the exception: it writes a tar archive to stdout.
+Without `--out`, regular text output is written to stdout. Formats spanning several files are the exception: multi-theme SCSS and Android write a tar archive to stdout instead.
 
 ## Convert token documents
 
@@ -203,6 +205,71 @@ dtokens convert \
 With multiple sources, the first file is the base token set.
 Remaining files are emitted as theme variants.
 
+## Generate a Figma script
+
+```bash
+dtokens convert tokens.json \
+  --outform figma-script \
+  --out ./tokens.figma.js
+```
+
+The Figma Plugin API runs only inside the editor, so tokens cannot be written from outside. Paste the generated script into a plugin that evaluates code, such as [Scripter](https://www.figma.com/community/plugin/757836922707087381), and run it.
+
+The script creates one variable collection per token layer, one mode per theme, and the variables and styles the tokens describe. References become Figma variable aliases rather than copied values, so the layering survives. Running the script again updates what it created instead of duplicating it.
+
+Figma represents five of the thirteen DTCG types: `color`, `dimension`, `number`, `typography`, and `shadow`. The rest are listed in the script header and reported when the script runs.
+
+## Generate Android resource XML
+
+```bash
+dtokens convert tokens.json \
+  --outform android \
+  --out ./app/src/main/res
+```
+
+Android output spans several resource files, so `--out` is treated as the resource root directory. Without `--out`, the resource tree is written to stdout as a tar archive; with `--out ./res.tar`, that archive is written to a file.
+
+Token values are converted to their Android equivalents:
+
+- colors to the `#AARRGGBB` hex form, alpha first;
+- sizes to `dp`, font sizes to `sp`;
+- `rem` resolved against a pixel base, since Android has no such unit;
+- references preserved as native `@color/...` and `@dimen/...` references;
+- composite tokens decomposed into one resource per field.
+
+By default resources are split into one file per root token group, mirroring the token hierarchy:
+
+```text
+res/
+  values/
+    primitive.xml
+    semantic.xml
+    component.xml
+  values-night/
+    semantic.xml
+```
+
+Use `--android-layout type` to split by Android resource type instead, producing `colors.xml`, `dimens.xml`, and so on.
+
+Use `--rem-base` to change the pixel base resolving `rem` dimensions, which defaults to `16`:
+
+```bash
+dtokens convert tokens.json \
+  --outform android \
+  --rem-base 10 \
+  --out ./app/src/main/res
+```
+
+With multiple sources, themes are written to qualified resource directories holding the overrides only. The `dark` theme maps to `values-night`, any other theme to `values-<theme>`:
+
+```bash
+dtokens convert \
+  tokens.json \
+  tokens.dark.json \
+  --outform android \
+  --out ./app/src/main/res
+```
+
 ## Read from standard input
 
 Use `-`:
@@ -223,8 +290,10 @@ Multiple sources are supported when generating:
 
 - CSS;
 - SCSS;
-- Tailwind CSS v4.
-- SwiftUI.
+- Tailwind CSS v4;
+- SwiftUI;
+- a Figma script;
+- Android resource XML.
 
 The first source is the base token set. Remaining sources are theme overrides.
 

@@ -123,6 +123,22 @@ npx @design-token-kit/cli convert tokens.json \
   --out ./DesignTokens.swift
 ```
 
+### Figma script
+
+```bash
+npx @design-token-kit/cli convert tokens.json \
+  --outform figma-script \
+  --out ./tokens.figma.js
+```
+
+### Android resource XML
+
+```bash
+npx @design-token-kit/cli convert tokens.json \
+  --outform android \
+  --out ./app/src/main/res
+```
+
 ### Static showcase
 
 ```bash
@@ -168,8 +184,9 @@ npx @design-token-kit/cli convert \
   --out ./tokens.css
 ```
 
-Multiple sources are supported for CSS, Tailwind CSS v4, and SwiftUI output.
-SCSS supports multiple themes, but emits separate files or a tar archive.
+Multiple sources are supported for CSS, Tailwind CSS v4, SwiftUI, and Figma
+script output. SCSS and Android support multiple themes, but emit separate
+files or a tar archive.
 
 ## Next steps
 
