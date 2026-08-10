@@ -1,6 +1,6 @@
 ---
 title: Convert with the Core API
-description: Generate CSS, SCSS, Tailwind CSS v4, SwiftUI, and serialized token documents.
+description: Generate CSS, SCSS, Tailwind CSS v4, SwiftUI, a Figma script, Android resource XML, and serialized token documents.
 section: Core API
 order: 4
 ---
@@ -13,6 +13,8 @@ The Core API can generate:
 - SCSS variables;
 - Tailwind CSS v4 theme output;
 - SwiftUI source;
+- a Figma script;
+- Android resource XML;
 - DTCG JSON;
 - HRDT YAML;
 - DESIGN.md.
@@ -133,9 +135,58 @@ const swift = new SwiftUiTokenConverter({ swiftType: "struct" })
   .convertList(list);
 ```
 
+## Generate a Figma script
+
+Use `FigmaScriptTokenConverter`.
+
+```ts
+import { FigmaScriptTokenConverter } from "@design-token-kit/core";
+
+const script = new FigmaScriptTokenConverter().convertList(list);
+```
+
+The generated script builds the token set inside Figma through the Plugin API, which runs only in the editor. It creates one variable collection per token layer, one mode per theme, and the variables and styles the tokens describe. References become Figma variable aliases rather than copied values.
+
+Figma represents five of the thirteen DTCG types: `color`, `dimension`, `number`, `typography`, and `shadow`.
+
+## Generate Android resource XML
+
+Use `AndroidTokenConverter`.
+
+Android output spans several resource files, so `convertResourceList()` returns one output per file, each carrying its path relative to the resource root:
+
+```ts
+import { AndroidTokenConverter } from "@design-token-kit/core";
+
+const outputs = new AndroidTokenConverter().convertResourceList(list);
+
+for (const output of outputs) {
+  // output.filePath - "values/semantic.xml", "values-night/semantic.xml", ...
+  // output.content  - resource file content
+}
+```
+
+Token values are converted to their Android equivalents:
+
+- colors to the `#AARRGGBB` hex form, alpha first;
+- sizes to `dp`, font sizes to `sp`;
+- `rem` resolved against a pixel base, since Android has no such unit;
+- references preserved as native `@color/...` and `@dimen/...` references;
+- composite tokens decomposed into one resource per field.
+
+By default resources are split into one file per root token group, mirroring the token hierarchy. Use the `type` layout to split by Android resource type instead, and `remBase` to change the pixel base resolving `rem`:
+
+```ts
+const outputs = new AndroidTokenConverter({ layout: "type", remBase: 10 })
+  .convertResourceList(list);
+```
+
+`convertDocument()` and `convertList()` return a single string and therefore only accept input producing exactly one resource file.
+
 Older `Dtcg*` converter names are still exported as compatibility aliases, but
 new code should use `CssTokenConverter`, `ScssTokenConverter`,
-`TailwindTokenConverter`, and `SwiftUiTokenConverter`.
+`TailwindTokenConverter`, `SwiftUiTokenConverter`,
+`FigmaScriptTokenConverter`, and `AndroidTokenConverter`.
 
 ## Convert token documents
 
