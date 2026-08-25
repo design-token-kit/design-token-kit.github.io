@@ -1,6 +1,6 @@
 ---
 title: "Designer Guide: Preparing Tokens in Figma"
-description: Rules for preparing Figma variables and styles for DTCG export.
+description: Rules for preparing Figma variables and styles for token architecture export.
 section: Introduction
 order: 2
 ---
@@ -8,10 +8,10 @@ order: 2
 # Designer Guide: Preparing Tokens in Figma
 
 This document explains how designers should prepare variables and styles in
-Figma so that the export creates a valid `tokens.json` file in DTCG format.
+Figma so that the plugin can export tokens and check their architecture.
 
-The exported file goes through `@design-token-kit` and is converted into CSS
-variables used by the application.
+The exported token files go through `@design-token-kit` and are converted into
+CSS variables used by the application.
 
 The rules in this document can be stricter than Figma itself or the DTCG
 specification.
@@ -22,8 +22,8 @@ between design and code.
 There are two types of rules in this document:
 
 * Architecture rules: how tokens should be organized in Design Token Kit.
-* Exporter behavior: what actually happens when exporting from Figma in the
-  current plugin version.
+* Plugin behavior: what actually happens when exporting and analyzing tokens in
+  the current plugin version.
 
 ## What Tokens Are and Why We Use Them
 
@@ -44,20 +44,20 @@ manually.
 
 ## How Tokens Get Into the Application
 
-Figma variables and styles are exported into DTCG JSON and then converted into
-CSS variables.
+Figma variables and styles are exported by the plugin and can then be converted
+into CSS variables.
 
 The flow is:
 
 * Figma variables and styles.
-* Export through Tokens Studio, Figma API, or manual export.
-* `tokens.json` in DTCG JSON format.
+* Export through the Design Token Kit Figma plugin.
+* `tokens.json` and theme token files.
 * `@design-token-kit` conversion.
 * `tokens.css` with CSS variables.
 * `var(--component-button-primary-bg)` in component code.
 
-The designer's task is to prepare the Figma file so that export creates valid
-DTCG JSON without manual fixes.
+The designer's task is to prepare the Figma file so that token names and aliases
+preserve the expected architecture without manual fixes after export.
 
 All rules below are meant to support this.
 
@@ -104,8 +104,7 @@ Examples:
 
 Raw values should not be used at the `semantic` level.
 
-If the exporter does not block this problem, Design Token Kit checks should find
-it later.
+The plugin reports this as an architecture warning in the `Summary` panel.
 
 ### component
 
@@ -140,14 +139,13 @@ Not allowed:
 * Referencing the same level: `semantic` to `semantic`.
 * Referencing another component token: `component` to `component`.
 
-If the exporter does not block an invalid reference, Design Token Kit checks
-should find it later.
+The plugin reports invalid architecture references in the `Summary` panel.
 
 ## Naming Rules
 
 ### Format
 
-* The first segment must be `primitive`, `semantic`, or `component`.
+* The first segment should be `primitive`, `semantic`, or `component`.
 * Use `/` as the separator.
 * Use at least 3 segments: `primitive/color/blue`, not `primitive/color`.
 * Use `kebab-case`: lowercase Latin letters, hyphens, and numbers.
@@ -155,6 +153,13 @@ should find it later.
 
 The exporter normalizes name segments to lowercase/kebab-case, but designers
 should use the correct format from the start.
+
+The exporter also accepts safe plural layer names and converts them to canonical
+layers:
+
+* `primitives` becomes `primitive`.
+* `semantics` becomes `semantic`.
+* `components` becomes `component`.
 
 This reduces the risk of conflicts and hidden renaming after export.
 
@@ -176,7 +181,8 @@ and examples.
 ### Correct and Incorrect
 
 * `primitive/color/blue/500`: correct.
-* `Primitive/Color/Blue/500`: incorrect, uppercase letters.
+* `Primitive/Color/Blue/500`: accepted by the exporter, but lowercase names are
+  preferred in the design file.
 * `semantic/color/text/on-primary`: correct.
 * `semantic/color/text/onPrimary`: incorrect, camelCase.
 * `component/button/primary/bg`: correct.
@@ -188,8 +194,8 @@ and examples.
 * `primitive/color/neutral/100`: correct.
 * `primitive-color-neutral-100`: incorrect, `/` is not used as the separator.
 
-The exporter can normalize some of these names, but they are still considered
-incorrect in the design file.
+The exporter can normalize some of these names, but predictable lowercase names
+are still preferred in the design file.
 
 ## Variables and Styles in Figma
 
@@ -312,6 +318,37 @@ If the target variable is deleted, export can continue with a warning.
 
 Because of this, always check exporter warnings before using the result.
 
+## Architecture Analysis in the Plugin
+
+The plugin analyzes token architecture automatically when the UI loads.
+
+This analysis is not DTCG schema validation.
+It checks token layers, dependencies, raw values, broken references, and
+component isolation.
+
+The result is shown in the `Summary` panel as named checks:
+
+* Required architecture layers are present.
+* Token dependencies follow the primitive -> semantic -> component architecture.
+* Raw values are defined only in the primitive layer.
+* All token references resolve to existing tokens.
+* Component tokens are isolated from other components.
+
+Each check has one of these states:
+
+* `OK`: the check passed.
+* `Warning`: the check found an architecture concern.
+* `Error`: the check found a broken token reference.
+
+Only broken references are treated as errors.
+Other architecture problems are shown as warnings.
+
+Details for a failed check are hidden by default.
+Open the check accordion to see the related messages.
+
+The `Analyze tokens` button runs the same analysis again.
+Export is not blocked by architecture warnings or errors.
+
 ## Collection Structure
 
 Collections in Figma are used to organize variables.
@@ -341,7 +378,7 @@ Rules:
 * Different dimensions should use different collections.
 * Do not mix theme, brand, and density modes in one collection.
 * Variable names must be unique across the whole file.
-* Two variables must not export to the same DTCG path.
+* Two variables must not export to the same token path.
 * `components` usually has one mode.
 * Components do not know about the theme.
   The semantic alias provides the theme value.
@@ -397,8 +434,11 @@ component contract already exists for that property.
 
 Exception: typography and shadows can use `semantic` styles directly.
 
-This does not break the architecture because Figma does not support aliases
-between styles.
+Figma does not support aliases between styles.
+Because of this, the plugin can report semantic or component typography and
+shadow styles as architecture warnings when they contain raw values.
+Review these warnings before export and decide whether a separate component
+style is needed.
 
 Examples:
 
@@ -407,24 +447,25 @@ Examples:
 
 ## Checklist Before Export
 
-* [ ] All variables start with `primitive/`, `semantic/`, or `component/`.
-* [ ] Names use `kebab-case`, Latin characters only, with no spaces.
-* [ ] No token path has fewer than 3 segments.
-* [ ] Final token paths are unique across the exported file.
-* [ ] All `semantic` tokens are aliases to `primitive`, with no raw values.
-* [ ] All `component` tokens are aliases to `semantic`, with no raw values.
-* [ ] There are no references up, across levels, or between tokens on the same
+* All variables start with `primitive/`, `semantic/`, or `component/`.
+  Safe plural layer names are accepted, but canonical singular names are
+  preferred.
+* Names use `kebab-case`, Latin characters only, with no spaces.
+* No token path has fewer than 3 segments.
+* All `semantic` tokens are aliases to `primitive`, with no raw values.
+* All `component` tokens are aliases to `semantic`, with no raw values.
+* There are no references up, across levels, or between tokens on the same
   level.
-* [ ] There are no references to external libraries.
-* [ ] Exporter warnings have been checked.
-* [ ] Theme names are not used in token paths.
-* [ ] Theme, brand, and density use separate collections.
-* [ ] Component layers reference `component` variables, not `primitive`.
-* [ ] Text Styles have an explicit line-height and a name starting with
+* There are no references to external libraries.
+* Plugin architecture warnings and errors have been checked in `Summary`.
+* Exporter warnings have been checked in `Warnings`.
+* Theme names are not used in token paths.
+* Theme, brand, and density use separate collections.
+* Component layers reference `component` variables, not `primitive`.
+* Text Styles have an explicit line-height and a name starting with
   `semantic/` or `component/`.
-* [ ] Effect Styles contain only shadows and have a name starting with
+* Effect Styles contain only shadows and have a name starting with
   `semantic/` or `component/`.
-* [ ] The exported `tokens.json` passes Design Token Kit checks.
 
 ## Links
 
