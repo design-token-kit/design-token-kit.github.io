@@ -104,8 +104,6 @@ Examples:
 
 Raw values should not be used at the `semantic` level.
 
-The plugin reports this as an architecture warning in the `Summary` panel.
-
 ### component
 
 The contract for a specific component.
@@ -139,8 +137,6 @@ Not allowed:
 * Referencing the same level: `semantic` to `semantic`.
 * Referencing another component token: `component` to `component`.
 
-The plugin reports invalid architecture references in the `Summary` panel.
-
 ## Naming Rules
 
 ### Format
@@ -161,7 +157,9 @@ layers:
 * `semantics` becomes `semantic`.
 * `components` becomes `component`.
 
-This reduces the risk of conflicts and hidden renaming after export.
+These aliases keep export stable when a Figma file uses plural group names.
+The plugin shows a yellow note under the required layers check because canonical
+singular names are recommended.
 
 Examples:
 
@@ -323,16 +321,10 @@ Because of this, always check exporter warnings before using the result.
 The plugin analyzes token architecture automatically when the UI loads.
 
 This analysis is not DTCG schema validation.
-It checks token layers, dependencies, raw values, broken references, and
-component isolation.
+It focuses only on layers, dependencies, raw values, broken references, and
+component-to-component references.
 
-The result is shown in the `Summary` panel as named checks:
-
-* Required architecture layers are present.
-* Token dependencies follow the primitive -> semantic -> component architecture.
-* Raw values are defined only in the primitive layer.
-* All token references resolve to existing tokens.
-* Component tokens are isolated from other components.
+The `Summary` panel shows one row for each check described below.
 
 Each check has one of these states:
 
@@ -343,11 +335,44 @@ Each check has one of these states:
 Only broken references are treated as errors.
 Other architecture problems are shown as warnings.
 
-Details for a failed check are hidden by default.
-Open the check accordion to see the related messages.
+Failed checks show their details in collapsed accordions.
+Plural layer aliases do not fail the required layers check.
+They are shown as a yellow note under that check.
 
 The `Analyze tokens` button runs the same analysis again.
 Export is not blocked by architecture warnings or errors.
+
+### Required Architecture Layers
+
+Tokens should be organized into the `primitive`, `semantic`, and `component`
+layers.
+
+This check also accepts the safe plural aliases described in Naming Rules.
+When an alias is used, the check stays `OK` and shows a yellow recommendation.
+
+### Token Dependencies
+
+Semantic tokens should reference primitive tokens.
+Component tokens should reference semantic tokens.
+Other cross-layer references are architecture warnings.
+
+### Raw Values
+
+Raw design values should live only in the `primitive` layer.
+Semantic and component tokens should reference lower layers instead.
+
+### Token References
+
+Every token reference should point to an existing local token.
+
+Broken references are treated as errors because the exported token graph cannot
+be resolved reliably.
+
+### Component Token References
+
+Component tokens should not reference other component tokens.
+
+Shared decisions should be moved to semantic tokens and reused from there.
 
 ## Collection Structure
 
