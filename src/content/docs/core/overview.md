@@ -11,7 +11,7 @@ order: 1
 
 Use it when you need to integrate token parsing, validation, conversion, showcase generation, or statistics into your own application.
 
-Node.js 18 or newer is required.
+Node.js 20.19.0 or newer is required.
 
 ## Install
 

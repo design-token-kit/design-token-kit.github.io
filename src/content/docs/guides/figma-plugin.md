@@ -10,8 +10,8 @@ order: 2
 This document explains how designers should prepare variables and styles in
 Figma so that the plugin can export tokens and check their architecture.
 
-The exported token files go through `@design-token-kit` and are converted into
-CSS variables used by the application.
+The exported token files are converted with `@design-token-kit/cli` or the
+`@design-token-kit/core` API into CSS variables used by the application.
 
 The rules in this document can be stricter than Figma itself or the DTCG
 specification.
@@ -52,9 +52,9 @@ The flow is:
 * Figma variables and styles.
 * Export through the Design Token Kit Figma plugin.
 * `tokens.json` and theme token files.
-* `@design-token-kit` conversion.
+* `@design-token-kit/cli` conversion.
 * `tokens.css` with CSS variables.
-* `var(--component-button-primary-bg)` in component code.
+* `var(--component-button-primary-background)` in component code.
 
 The designer's task is to prepare the Figma file so that token names and aliases
 preserve the expected architecture without manual fixes after export.
@@ -221,8 +221,14 @@ For opacity, use the `opacity` segment in the name and set the scope to
 `OPACITY` when possible.
 
 In the architecture, `z-index` and other unitless numbers should use `number`.
+The plugin currently exports Figma `FLOAT` variables as `number` only when their
+scope is `OPACITY` or their name contains `opacity`.
+Other unitless FLOAT variables, including `z-index`, are exported as
+`dimension` and need correction after export.
 
-These tokens need an additional check after export.
+Prefer explicit line-height values in Text Styles.
+When Figma uses automatic line-height, the plugin exports it as the unitless
+value `1`.
 
 Not allowed:
 
@@ -254,8 +260,6 @@ Not allowed:
 * Layer blur or background blur in Effect Styles.
 * Mixing shadows and blur in one Effect Style.
 * Style names connected to a specific page or screen.
-
-Line-height must have an explicit value in px or `%`.
 
 Only `DROP_SHADOW` and `INNER_SHADOW` should be used.
 
@@ -487,7 +491,7 @@ Examples:
 * Theme names are not used in token paths.
 * Theme, brand, and density use separate collections.
 * Component layers reference `component` variables, not `primitive`.
-* Text Styles have an explicit line-height and a name starting with
+* Text Styles preferably have an explicit line-height and a name starting with
   `semantic/` or `component/`.
 * Effect Styles contain only shadows and have a name starting with
   `semantic/` or `component/`.

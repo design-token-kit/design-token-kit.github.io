@@ -18,12 +18,12 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.3",
-    "@design-token-kit/core": "1.5.0",
+    "@design-token-kit/core": "1.9.0",
     "astro": "7.0.7",
     "sass": "1.89.2"
   },
   "devDependencies": {
-    "@design-token-kit/cli": "1.5.0",
+    "@design-token-kit/cli": "1.9.0",
     "@types/node": "22.20.1",
     "postcss-scss": "4.0.9",
     "stylelint": "16.23.1",

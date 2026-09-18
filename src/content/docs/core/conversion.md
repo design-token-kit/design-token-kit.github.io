@@ -98,7 +98,11 @@ Default output contains:
 - one `@theme` block for base values;
 - theme selectors for overrides.
 
-Dimension tokens map to spacing by default. Names containing `breakpoint`, `radius`, `font-size`, `line-height`, or `letter-spacing` map to the matching Tailwind namespaces. The only explicit `design-token-kit.tailwindNamespace` value currently supported is `breakpoint`.
+Dimension tokens map to `spacing` by default. Dimension names containing
+`breakpoint`, `radius`, `font-size`, or `letter-spacing` map to `breakpoint`,
+`radius`, `text`, or `tracking`; `border-width` dimensions are skipped. Number
+tokens with a `line-height` name map to `leading`. The only explicit
+`design-token-kit.tailwindNamespace` value currently supported is `breakpoint`.
 
 Configure selectors when the output is used in Shadow DOM or another scoped environment:
 
@@ -145,7 +149,13 @@ import { FigmaScriptTokenConverter } from "@design-token-kit/core";
 const script = new FigmaScriptTokenConverter().convertList(list);
 ```
 
-The generated script builds the token set inside Figma through the Plugin API, which runs only in the editor. It creates one variable collection per token layer, one mode per theme, and the variables and styles the tokens describe. References become Figma variable aliases rather than copied values.
+The generated script builds the token set inside Figma through the Plugin API,
+which runs only in the editor. It creates one variable collection per token
+layer, one mode per theme, and the variables and styles the tokens describe.
+References become Figma variable aliases rather than copied values.
+Figma variables support theme modes, but Figma styles do not.
+Typography and effect styles are emitted only from the base document, and theme
+overrides for those styles are skipped.
 
 Figma represents five of the thirteen DTCG types: `color`, `dimension`, `number`, `typography`, and `shadow`.
 
@@ -172,7 +182,9 @@ Token values are converted to their Android equivalents:
 - sizes to `dp`, font sizes to `sp`;
 - `rem` resolved against a pixel base, since Android has no such unit;
 - references preserved as native `@color/...` and `@dimen/...` references;
-- composite tokens decomposed into one resource per field.
+- supported composite tokens decomposed into one resource per field;
+- unsupported cubic-bezier and stroke-style geometry fields are skipped;
+- shadow `inset` is not represented in Android resources.
 
 By default resources are split into one file per root token group, mirroring the token hierarchy. Use the `type` layout to split by Android resource type instead, and `remBase` to change the pixel base resolving `rem`:
 

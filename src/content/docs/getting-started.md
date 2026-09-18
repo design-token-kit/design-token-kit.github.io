@@ -14,7 +14,7 @@ You can use it in two ways:
 - **CLI** for local scripts, package scripts, and CI.
 - **Core API** for applications, integrations, and custom tooling.
 
-Design Token Kit requires **Node.js 18 or newer**.
+Design Token Kit requires **Node.js 20.19.0 or newer**.
 
 ## Choose how to use DTK
 
