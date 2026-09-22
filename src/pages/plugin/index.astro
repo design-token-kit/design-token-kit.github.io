@@ -1,0 +1,168 @@
+---
+import arrowRightIcon from '#/assets/icons/icon-arrow-right.svg';
+import figmaPluginFlow from '#/assets/figma-plugin.png';
+import slide2 from '#/assets/slides/slide2.jpg';
+import slide3 from '#/assets/slides/slide3.jpg';
+import slide4 from '#/assets/slides/slide4.jpg';
+import slide5 from '#/assets/slides/slide5.jpg';
+import slide1 from '#/assets/slides/slide1.jpg';
+import Footer from '#/components/Footer/Footer.astro';
+import Header from '#/components/Header/Header.astro';
+import Layout from '#/layouts/Layout.astro';
+import styles from '#/pages/plugin/plugin.module.scss';
+
+const baseUrl = import.meta.env.BASE_URL.endsWith('/')
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
+
+const pluginSections = [
+    {
+        image: slide2,
+        label: '01 / Prepare in Figma',
+        title: 'Start where token decisions are made',
+        description:
+            'Organize variables and styles into clear layers, then choose the target directly in Figma. The handoff begins with the current file rather than a manual rebuild.',
+        benefits: ['Export clean DTCG JSON without rebuilding the token tree', 'Move from design decisions to production-ready output in one step'],
+        alt: 'Design Token Kit plugin export panel with token architecture checks and format choices.',
+    },
+    {
+        image: slide3,
+        label: '02 / Export as DTCG',
+        title: 'Keep the meaning behind every token',
+        description:
+            'The exported file carries a portable structure that other tools can read and teams can inspect.',
+        benefits: ['Primitive, semantic, and component layers stay explicit', 'Missing layers, broken references, and raw values surface before code'],
+        alt: 'Figma token layers mapped to a structured DTCG JSON output.',
+    },
+    {
+        image: slide4,
+        label: '03 / Generate for web',
+        title: 'Give web teams one shared vocabulary',
+        description:
+            'Use one token source for frontend stacks instead of translating values and names by hand.',
+        benefits: ['Consistent names across CSS, SCSS, and Tailwind', 'Less drift between design and implementation'],
+        formats: ['CSS', 'SCSS', 'Tailwind v4'],
+        alt: 'CSS, SCSS, and Tailwind CSS outputs generated from one shared token system.',
+    },
+    {
+        image: slide5,
+        label: '04 / Generate for native',
+        title: 'Make the same system useful on mobile',
+        description:
+            'Carry the same token decisions into native code so mobile teams do not maintain a parallel system.',
+        benefits: ['Readable SwiftUI and Android output', 'Themes stay connected across platforms'],
+        formats: ['SwiftUI', 'Android'],
+        alt: 'Readable SwiftUI code generated from the Figma token system.',
+    },
+    {
+        image: slide1,
+        label: '05 / Ship to product',
+        title: 'See the whole path before it becomes a handoff',
+        description:
+            'Export a base file and theme files, then use the CLI or Core API to ship the same contract into product code.',
+        benefits: ['Figma remains the source of truth', 'Aliases and themes stay connected across destinations'],
+        formats: ['DTCG JSON', 'Base file', 'Theme files'],
+        action: 'Explore the plugin on Figma',
+        alt: 'Connected flow from Figma Variables and Styles through DTCG tokens to production code.',
+    },
+];
+---
+
+<Layout
+    title="Figma Plugin | Design Token Kit"
+    description="Export, analyze, and prepare Figma Variables and Styles for production-ready design token workflows."
+>
+    <Header />
+
+    <main class={styles.page}>
+        <section class={styles.hero} aria-labelledby="plugin-title">
+            <div class={styles.heroContent}>
+                <p class={styles.eyebrow}>Figma plugin</p>
+                <h1 id="plugin-title">From Figma variables to code-ready tokens.</h1>
+                <p class={styles.lead}>
+                    Export Figma Variables and Styles to DTCG JSON, validate their architecture,
+                    and turn them into the formats your product team already uses.
+                </p>
+                <div class={styles.actions}>
+                    <a
+                        class={`${styles.primaryAction} ${styles.action}`}
+                        href="https://www.figma.com/community/plugin/1661669063434861129/design-token-kit"
+                    >
+                        <span>Get the plugin</span>
+                        <img src={arrowRightIcon.src} width="20" height="20" alt="" />
+                    </a>
+                    <a class={`${styles.secondaryAction} ${styles.action}`} href={`${baseUrl}docs/guides/figma-plugin/`}>
+                        <span>Read the guide</span>
+                        <img src={arrowRightIcon.src} width="20" height="20" alt="" />
+                    </a>
+                </div>
+            </div>
+
+            <div class={styles.heroVisual}>
+                <div class={styles.visualLabel}>
+                    <span class={styles.statusDot}></span>
+                    <span>Figma → DTCG → code</span>
+                </div>
+                <img
+                    src={figmaPluginFlow.src}
+                    width={figmaPluginFlow.width}
+                    height={figmaPluginFlow.height}
+                    alt="Figma Variables and Styles exported to DTCG JSON and converted into implementation formats."
+                />
+            </div>
+        </section>
+
+        <section class={styles.showcase} aria-labelledby="showcase-title">
+            <div class={styles.showcaseHeader}>
+                <div>
+                    <p class={styles.eyebrow}>Plugin showcase</p>
+                    <h2 id="showcase-title">A closer look at what the plugin protects.</h2>
+                </div>
+                <p>Each step keeps the connection between design intent and production code visible.</p>
+            </div>
+
+            <div class={styles.showcaseList}>
+                {pluginSections.map((section, index) => (
+                    <article class={styles.showcaseItem}>
+                        <div class={styles.showcaseMedia}>
+                            <img
+                                src={section.image.src}
+                                width={section.image.width}
+                                height={section.image.height}
+                                alt={section.alt}
+                                loading={index === 0 ? 'eager' : 'lazy'}
+                            />
+                        </div>
+                        <div class={styles.showcaseCopy}>
+                            <p class={styles.showcaseLabel}>{section.label}</p>
+                            <h3>{section.title}</h3>
+                            <p>{section.description}</p>
+                            <ul class={styles.showcaseBenefits}>
+                                {section.benefits.map((benefit) => <li>{benefit}</li>)}
+                            </ul>
+                            {section.formats && (
+                                <div class={styles.showcaseFormats}>
+                                    <span>Outputs</span>
+                                    <ul>
+                                        {section.formats.map((format) => <li>{format}</li>)}
+                                    </ul>
+                                </div>
+                            )}
+                            {section.action && (
+                                <a
+                                    class={`${styles.primaryAction} ${styles.action}`}
+                                    href="https://www.figma.com/community/plugin/1661669063434861129/design-token-kit"
+                                >
+                                    <span>{section.action}</span>
+                                    <img src={arrowRightIcon.src} width="20" height="20" alt="" />
+                                </a>
+                            )}
+                        </div>
+                    </article>
+                ))}
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+</Layout>
