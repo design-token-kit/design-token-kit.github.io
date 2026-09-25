@@ -67,6 +67,17 @@ Preview the production build locally:
 npm run preview
 ```
 
+Use unreleased `@design-token-kit/core` changes from a local checkout of the
+core repository (`../design-token-kit` by default, or `DTK_CORE_DIR`):
+
+```bash
+npm run core:local
+```
+
+The script builds and installs core without changing `package.json`. Run it
+again after changing core, and after `npm install`, which restores the
+published version.
+
 ## Publish
 
 The site is deployed through GitHub Pages using GitHub Actions.
