@@ -9,6 +9,7 @@
     "prepare": "node scripts/setup-git-hooks.mjs",
     "check:import-case": "node scripts/check-import-case.mjs",
     "dev": "astro dev",
+    "core:local": "node scripts/use-local-core.mjs",
     "tokens:check": "dtokens check --scope validate --inform dtcg src/styles/tokens/tokens.json",
     "tokens:build": "dtokens convert --inform dtcg --outform css --out src/styles/tokens/tokens.css src/styles/tokens/tokens.json",
     "lint:styles": "stylelint \"src/**/*.scss\"",
