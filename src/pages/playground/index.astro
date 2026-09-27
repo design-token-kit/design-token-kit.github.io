@@ -1,0 +1,18 @@
+---
+import Footer from '#/components/Footer/Footer.astro';
+import Header from '#/components/Header/Header.astro';
+import TokenPlayground from '#/components/token-playground/TokenPlayground.astro';
+import Layout from '#/layouts/Layout.astro';
+import styles from './playground.module.scss';
+---
+
+<Layout
+    title="Token Playground | Design Token Kit"
+    description="Validate, convert, and showcase design tokens in your browser."
+>
+    <Header />
+    <main class={styles.page}>
+        <TokenPlayground full />
+    </main>
+    <Footer />
+</Layout>

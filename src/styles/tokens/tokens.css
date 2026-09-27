@@ -23,6 +23,12 @@
   --primitive-color-status-success: #3a8f5a;
   --primitive-color-status-successWash: color(srgb 0.227451 0.560784 0.352941 / 0.08);
   --primitive-color-status-successBorder: color(srgb 0.227451 0.560784 0.352941 / 0.24);
+  --primitive-color-status-error: #b42318;
+  --primitive-color-status-errorWash: color(srgb 0.705882 0.137255 0.094118 / 0.08);
+  --primitive-color-status-errorBorder: color(srgb 0.705882 0.137255 0.094118 / 0.24);
+  --primitive-color-status-warning: #b45309;
+  --primitive-color-status-warningWash: color(srgb 0.705882 0.32549 0.035294 / 0.08);
+  --primitive-color-status-warningBorder: color(srgb 0.705882 0.32549 0.035294 / 0.24);
   --primitive-color-inset-light: color(srgb 1 1 1 / 0.24);
   --primitive-space-0: 0rem;
   --primitive-space-1: 0.25rem;
@@ -68,7 +74,7 @@
   --primitive-size-micro: 0.65rem;
   --primitive-size-microLg: 0.7rem;
   --primitive-size-iconXs: 1rem;
-  --primitive-size-iconSmPlus: 1.15rem;
+  --primitive-size-iconSmPlus: 1.3rem;
   --primitive-size-iconLgPlus: 1.7rem;
   --primitive-size-iconXl: 1.75rem;
   --primitive-size-icon2xl: 2rem;
@@ -92,6 +98,7 @@
   --primitive-size-workflowCardMinHeight: 18.75rem;
   --primitive-size-titleMaxWidthSm: 20rem;
   --primitive-size-codeMinHeightSm: 22rem;
+  --primitive-size-playgroundEditorHeight: 30rem;
   --primitive-size-copyMaxWidthMd: 24rem;
   --primitive-size-brandCopyMaxWidth: 25rem;
   --primitive-size-titleMaxWidthMd: 28rem;
@@ -143,6 +150,12 @@
   --semantic-color-status-success: var(--primitive-color-status-success);
   --semantic-color-status-successWash: var(--primitive-color-status-successWash);
   --semantic-color-status-successBorder: var(--primitive-color-status-successBorder);
+  --semantic-color-status-error: var(--primitive-color-status-error);
+  --semantic-color-status-errorWash: var(--primitive-color-status-errorWash);
+  --semantic-color-status-errorBorder: var(--primitive-color-status-errorBorder);
+  --semantic-color-status-warning: var(--primitive-color-status-warning);
+  --semantic-color-status-warningWash: var(--primitive-color-status-warningWash);
+  --semantic-color-status-warningBorder: var(--primitive-color-status-warningBorder);
   --semantic-color-inset-light: var(--primitive-color-inset-light);
   --semantic-space-0: var(--primitive-space-0);
   --semantic-space-1: var(--primitive-space-1);
