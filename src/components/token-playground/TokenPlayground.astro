@@ -50,14 +50,46 @@ const outputFormats: Option[] = [
         )}
         {full ? (
             <p>
-                Paste, drop, or upload DTCG JSON, HRDT YAML, or DESIGN.md. Tokens are checked and converted on your
-                device and never leave the browser.
+                Load a token file, validate its structure, convert it into implementation formats, and preview or
+                download a showcase. Everything runs locally in your browser.
             </p>
         ) : (
             <p>
                 Try the token workflow here, or open the full playground for file upload, validation, linting, and
                 conversion. Everything runs locally in your browser.
             </p>
+        )}
+        {full && (
+            <ol class={styles.workflowGuide} aria-label="Playground workflow">
+                <li class={styles.workflowStep}>
+                    <span class={styles.workflowIndex}>1</span>
+                    <span>
+                        <strong>Load</strong>
+                        Choose an example, paste tokens, or use Upload file and drag &amp; drop.
+                    </span>
+                </li>
+                <li class={styles.workflowStep}>
+                    <span class={styles.workflowIndex}>2</span>
+                    <span>
+                        <strong>Check</strong>
+                        Read as selects the source format; Lint adds naming and architecture checks.
+                    </span>
+                </li>
+                <li class={styles.workflowStep}>
+                    <span class={styles.workflowIndex}>3</span>
+                    <span>
+                        <strong>Convert</strong>
+                        To chooses the generated code format; Convert &amp; preview updates both outputs.
+                    </span>
+                </li>
+                <li class={styles.workflowStep}>
+                    <span class={styles.workflowIndex}>4</span>
+                    <span>
+                        <strong>Export</strong>
+                        Download the generated code or the standalone token-showcase.html file.
+                    </span>
+                </li>
+            </ol>
         )}
         {!full && (
             <a class={`${styles.primaryButton} ${styles.openButton}`} href="/playground/">
@@ -68,112 +100,153 @@ const outputFormats: Option[] = [
 
     {full ? (
         <div class={styles.workspace}>
-            <div class={styles.toolbar}>
-                <div class={styles.toolbarGroup}>
-                    <button class={styles.secondaryButton} type="button" data-playground-upload>Upload file</button>
-                    <input
-                        class={styles.visuallyHidden}
-                        type="file"
-                        accept=".json,.yaml,.yml,.md,application/json,text/yaml,text/markdown"
-                        tabindex="-1"
-                        aria-hidden="true"
-                        data-playground-file-input
-                    />
-                    <label class={styles.field}>
-                        <span class={styles.fieldLabel}>Example</span>
-                        <span class={styles.selectWrap}>
-                            <select class={styles.select} data-playground-example>
-                                <option value="">Load example…</option>
-                                {playgroundExamples.map((example) => (
-                                    <option value={example.id}>{example.label}</option>
-                                ))}
-                            </select>
-                            <span class={styles.selectChevron} aria-hidden="true"></span>
-                        </span>
-                    </label>
-                    <label class={styles.field}>
-                        <span class={styles.fieldLabel}>Input</span>
-                        <span class={styles.selectWrap}>
-                            <select class={styles.select} data-playground-input-format>
-                                {inputFormats.map((format) => (
-                                    <option value={format.value}>{format.label}</option>
-                                ))}
-                            </select>
-                            <span class={styles.selectChevron} aria-hidden="true"></span>
-                        </span>
-                    </label>
-                </div>
-                <div class={styles.toolbarGroup}>
-                    <label class={styles.checkbox}>
-                        <input type="checkbox" data-playground-lint />
-                        <span>Lint</span>
-                    </label>
-                    <button class={styles.secondaryButton} type="button" data-playground-validate>Revalidate</button>
-                    <label class={styles.field}>
-                        <span class={styles.fieldLabel}>Output</span>
-                        <span class={styles.selectWrap}>
-                            <select class={styles.select} data-playground-output-format>
-                                {outputFormats.map((format) => (
-                                    <option value={format.value} selected={format.value === 'css'}>{format.label}</option>
-                                ))}
-                            </select>
-                            <span class={styles.selectChevron} aria-hidden="true"></span>
-                        </span>
-                    </label>
-                    <button class={styles.primaryButton} type="button" data-playground-convert>Convert</button>
-                    <button class={styles.secondaryButton} type="button" data-playground-download disabled>
-                        Download
-                    </button>
-                </div>
+            <div class={styles.exampleBar}>
+                <button class={styles.uploadButton} type="button" data-playground-upload>Upload file</button>
+                <input
+                    class={styles.visuallyHidden}
+                    type="file"
+                    accept=".json,.yaml,.yml,.md,application/json,text/yaml,text/markdown"
+                    tabindex="-1"
+                    aria-hidden="true"
+                    data-playground-file-input
+                />
+                <label class={styles.exampleField}>
+                    <span class={styles.fieldLabel}>Example</span>
+                    <span class={styles.selectWrap}>
+                        <select class={styles.select} data-playground-example>
+                            <option value="">Load example…</option>
+                            {playgroundExamples.map((example) => (
+                                <option value={example.id}>{example.label}</option>
+                            ))}
+                        </select>
+                        <span class={styles.selectChevron} aria-hidden="true"></span>
+                    </span>
+                </label>
+                <label class={styles.exampleField}>
+                    <span class={styles.fieldLabel}>Read as</span>
+                    <span class={styles.selectWrap}>
+                        <select class={styles.select} data-playground-input-format>
+                            {inputFormats.map((format) => (
+                                <option value={format.value}>{format.label}</option>
+                            ))}
+                        </select>
+                        <span class={styles.selectChevron} aria-hidden="true"></span>
+                    </span>
+                </label>
             </div>
-            <p class={styles.status} role="status" data-playground-status>
-                Tokens are processed locally. Nothing is uploaded.
-            </p>
             <div class={styles.panels}>
                 <div class={styles.panel} data-playground-drop-zone="true">
                     <div class={styles.panelHeader}>
-                        <label class={styles.panelTitle} for="playground-editor">Input</label>
-                        <span class={styles.panelMeta} data-playground-source></span>
+                        <div class={styles.panelIdentity}>
+                            <label class={styles.panelTitle} for="playground-editor">Input</label>
+                            <span class={styles.panelMeta} data-playground-source></span>
+                        </div>
+                        <div class={styles.panelActions}>
+                            <label class={styles.toggleField}>
+                                <input type="checkbox" data-playground-lint />
+                                <span class={styles.toggle} aria-hidden="true"></span>
+                                <span>Lint</span>
+                            </label>
+                            <button class={styles.secondaryButton} type="button" data-playground-validate>Revalidate</button>
+                        </div>
                     </div>
-                    <textarea
-                        id="playground-editor"
-                        class={styles.editor}
-                        spellcheck="false"
-                        autocomplete="off"
-                        autocapitalize="off"
-                        placeholder="Paste tokens here or drop a file"
-                        data-playground-editor
-                    ></textarea>
+                    <div class={styles.editorFrame}>
+                        <div class={styles.lineNumbers} aria-hidden="true" data-playground-input-lines>1</div>
+                        <div class={styles.editorSurface}>
+                            <pre class={styles.inputHighlight} aria-hidden="true" data-playground-input-highlight></pre>
+                            <textarea
+                                id="playground-editor"
+                                class={styles.editor}
+                                spellcheck="false"
+                                autocomplete="off"
+                                autocapitalize="off"
+                                placeholder="Paste tokens here or drop a file"
+                                data-playground-editor
+                            ></textarea>
+                        </div>
+                    </div>
                 </div>
                 <div class={styles.panel} data-playground-output-panel>
                     <div class={styles.panelHeader}>
-                        <h3 class={styles.panelTitle}>Code</h3>
-                        <span class={styles.selectWrap}>
-                            <select class={styles.select} aria-label="Output file" hidden data-playground-output-file></select>
-                            <span class={styles.selectChevron} aria-hidden="true"></span>
-                        </span>
+                        <h3 class={styles.panelTitle}>Output</h3>
+                        <div class={`${styles.panelActions} ${styles.outputActions}`}>
+                            <span class={`${styles.selectWrap} ${styles.outputFile}`}>
+                                <select class={styles.select} aria-label="Output file" hidden data-playground-output-file></select>
+                                <span class={styles.selectChevron} aria-hidden="true"></span>
+                            </span>
+                            <label class={styles.formatField}>
+                                <span class={styles.fieldLabel}>To</span>
+                                <span class={styles.selectWrap}>
+                                    <select class={styles.select} aria-label="Output format" data-playground-output-format>
+                                        {outputFormats.map((format) => (
+                                            <option value={format.value} selected={format.value === 'css'}>{format.label}</option>
+                                        ))}
+                                    </select>
+                                    <span class={styles.selectChevron} aria-hidden="true"></span>
+                                </span>
+                            </label>
+                            <button class={styles.primaryButton} type="button" data-playground-convert>
+                                Convert &amp; preview
+                            </button>
+                            <button class={styles.downloadButton} type="button" data-playground-download disabled>
+                                Download
+                            </button>
+                        </div>
                     </div>
                     <div class={styles.view}>
+                        <div class={`${styles.lineNumbers} ${styles.outputLineNumbers}`} aria-hidden="true" data-playground-output-lines></div>
                         <pre class={styles.code}><code data-playground-code></code></pre>
                         <p class={styles.placeholder} data-playground-code-placeholder>
-                            Choose an output format and press Convert.
+                            Paste tokens or load an example to start.
                         </p>
                     </div>
                 </div>
-                <aside
-                    class={styles.issuesPanel}
-                    aria-labelledby="playground-issues-heading"
-                    data-playground-validation
-                >
-                    <div class={styles.panelHeader}>
-                        <h3 id="playground-issues-heading" class={styles.panelTitle}>Issues</h3>
-                    </div>
-                    <p class={styles.summary} aria-live="polite" data-state="idle" data-playground-summary>
-                        Not checked yet.
-                    </p>
-                    <ol class={styles.issueList} data-playground-issues></ol>
-                </aside>
             </div>
+            <details class={styles.validationPanel} data-playground-validation>
+                <summary class={styles.validationSummary}>
+                    <span class={styles.validationIcon} aria-hidden="true">✓</span>
+                    <span class={styles.validationCopy}>
+                        <strong class={styles.summary} aria-live="polite" data-state="idle" data-playground-summary>
+                            Validation pending
+                        </strong>
+                        <span class={styles.status} role="status" data-playground-status>
+                            Your tokens are checked locally and never uploaded.
+                        </span>
+                    </span>
+                    <span class={styles.validationChevron} aria-hidden="true">⌄</span>
+                </summary>
+                <div class={styles.validationDetails}>
+                    <ol class={styles.issueList} data-playground-issues></ol>
+                </div>
+            </details>
+            <section class={styles.showcasePanel} aria-labelledby="showcase-heading">
+                <div class={styles.panelHeader}>
+                    <h2 id="showcase-heading" class={styles.panelTitle}>Showcase</h2>
+                    <span class={styles.status}>Rendered from the same token file.</span>
+                </div>
+                <div class={styles.showcaseView}>
+                    <iframe
+                        class={styles.showcase}
+                        title="Token showcase"
+                        sandbox="allow-scripts"
+                        hidden
+                        data-playground-showcase
+                    ></iframe>
+                    <p class={styles.placeholder} data-playground-showcase-placeholder>
+                        Convert tokens to generate the output and render the showcase.
+                    </p>
+                </div>
+                <div class={styles.showcaseActions}>
+                    <button
+                        class={styles.secondaryButton}
+                        type="button"
+                        data-playground-showcase-download
+                        disabled
+                    >
+                        Download showcase
+                    </button>
+                </div>
+            </section>
         </div>
     ) : (
     <div class={styles.workspace}>
@@ -240,20 +313,23 @@ const outputFormats: Option[] = [
 
             <div class={styles.panel} data-playground-output-panel>
                 <div class={styles.panelHeader}>
-                    <h3 class={styles.panelTitle}>Code</h3>
+                    <h3 class={styles.panelTitle}>Output</h3>
                     <div class={styles.panelActions}>
                         <span class={styles.selectWrap}>
                             <select class={styles.select} aria-label="Output file" hidden data-playground-output-file></select>
                             <span class={styles.selectChevron} aria-hidden="true"></span>
                         </span>
-                        <span class={styles.selectWrap}>
-                            <select class={styles.select} aria-label="Output format" data-playground-output-format>
-                                {outputFormats.map((format) => (
-                                    <option value={format.value} selected={format.value === 'android'}>{format.label}</option>
-                                ))}
-                            </select>
-                            <span class={styles.selectChevron} aria-hidden="true"></span>
-                        </span>
+                        <label class={styles.formatField}>
+                            <span class={styles.fieldLabel}>To</span>
+                            <span class={styles.selectWrap}>
+                                <select class={styles.select} aria-label="Output format" data-playground-output-format>
+                                    {outputFormats.map((format) => (
+                                        <option value={format.value} selected={format.value === 'android'}>{format.label}</option>
+                                    ))}
+                                </select>
+                                <span class={styles.selectChevron} aria-hidden="true"></span>
+                            </span>
+                        </label>
                         <button class={styles.primaryButton} type="button" data-playground-convert>Convert</button>
                         {full && (
                             <button class={styles.downloadButton} type="button" data-playground-download disabled>

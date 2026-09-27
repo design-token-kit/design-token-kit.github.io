@@ -29,6 +29,48 @@
     }
 }
 
+.workflowGuide {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--semantic-space-4);
+    max-width: var(--semantic-size-maxWidthPage);
+    margin: var(--semantic-space-6) auto var(--semantic-space-0);
+    padding: var(--semantic-space-4) var(--semantic-space-0) var(--semantic-space-0);
+    text-align: left;
+    list-style: none;
+    border-top: var(--primitive-size-borderWidthSm) solid var(--semantic-color-border-default);
+}
+
+.workflowStep {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--semantic-space-2);
+    align-items: start;
+    color: var(--semantic-color-text-secondary);
+    font-size: var(--semantic-font-size-xs);
+    line-height: var(--semantic-font-lineHeight-normal);
+
+    strong {
+        display: block;
+        margin-bottom: var(--semantic-space-1);
+        color: var(--semantic-color-text-primary);
+        font-size: var(--semantic-font-size-sm);
+    }
+}
+
+.workflowIndex {
+    display: grid;
+    flex: 0 0 auto;
+    width: var(--primitive-size-iconLgPlus);
+    height: var(--primitive-size-iconLgPlus);
+    place-items: center;
+    color: var(--semantic-color-text-inverse);
+    font-size: var(--semantic-font-size-xs);
+    font-weight: var(--semantic-font-weight-bold);
+    background: var(--semantic-color-accent-primary);
+    border-radius: var(--semantic-radius-full);
+}
+
 .openButton {
     margin-top: var(--semantic-space-4);
     text-decoration: none;
@@ -55,13 +97,24 @@
 
 .exampleBar {
     display: flex;
+    gap: var(--semantic-space-5);
     align-items: center;
     min-height: var(--primitive-size-controlMinHeight);
+}
+
+.exampleBar > .uploadButton {
+    margin-left: 0;
 }
 
 .exampleField {
     display: inline-flex;
     gap: var(--semantic-space-3);
+    align-items: center;
+}
+
+.formatField {
+    display: inline-flex;
+    gap: var(--semantic-space-2);
     align-items: center;
 }
 
@@ -193,12 +246,6 @@
 }
 
 .editorFrame {
-    --editor-guides: linear-gradient(
-        90deg,
-        transparent 3.5rem,
-        var(--semantic-color-border-subtle) 3.5rem,
-        transparent 3.5625rem
-    );
     background: var(--semantic-color-surface-muted);
 }
 
@@ -209,7 +256,6 @@
     min-height: 0;
     overflow: hidden;
     background-color: var(--semantic-color-surface-muted);
-    background-image: var(--editor-guides);
 }
 
 .lineNumbers {
@@ -394,10 +440,15 @@
 }
 
 .uploadButton {
-    padding-inline: var(--semantic-space-2);
-    color: var(--semantic-color-text-muted);
-    font-size: var(--semantic-font-size-xs);
-    border-color: transparent;
+    color: var(--semantic-color-text-inverse);
+    background: var(--semantic-color-accent-primary);
+    border-color: var(--semantic-color-accent-primary);
+
+    &:hover:not(:disabled) {
+        color: var(--semantic-color-text-inverse);
+        background: var(--semantic-color-accent-primaryHover);
+        border-color: var(--semantic-color-accent-primaryHover);
+    }
 }
 
 .downloadButton {
@@ -676,6 +727,13 @@
     border: none;
 }
 
+.showcaseActions {
+    display: flex;
+    justify-content: flex-end;
+    padding: var(--semantic-space-3) var(--semantic-space-4);
+    border-top: var(--primitive-size-borderWidthSm) solid var(--semantic-color-border-subtle);
+}
+
 .visuallyHidden {
     position: absolute;
     width: var(--primitive-size-borderWidthSm);
@@ -685,7 +743,17 @@
     white-space: nowrap;
 }
 
+@media (min-width: 70.0625rem) {
+    .playground:not([data-playground-full="true"]) {
+        --primitive-size-playgroundEditorHeight: 26rem;
+    }
+}
+
 @media (max-width: 70rem) {
+    .playground {
+        --primitive-size-playgroundEditorHeight: 18rem;
+    }
+
     .panelHeader {
         align-items: flex-start;
         flex-direction: column;
@@ -695,16 +763,25 @@
         width: 100%;
         justify-content: flex-start;
     }
+
+    .workflowGuide {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 47.9375rem) {
     .playground {
+        --primitive-size-playgroundEditorHeight: 12rem;
         width: min(var(--semantic-size-maxWidthPage), calc(100% - var(--semantic-space-5)));
         padding-top: var(--semantic-space-7);
     }
 
     .workspace {
         padding: var(--semantic-space-4);
+    }
+
+    .workflowGuide {
+        grid-template-columns: 1fr;
     }
 
     .exampleField,
@@ -714,6 +791,16 @@
     }
 
     .exampleField {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .exampleBar > .uploadButton {
+        width: 100%;
+        margin-left: var(--semantic-space-0);
+    }
+
+    .formatField {
         align-items: stretch;
         flex-direction: column;
     }
@@ -735,7 +822,7 @@
     }
 }
 
-/* The full playground keeps its original three-panel workspace. */
+/* The full playground keeps the home page workspace and adds the complete toolset. */
 [data-playground-full="true"] {
     .playground {
         width: min(var(--semantic-size-maxWidthPage), calc(100% - var(--semantic-space-6)));
@@ -747,84 +834,22 @@
         background: color-mix(in srgb, var(--semantic-color-surface-default) 86%, var(--semantic-color-bg-soft));
     }
 
-    .toolbar {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--semantic-space-3);
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .toolbarGroup {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--semantic-space-3);
-        align-items: center;
-    }
-
-    .field {
-        display: inline-flex;
-        gap: var(--semantic-space-2);
-        align-items: center;
-    }
-
-    .checkbox {
-        display: inline-flex;
-        gap: var(--semantic-space-2);
-        align-items: center;
-        color: var(--semantic-color-text-primary);
-        font-size: var(--semantic-font-size-sm);
-        font-weight: var(--semantic-font-weight-bold);
-        cursor: pointer;
-
-        input {
-            width: var(--primitive-size-iconXs);
-            height: var(--primitive-size-iconXs);
-            margin: var(--semantic-space-0);
-            accent-color: var(--semantic-color-accent-primary);
-            cursor: pointer;
-        }
-    }
-
-    .status {
-        margin: var(--semantic-space-0);
-        color: var(--semantic-color-text-muted);
-        font-size: var(--semantic-font-size-xs);
-        font-weight: var(--semantic-font-weight-semibold);
-    }
-
     .panels {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(16rem, 0.62fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .panel {
         box-shadow: var(--semantic-shadow-sm);
     }
 
-    .editor {
-        position: static;
-        inset: auto;
-        z-index: auto;
-        width: 100%;
-        height: var(--primitive-size-playgroundEditorHeight);
-        padding: var(--semantic-space-4);
-        color: var(--semantic-color-text-primary);
-        background: var(--semantic-color-surface-muted);
-        resize: vertical;
-    }
-
     .view {
-        display: flex;
+        flex: 1 0 auto;
+        grid-template-rows: minmax(0, 1fr);
         min-height: var(--primitive-size-playgroundEditorHeight);
-        overflow: visible;
-        background: var(--semantic-color-surface-default);
     }
 
     .code {
-        height: var(--primitive-size-playgroundEditorHeight);
-        padding: var(--semantic-space-4);
-        color: var(--semantic-color-text-inverse);
-        background: var(--semantic-color-accent-primaryHover);
+        height: 100%;
     }
 
     .placeholder {
@@ -833,65 +858,54 @@
         background: var(--semantic-color-surface-muted);
     }
 
-    .issuesPanel {
-        display: flex;
-        flex-direction: column;
-        min-width: 0;
-        overflow: hidden;
-        background: var(--semantic-color-surface-default);
-        border: var(--primitive-size-borderWidthSm) solid var(--semantic-color-border-default);
-        border-radius: var(--semantic-radius-lg);
-    }
-
-    .summary {
-        margin: var(--semantic-space-3) var(--semantic-space-4) var(--semantic-space-0);
-        padding: var(--semantic-space-2) var(--semantic-space-3);
-        color: var(--semantic-color-text-secondary);
-        font-size: var(--semantic-font-size-sm);
-        font-weight: var(--semantic-font-weight-bold);
-        background: var(--semantic-color-surface-muted);
-        border: var(--primitive-size-borderWidthSm) solid var(--semantic-color-border-subtle);
-        border-radius: var(--semantic-radius-sm);
-    }
-
-    .issueList {
-        flex: 1 1 auto;
+    .validationDetails {
         max-height: var(--primitive-size-playgroundEditorHeight);
         padding: var(--semantic-space-3) var(--semantic-space-4) var(--semantic-space-4);
         overflow-y: auto;
+        border-top: var(--primitive-size-borderWidthSm) solid var(--semantic-color-status-successBorder);
     }
 }
 
-@media (max-width: 70rem) {
-    [data-playground-full="true"] .panels {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+@media (min-width: 80rem) {
+    .outputActions {
+        flex: 1;
+        flex-wrap: nowrap;
+        gap: var(--semantic-space-2);
+
+        .formatField,
+        .primaryButton,
+        .downloadButton {
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+
+        .primaryButton {
+            padding-inline: var(--semantic-space-3);
+        }
     }
 
-    [data-playground-full="true"] .issuesPanel {
-        grid-column: 1 / -1;
+    .outputFile {
+        flex: 1;
+
+        .select {
+            width: 100%;
+            min-width: 0;
+            text-overflow: ellipsis;
+        }
     }
 }
 
 @media (max-width: 47.9375rem) {
     [data-playground-full="true"] {
-        .toolbar {
-            display: grid;
-        }
-
-        .toolbarGroup {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            align-items: end;
-        }
-
-        .toolbarGroup > button:first-child,
-        .toolbarGroup > button:last-child {
-            grid-column: 1 / -1;
-        }
-
-        .field {
-            flex-direction: column;
+        .exampleBar {
             align-items: stretch;
+            flex-direction: column;
+        }
+
+        .exampleField,
+        .exampleField .selectWrap,
+        .exampleField .select {
+            width: 100%;
         }
 
         .select {
