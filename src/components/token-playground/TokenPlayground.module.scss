@@ -71,8 +71,15 @@
     border-radius: var(--semantic-radius-full);
 }
 
-.openButton {
+.headerActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--semantic-space-3);
+    justify-content: center;
     margin-top: var(--semantic-space-4);
+}
+
+.openButton {
     text-decoration: none;
 }
 
@@ -436,6 +443,18 @@
     &:hover:not(:disabled) {
         color: var(--semantic-color-accent-primary);
         border-color: var(--semantic-color-accent-primary);
+    }
+}
+
+.docsButton {
+    color: var(--semantic-color-accent-secondaryHover);
+    background: var(--semantic-color-surface-default);
+    border-color: var(--semantic-color-accent-secondary);
+
+    &:hover:not(:disabled) {
+        color: var(--semantic-color-accent-secondaryHover);
+        background: var(--semantic-color-accent-wash);
+        border-color: var(--semantic-color-accent-secondaryHover);
     }
 }
 

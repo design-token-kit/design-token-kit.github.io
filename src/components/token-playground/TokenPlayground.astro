@@ -92,9 +92,14 @@ const outputFormats: Option[] = [
             </ol>
         )}
         {!full && (
-            <a class={`${styles.primaryButton} ${styles.openButton}`} href="/playground/">
-                Open full playground
-            </a>
+            <div class={styles.headerActions}>
+                <a class={`${styles.primaryButton} ${styles.openButton}`} href="/playground/">
+                    Open full playground
+                </a>
+                <a class={`${styles.secondaryButton} ${styles.docsButton}`} href="/docs/core/browser-api/">
+                    Read the docs
+                </a>
+            </div>
         )}
     </div>
 
