@@ -53,6 +53,7 @@ export function initTokenPlayground(root: HTMLElement): void {
     const outputLines = root.querySelector<HTMLElement>('[data-playground-output-lines]');
     const showcase = root.querySelector<HTMLIFrameElement>('[data-playground-showcase]');
     const showcasePlaceholder = root.querySelector<HTMLElement>('[data-playground-showcase-placeholder]');
+    const showcaseDownloadButton = root.querySelector<HTMLButtonElement>('[data-playground-showcase-download]');
     const validationPanel = root.querySelector<HTMLElement>('[data-playground-validation]');
     const validationSummary = validationPanel?.querySelector<HTMLElement>('summary');
     const summary = element<HTMLElement>('summary');
@@ -64,6 +65,7 @@ export function initTokenPlayground(root: HTMLElement): void {
     let sourceName: string | undefined = root.dataset.playgroundInitialSource;
     let outputs: BrowserTokenOutput[] = [];
     let selectedOutput = 0;
+    let showcaseContent: string | undefined;
     let autoValidateTimer: number | undefined;
 
     const tokenSet = (): BrowserTokenSet => {
@@ -196,6 +198,8 @@ export function initTokenPlayground(root: HTMLElement): void {
     };
 
     const clearShowcase = (message: string): void => {
+        showcaseContent = undefined;
+        if (showcaseDownloadButton !== null) showcaseDownloadButton.disabled = true;
         if (showcase === null || showcasePlaceholder === null) return;
         showcase.srcdoc = '';
         showcase.hidden = true;
@@ -204,6 +208,8 @@ export function initTokenPlayground(root: HTMLElement): void {
     };
 
     const renderShowcase = (content: string): void => {
+        showcaseContent = content;
+        if (showcaseDownloadButton !== null) showcaseDownloadButton.disabled = false;
         if (showcase === null || showcasePlaceholder === null) return;
         showcase.srcdoc = content;
         showcase.hidden = false;
@@ -232,7 +238,9 @@ export function initTokenPlayground(root: HTMLElement): void {
                 if (showcaseOutput !== undefined) renderShowcase(showcaseOutput.content);
             }
             outputPanel.dataset.stale = 'false';
-            setStatus(`Converted to ${label}: ${plural(outputs.length, 'file')}.`);
+            setStatus(isFullPlayground
+                ? `Converted to ${label}: ${plural(outputs.length, 'file')}. Showcase updated.`
+                : `Converted to ${label}: ${plural(outputs.length, 'file')}.`);
         } catch (error) {
             outputs = [];
             selectedOutput = 0;
@@ -287,6 +295,18 @@ export function initTokenPlayground(root: HTMLElement): void {
         URL.revokeObjectURL(url);
     };
 
+    const downloadShowcase = (): void => {
+        if (showcaseContent === undefined) return;
+
+        const url = URL.createObjectURL(new Blob([showcaseContent], { type: 'text/html;charset=utf-8' }));
+        const link = Object.assign(document.createElement('a'), {
+            href: url,
+            download: 'token-showcase.html',
+        });
+        link.click();
+        URL.revokeObjectURL(url);
+    };
+
     editor.addEventListener('paste', () => {
         // Pasting over the whole document replaces it, so the uploaded file
         // name no longer describes the content.
@@ -329,6 +349,7 @@ export function initTokenPlayground(root: HTMLElement): void {
         if (outputs.length > 0) void convert();
     });
     downloadButton?.addEventListener('click', download);
+    showcaseDownloadButton?.addEventListener('click', downloadShowcase);
     outputFileSelect.addEventListener('change', () => {
         selectedOutput = Number(outputFileSelect.value);
         const outputContent = outputs[selectedOutput]?.content ?? '';

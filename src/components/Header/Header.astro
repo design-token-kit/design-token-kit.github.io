@@ -14,13 +14,27 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/')
 const navigationLinks: NavigationLink[] = [
     { label: 'Home', href: baseUrl },
     { label: 'Figma Plugin', href: `${baseUrl}plugin/` },
+    { label: 'Playground', href: `${baseUrl}playground/` },
     { label: 'Docs', href: `${baseUrl}docs/` },
     { label: 'Articles', href: `${baseUrl}articles/` },
     { label: 'Sponsor', href: `${baseUrl}sponsor/` },
-    // { label: 'Playground', href: '#' },
     // { label: 'Showcase', href: '#' },
     { label: 'GitHub', href: 'https://github.com/design-token-kit/design-token-kit' },
 ];
+
+const normalizePath = (path: string): string => path.replace(/\/+$/, '') || '/';
+const currentPath = normalizePath(Astro.url.pathname);
+
+const isExternalHref = (href: string): boolean => /^https?:\/\//.test(href);
+
+const isActiveNavigationLink = (href: string): boolean => {
+    if (isExternalHref(href)) return false;
+
+    const linkPath = normalizePath(new URL(href, Astro.url).pathname);
+    return linkPath === '/'
+        ? currentPath === '/'
+        : currentPath === linkPath || currentPath.startsWith(`${linkPath}/`);
+};
 ---
 
 <header class={styles.header}>
@@ -30,12 +44,63 @@ const navigationLinks: NavigationLink[] = [
             <span>Design Token Kit</span>
         </a>
 
-        <nav class={styles.navigation} aria-label="Primary navigation">
-            {navigationLinks.map((navigationLink) => (
-                <a href={navigationLink.href}>{navigationLink.label}</a>
-            ))}
-        </nav>
+        <button
+            class={styles.menuToggle}
+            type="button"
+            aria-controls="primary-navigation"
+            aria-expanded="false"
+            data-menu-toggle
+        >
+            <span class={styles.menuIcon} aria-hidden="true"></span>
+            <span>Menu</span>
+        </button>
 
-        <a class={styles.action} href={`${baseUrl}docs/getting-started/`}>Get Started</a>
+        <div class={styles.menu} id="primary-navigation" data-menu>
+            <nav class={styles.navigation} aria-label="Primary navigation">
+                {navigationLinks.map((navigationLink) => (
+                    <a
+                        href={navigationLink.href}
+                        aria-current={isActiveNavigationLink(navigationLink.href) ? 'page' : undefined}
+                        target={isExternalHref(navigationLink.href) ? '_blank' : undefined}
+                        rel={isExternalHref(navigationLink.href) ? 'noreferrer' : undefined}
+                    >
+                        {navigationLink.label}
+                    </a>
+                ))}
+            </nav>
+
+            <a class={styles.action} href={`${baseUrl}docs/getting-started/`}>Get Started</a>
+        </div>
     </div>
 </header>
+
+<script>
+    const menuToggle = document.querySelector('[data-menu-toggle]');
+    const menu = document.querySelector('[data-menu]');
+
+    if (menuToggle instanceof HTMLButtonElement && menu instanceof HTMLElement) {
+        const closeMenu = (): void => {
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menu.removeAttribute('data-open');
+        };
+
+        menuToggle.addEventListener('click', () => {
+            const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+
+            menuToggle.setAttribute('aria-expanded', String(!isOpen));
+            menu.toggleAttribute('data-open', !isOpen);
+        });
+
+        menu.addEventListener('click', (event) => {
+            if (event.target instanceof HTMLAnchorElement) {
+                closeMenu();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeMenu();
+            }
+        });
+    }
+</script>
