@@ -13,6 +13,11 @@ export default defineConfig({
         host: true,
     },
     vite: {
+        optimizeDeps: {
+            // The playground loads this ESM bundle lazily. Skipping Vite's dev
+            // pre-bundle prevents stale hashed URLs after dependency re-optimization.
+            exclude: ['@design-token-kit/core/browser'],
+        },
         resolve: {
             alias: {
                 '#': fileURLToPath(new URL('./src', import.meta.url)),

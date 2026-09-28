@@ -1,0 +1,7 @@
+.page {
+    overflow: hidden;
+    background: var(--semantic-color-bg-page);
+    background-image:
+        radial-gradient(circle at top left, var(--semantic-color-accent-wash), transparent 24rem),
+        linear-gradient(180deg, var(--semantic-color-bg-soft), var(--semantic-color-bg-page) 42rem);
+}
