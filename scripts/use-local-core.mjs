@@ -28,7 +28,11 @@ try {
     console.log(`Building core in ${coreRepo}...`);
     npm(['run', 'build', '--workspace', '@design-token-kit/core'], coreRepo, 'inherit');
 
-    const [packed] = JSON.parse(npm(['pack', '--json', '--pack-destination', packDir], corePackage, 'pipe'));
+    const packResult = JSON.parse(npm(['pack', '--json', '--pack-destination', packDir], corePackage, 'pipe'));
+    const packed = Array.isArray(packResult) ? packResult[0] : packResult;
+    if (!packed?.filename) {
+        throw new Error('npm pack did not return a tarball filename.');
+    }
     const tarball = path.join(packDir, packed.filename);
 
     console.log(`Installing ${packed.name}@${packed.version} from the local build...`);
