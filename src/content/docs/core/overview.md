@@ -107,6 +107,11 @@ Use the primary names above in new code and documentation.
 - `createTokenHtmlShowcase()`
 - `createTokenStats()`
 
+## Browser integration
+
+The [Browser API guide](../browser-api/) covers installation, file handling,
+validation, conversion, themes, errors, and browser security requirements.
+
 ## Source model
 
 Core APIs can work with:

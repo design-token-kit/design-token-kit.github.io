@@ -2,7 +2,7 @@
 title: Parse and load tokens
 description: Read DTCG JSON, HRDT YAML, DESIGN.md, base token sets, and themes.
 section: Core API
-order: 2
+order: 3
 ---
 
 # Parse and load tokens

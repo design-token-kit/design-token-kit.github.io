@@ -2,7 +2,7 @@
 title: Validate with the Core API
 description: Run schema, semantic, and lint checks from TypeScript.
 section: Core API
-order: 3
+order: 4
 ---
 
 # Validate with the Core API
