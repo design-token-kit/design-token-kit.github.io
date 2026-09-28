@@ -16,10 +16,14 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/')
     ? import.meta.env.BASE_URL
     : `${import.meta.env.BASE_URL}/`;
 
+const isExternalHref = (href: string): boolean => /^https?:\/\//.test(href);
+
 const footerGroups: FooterGroup[] = [
     {
         title: 'Product',
         links: [
+            { label: 'Playground', href: `${baseUrl}playground/` },
+            { label: 'Figma Plugin', href: `${baseUrl}plugin/` },
             { label: 'Cli', href: `https://www.npmjs.com/package/@design-token-kit/cli` },
             { label: 'Core API', href: `https://www.npmjs.com/package/@design-token-kit/core` },
             { label: 'Changelog', href: 'https://github.com/design-token-kit/design-token-kit/blob/main/CHANGELOG.md' },
@@ -63,7 +67,15 @@ const footerGroups: FooterGroup[] = [
                     <h2>{footerGroup.title}</h2>
                     <ul>
                         {footerGroup.links.map((footerLink) => (
-                            <li><a href={footerLink.href}>{footerLink.label}</a></li>
+                            <li>
+                                <a
+                                    href={footerLink.href}
+                                    target={isExternalHref(footerLink.href) ? '_blank' : undefined}
+                                    rel={isExternalHref(footerLink.href) ? 'noreferrer' : undefined}
+                                >
+                                    {footerLink.label}
+                                </a>
+                            </li>
                         ))}
                     </ul>
                 </div>
