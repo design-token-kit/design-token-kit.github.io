@@ -29,7 +29,11 @@ try {
     npm(['run', 'build', '--workspace', '@design-token-kit/core'], coreRepo, 'inherit');
 
     const packResult = JSON.parse(npm(['pack', '--json', '--pack-destination', packDir], corePackage, 'pipe'));
-    const packed = Array.isArray(packResult) ? packResult[0] : packResult;
+    const packed = Array.isArray(packResult)
+        ? packResult[0]
+        : packResult?.filename
+            ? packResult
+            : Object.values(packResult ?? {})[0];
     if (!packed?.filename) {
         throw new Error('npm pack did not return a tarball filename.');
     }
