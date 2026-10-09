@@ -125,7 +125,7 @@ Use the extended DESIGN.md-compatible schema:
 dtokens check tokens.json --schema 2025.10-design.md
 ```
 
-You can also pass a schema directory path with `--schema`.
+You can also pass a path to a schema file or to a directory of schema files with `--schema`.
 
 ## Select an input format
 

@@ -11,24 +11,43 @@ The Core API provides readers for individual formats and a list loader for base 
 
 ## Readers
 
+A reader validates its own format and returns a result instead of throwing.
+
+The result is a tagged union: `ok` says whether the source was read, `documents` is available only on the successful branch, and `issues` explains a failure. A source with errors yields no document at all, so the compiler will not let you reach for `documents` until you have checked `ok`.
+
 ### DTCG JSON
 
-Use `DtcgJsonReader` to parse a DTCG JSON string into the internal token model.
+Use `DtcgReader` to read a DTCG JSON string into the internal token model.
 
 ```ts
-import { DtcgJsonReader } from "@design-token-kit/core";
+import { DtcgReader } from "@design-token-kit/core";
 
-const document = new DtcgJsonReader().parse(jsonString);
+const reader = await DtcgReader.create();
+const result = reader.read(jsonString);
+
+if (!result.ok) {
+  console.error(result.issues);
+  process.exit(1);
+}
+
+const document = result.documents[0];
 ```
+
+`DtcgReader.create()` loads the DTCG JSON Schema from disk once, so reading a document afterwards is synchronous. It also accepts a built-in schema name or a path to a schema of your own.
+
+Use `DtcgReader.noSchema()` to check the token model without the document structure, for example where there is no file system to load a schema from.
 
 ### HRDT YAML
 
-Use `HrdtTokenReader` for compact HRDT YAML sources.
+Use `HrdtReader` for compact HRDT YAML sources.
 
-HRDT is normalized into the same internal DTCG model used by the rest of the library.
+HRDT is normalized into the same internal DTCG model used by the rest of the library. One HRDT source may hold several YAML documents, so `read()` returns all of them.
 
 ```ts
-import { HrdtTokenReader } from "@design-token-kit/core";
+import { HrdtReader } from "@design-token-kit/core";
+
+const reader = await HrdtReader.create();
+const result = reader.read(yamlString);
 ```
 
 ### DESIGN.md
@@ -39,7 +58,23 @@ DESIGN.md is mapped to the internal DTCG model before validation, conversion, sh
 
 ```ts
 import { DesignMdReader } from "@design-token-kit/core";
+
+const reader = await DesignMdReader.create();
+const result = reader.read(markdownString);
 ```
+
+### Pick the format at run time
+
+Ask the `tokenFormats` registry for a reader when the format is not known in advance:
+
+```ts
+import { tokenFormats, TokenFormat } from "@design-token-kit/core";
+
+const reader = await tokenFormats.get(TokenFormat.HRDT).createReader();
+const result = reader.read(yamlString);
+```
+
+`tokenFormats.detect(content)` returns the descriptor of the format the content looks like.
 
 ## Load a base set and themes
 
@@ -80,20 +115,27 @@ Readers convert source content into the internal model.
 
 Writers serialize a parsed token document:
 
-- `DtcgJsonWriter`
-- `HrdtTokenWriter`
+- `DtcgWriter`
+- `HrdtWriter`
 - `DesignMdWriter`
 
 Example: convert parsed DTCG JSON to HRDT YAML.
 
 ```ts
 import {
-  DtcgJsonReader,
-  HrdtTokenWriter,
+  DtcgReader,
+  HrdtWriter,
 } from "@design-token-kit/core";
 
-const document = new DtcgJsonReader().parse(jsonString);
-const yaml = new HrdtTokenWriter().write(document);
+const reader = await DtcgReader.create();
+const result = reader.read(jsonString);
+
+if (!result.ok) {
+  console.error(result.issues);
+  process.exit(1);
+}
+
+const yaml = new HrdtWriter().write(result.documents[0]);
 ```
 
 ## DESIGN.md mapping

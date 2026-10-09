@@ -206,18 +206,27 @@ Use readers and writers to convert serialized token formats.
 
 ```ts
 import {
-  DtcgJsonReader,
-  HrdtTokenWriter,
+  DtcgReader,
+  HrdtWriter,
 } from "@design-token-kit/core";
 
-const document = new DtcgJsonReader().parse(jsonString);
-const yaml = new HrdtTokenWriter().write(document);
+const reader = await DtcgReader.create();
+const result = reader.read(jsonString);
+
+if (!result.ok) {
+  console.error(result.issues);
+  process.exit(1);
+}
+
+const yaml = new HrdtWriter().write(result.documents[0]);
 ```
+
+A reader validates its own format and returns a result instead of throwing. See [Parse and load tokens](../../core/parsing/) for the reader API.
 
 Available writers:
 
-- `DtcgJsonWriter`;
-- `HrdtTokenWriter`;
+- `DtcgWriter`;
+- `HrdtWriter`;
 - `DesignMdWriter`.
 
 Use `DtcgToDesignMdMapper` when mapping a DTCG tree to the flat DESIGN.md model. This mapping is intentionally lossy: unsupported DTCG token types such as `border`, `shadow`, `transition`, `gradient`, `duration`, `fontFamily`, `fontWeight`, `cubicBezier`, and `strokeStyle` are skipped.

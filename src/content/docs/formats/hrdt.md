@@ -123,9 +123,9 @@ dtokens stats tokens.yaml --out ./stats.html
 
 Use:
 
-- `HrdtTokenReader` to read HRDT content;
-- `HrdtTokenWriter` to serialize a token document as HRDT;
-- `HrdtTokenValidator` for format validation;
+- `HrdtReader` to read HRDT content, validating it against the HRDT schema;
+- `HrdtWriter` to serialize a token document as HRDT;
+- `TokenChecker` to check HRDT sources with the same pipeline as every other format;
 - `DtcgListLoader` to load HRDT together with base or theme sources.
 
 ## Related pages

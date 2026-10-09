@@ -118,10 +118,9 @@ dtokens convert \
 
 Use:
 
-- `DtcgJsonReader` to parse JSON content;
-- `DtcgJsonWriter` to serialize a document;
-- `DtcgSchemaValidator` for schema-only validation;
-- `DtcgChecker` for the complete check pipeline.
+- `DtcgReader` to read JSON content, validating it against the DTCG JSON Schema;
+- `DtcgWriter` to serialize a document;
+- `TokenChecker` for the complete check pipeline, with `CheckScope.SCHEMA` for schema-only validation.
 
 ## Related pages
 
