@@ -40,7 +40,8 @@ import {
   BrowserTokenToolkit,
   BrowserTokenValidationError,
   CheckScope,
-  Format,
+  PlatformFormat,
+  TokenFormat,
 } from "@design-token-kit/core/browser";
 
 const file = document.querySelector<HTMLInputElement>("#tokens")?.files?.[0];
@@ -50,7 +51,7 @@ const input = {
   base: {
     source: file.name,
     content: await file.text(),
-    format: Format.DTCG,
+    format: TokenFormat.DTCG,
   },
 };
 const toolkit = new BrowserTokenToolkit();
@@ -60,7 +61,7 @@ if (issues.some((issue) => issue.severity === "error")) {
   console.error(issues);
 } else {
   try {
-    const [output] = toolkit.convert(input, Format.CSS);
+    const [output] = toolkit.convert(input, PlatformFormat.CSS);
     console.log(output?.fileName, output?.content);
   } catch (error) {
     if (error instanceof BrowserTokenValidationError) {
@@ -86,15 +87,15 @@ Supported input formats:
 
 `convert()` accepts these output formats:
 
-- `Format.CSS`;
-- `Format.SCSS`;
-- `Format.TAILWIND_V4`;
-- `Format.SWIFT_UI`;
-- `Format.ANDROID`;
-- `Format.FIGMA_SCRIPT`;
-- `Format.DTCG`;
-- `Format.HRDT`;
-- `Format.DESIGN_MD`;
+- `PlatformFormat.CSS`;
+- `PlatformFormat.SCSS`;
+- `PlatformFormat.TAILWIND_V4`;
+- `PlatformFormat.SWIFT_UI`;
+- `PlatformFormat.ANDROID`;
+- `PlatformFormat.FIGMA_SCRIPT`;
+- `TokenFormat.DTCG`;
+- `TokenFormat.HRDT`;
+- `TokenFormat.DESIGN_MD`;
 - `"showcase"`.
 
 It returns one or more `BrowserTokenOutput` objects.
@@ -102,7 +103,7 @@ Each output contains a `fileName` and `content` field.
 The host application can display the content or create a `Blob` for download.
 
 ```ts
-const outputs = toolkit.convert(input, Format.SCSS);
+const outputs = toolkit.convert(input, PlatformFormat.SCSS);
 
 for (const output of outputs) {
   console.log(output.fileName, output.content);
@@ -126,13 +127,13 @@ The name `base` is reserved for the base document.
 const input = {
   base: {
     source: "tokens.json",
-    format: Format.DTCG,
+    format: TokenFormat.DTCG,
     content: await baseFile.text(),
   },
   themes: {
     dark: {
       source: "tokens.dark.json",
-      format: Format.DTCG,
+      format: TokenFormat.DTCG,
       content: await darkFile.text(),
     },
   },
@@ -155,7 +156,7 @@ The error exposes the structured diagnostics through its `issues` property.
 
 ```ts
 try {
-  const outputs = toolkit.convert(input, Format.CSS);
+  const outputs = toolkit.convert(input, PlatformFormat.CSS);
 } catch (error) {
   if (error instanceof BrowserTokenValidationError) {
     renderIssues(error.issues);
