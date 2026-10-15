@@ -7,12 +7,12 @@ order: 4
 
 # Validate with the Core API
 
-Use `DtcgChecker` for the complete token check pipeline.
+Use `TokenChecker` for the complete token check pipeline.
 
 ```ts
-import { DtcgChecker } from "@design-token-kit/core";
+import { TokenChecker } from "@design-token-kit/core";
 
-const issues = await new DtcgChecker().validate([
+const issues = await new TokenChecker().check([
   "./tokens.json",
   "./tokens.dark.json",
 ]);
@@ -29,27 +29,29 @@ for (const issue of issues) {
 
 ## Full pipeline
 
-`DtcgChecker` can perform:
+`TokenChecker` can perform:
 
-- format and schema checks;
+- format and schema checks, reported by the format's own reader;
 - semantic checks on the resolved token graph;
-- lint checks when the selected scope includes linting.
+- lint checks when the selected scope includes `CheckScope.LINT`.
 
 Use it when your application needs the same general validation flow as the CLI.
 
+A source that fails format or schema checks yields no document at all, so the later stages run only on sources that were read.
+
 ## Schema-only validation
 
-Use `DtcgSchemaValidator` when you only need DTCG schema validation and do not need semantic checks.
+Use `CheckScope.SCHEMA` when you only need format and schema validation and do not need semantic checks.
 
 ```ts
-import { DtcgSchemaValidator } from "@design-token-kit/core";
+import { TokenChecker, CheckScope } from "@design-token-kit/core";
+
+const issues = await new TokenChecker({ scope: CheckScope.SCHEMA }).check([
+  "./tokens.json",
+]);
 ```
 
-Use `HrdtTokenValidator` for HRDT-specific validation.
-
-```ts
-import { HrdtTokenValidator } from "@design-token-kit/core";
-```
+Every readable format validates itself the same way, so HRDT YAML and DESIGN.md sources need no separate validator.
 
 ## Semantic checks
 
@@ -70,7 +72,7 @@ The lint layer can check:
 - allowed references between layers;
 - raw value placement;
 - empty groups;
-- missing descriptions.
+- missing descriptions, when `missing-description` is listed in the `checks` option.
 
 ## Handle issues
 
@@ -79,8 +81,8 @@ Validation returns issues instead of terminating the process.
 This lets the application decide how to display or handle them:
 
 ```ts
-const checker = new DtcgChecker();
-const issues = await checker.validate(["./tokens.json"]);
+const checker = new TokenChecker();
+const issues = await checker.check(["./tokens.json"]);
 
 const errors = issues.filter(
   (issue) => issue.severity === "error",
@@ -95,6 +97,7 @@ if (errors.length > 0) {
 
 Issue data can include:
 
+- an id naming the problem, such as `bad-reference` or `invalid-color`;
 - severity;
 - source path;
 - token path;
@@ -113,14 +116,14 @@ A common application flow is:
 
 ```ts
 import {
-  DtcgChecker,
+  TokenChecker,
   DtcgListLoader,
   CssTokenConverter,
 } from "@design-token-kit/core";
 
 const sources = ["./tokens.json"];
 
-const issues = await new DtcgChecker().validate(sources);
+const issues = await new TokenChecker().check(sources);
 const hasErrors = issues.some(
   (issue) => issue.severity === "error",
 );

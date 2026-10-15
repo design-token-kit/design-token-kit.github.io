@@ -51,7 +51,7 @@ Import the APIs you need:
 
 ```ts
 import {
-  DtcgChecker,
+  TokenChecker,
   DtcgListLoader,
   CssTokenConverter,
 } from "@design-token-kit/core";

@@ -49,19 +49,19 @@ const syntax = {
     punctuation: styles.syntaxPunctuation,
 };
 
-const parseCodeHtml = `<span class="${syntax.keyword}">import</span> <span class="${syntax.punctuation}">{</span> <span class="${syntax.function}">DtcgChecker</span> <span class="${syntax.punctuation}">}</span>
+const parseCodeHtml = `<span class="${syntax.keyword}">import</span> <span class="${syntax.punctuation}">{</span> <span class="${syntax.function}">TokenChecker</span> <span class="${syntax.punctuation}">}</span>
 <span class="${syntax.keyword}">from</span> <span class="${syntax.string}">'@design-token-kit/core'</span><span class="${syntax.punctuation}">;</span>
 
 <span class="${syntax.keyword}">const</span> <span class="${syntax.variable}">issues</span> <span class="${syntax.operator}">=</span> <span class="${syntax.keyword}">await</span>
-<span class="${syntax.keyword}">new</span> <span class="${syntax.function}">DtcgChecker</span><span class="${syntax.punctuation}">(</span><span class="${syntax.punctuation}">)</span><span class="${syntax.punctuation}">.</span><span class="${syntax.function}">validate</span><span class="${syntax.punctuation}">(</span><span class="${syntax.punctuation}">[</span>
+<span class="${syntax.keyword}">new</span> <span class="${syntax.function}">TokenChecker</span><span class="${syntax.punctuation}">(</span><span class="${syntax.punctuation}">)</span><span class="${syntax.punctuation}">.</span><span class="${syntax.function}">check</span><span class="${syntax.punctuation}">(</span><span class="${syntax.punctuation}">[</span>
   <span class="${syntax.string}">'./tokens.json'</span><span class="${syntax.punctuation}">,</span>
 <span class="${syntax.punctuation}">]</span><span class="${syntax.punctuation}">);</span>`;
 
-const methodsCodeHtml = `<span class="${syntax.keyword}">import</span> <span class="${syntax.punctuation}">{</span> <span class="${syntax.function}">DtcgTokenCssConverter</span> <span class="${syntax.punctuation}">}</span>
+const methodsCodeHtml = `<span class="${syntax.keyword}">import</span> <span class="${syntax.punctuation}">{</span> <span class="${syntax.function}">CssTokenConverter</span> <span class="${syntax.punctuation}">}</span>
 <span class="${syntax.keyword}">from</span> <span class="${syntax.string}">'@design-token-kit/core'</span><span class="${syntax.punctuation}">;</span>
 
 <span class="${syntax.keyword}">const</span> <span class="${syntax.variable}">css</span> <span class="${syntax.operator}">=</span> <span class="${syntax.keyword}">await</span>
-<span class="${syntax.keyword}">new</span> <span class="${syntax.function}">DtcgTokenCssConverter</span><span class="${syntax.punctuation}">(</span><span class="${syntax.punctuation}">)</span><span class="${syntax.punctuation}">.</span><span class="${syntax.function}">convert</span><span class="${syntax.punctuation}">(</span><span class="${syntax.punctuation}">[</span>
+<span class="${syntax.keyword}">new</span> <span class="${syntax.function}">CssTokenConverter</span><span class="${syntax.punctuation}">(</span><span class="${syntax.punctuation}">)</span><span class="${syntax.punctuation}">.</span><span class="${syntax.function}">convert</span><span class="${syntax.punctuation}">(</span><span class="${syntax.punctuation}">[</span>
   <span class="${syntax.string}">'./tokens.json'</span><span class="${syntax.punctuation}">,</span>
 <span class="${syntax.punctuation}">]</span><span class="${syntax.punctuation}">);</span>`;
 

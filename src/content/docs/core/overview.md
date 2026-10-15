@@ -23,7 +23,7 @@ npm install @design-token-kit/core
 
 ```ts
 import {
-  DtcgChecker,
+  TokenChecker,
   DtcgListLoader,
   CssTokenConverter,
   ScssTokenConverter,
@@ -37,7 +37,7 @@ const sources = [
   "./tokens.dark.yaml",
 ];
 
-const issues = await new DtcgChecker().validate(sources);
+const issues = await new TokenChecker().check(sources);
 
 if (issues.some((issue) => issue.severity === "error")) {
   console.error(issues);
@@ -66,21 +66,21 @@ console.log(stats);
 
 ### Checking
 
-- `DtcgChecker`
-- `DtcgSchemaValidator`
-- `HrdtTokenValidator`
+- `TokenChecker`
+- `CheckScope`
 
 ### Loading and parsing
 
 - `DtcgListLoader`
-- `DtcgJsonReader`
-- `HrdtTokenReader`
+- `tokenFormats`
+- `DtcgReader`
+- `HrdtReader`
 - `DesignMdReader`
 
 ### Writing documents
 
-- `DtcgJsonWriter`
-- `HrdtTokenWriter`
+- `DtcgWriter`
+- `HrdtWriter`
 - `DesignMdWriter`
 - `DtcgToDesignMdMapper`
 
