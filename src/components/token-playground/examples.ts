@@ -42,6 +42,32 @@ const dtcg = {
     },
 };
 
+const dtcgPropertyReferences = {
+    primitive: {
+        color: {
+            blue: {
+                $type: 'color',
+                $value: { colorSpace: 'srgb', components: [0.1, 0.4, 0.9], hex: '#1a66e6' },
+            },
+        },
+        opacity: {
+            disabled: { $type: 'number', $value: 0.6 },
+        },
+    },
+    semantic: {
+        color: {
+            disabled: {
+                $type: 'color',
+                $value: {
+                    colorSpace: 'srgb',
+                    components: { $ref: '#/primitive/color/blue/$value/components' },
+                    alpha: { $ref: '#/primitive/opacity/disabled/$value' },
+                },
+            },
+        },
+    },
+};
+
 const hrdt = `primitive:
   color:
     teal-600: "#0a5f59"
@@ -95,6 +121,7 @@ A calm, editorial palette with a teal primary color and warm accents.
 
 export const playgroundExamples: readonly PlaygroundExample[] = [
     { id: 'dtcg', label: 'DTCG JSON', fileName: 'tokens.json', inputFormat: 'dtcg', content: `${JSON.stringify(dtcg, null, 2)}\n` },
+    { id: 'dtcg-property-references', label: 'DTCG JSON with property references', fileName: 'tokens.json', inputFormat: 'dtcg', content: `${JSON.stringify(dtcgPropertyReferences, null, 2)}\n` },
     { id: 'hrdt', label: 'HRDT YAML with a theme', fileName: 'tokens.yaml', inputFormat: 'hrdt', content: hrdt },
     { id: 'design-md', label: 'DESIGN.md', fileName: 'DESIGN.md', inputFormat: 'design-md', content: designMd },
 ];

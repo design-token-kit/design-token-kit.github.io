@@ -220,11 +220,13 @@ Example: `primitive/opacity/disabled`.
 For opacity, use the `opacity` segment in the name and set the scope to
 `OPACITY` when possible.
 
-In the architecture, `z-index` and other unitless numbers should use `number`.
-The plugin currently exports Figma `FLOAT` variables as `number` only when their
-scope is `OPACITY` or their name contains `opacity`.
-Other unitless FLOAT variables, including `z-index`, are exported as
-`dimension` and need correction after export.
+In the architecture, `z-index` and other unitless values should use `number`.
+The plugin exports Figma `FLOAT` variables as DTCG `number` when their scope is
+`OPACITY` or a slash-separated name segment is `opacity`, `alpha`, `number`, or
+`lineHeight`.
+For example, use `primitive/number/z-index/modal` for a z-index variable.
+Other FLOAT variables are exported as `dimension` and need correction after
+export.
 
 Prefer explicit line-height values in Text Styles.
 When Figma uses automatic line-height, the plugin exports it as the unitless
@@ -315,6 +317,11 @@ Rules:
 * References to variables from external libraries are not allowed.
 * An alias must reference a variable of the same type.
 * Dimension values and number values must not be mixed.
+
+The exporter follows a local alias chain only when every target is resolvable
+and compatible with the expected token type.
+It skips circular chains and composed color aliases whose color or alpha target
+cannot be resolved.
 
 If the target variable is deleted, export can continue with a warning.
 

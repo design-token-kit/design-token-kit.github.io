@@ -194,3 +194,5 @@ files or a tar archive.
 - [Convert token files](../cli/convert/)
 - [Use the Core API](../core/overview/)
 - [Use supported formats](../formats/dtcg/)
+- [Migrate from 1.x to 3.0](../migration/1.x-to-3.0/)
+- [Migrate from 2.0 to 3.0](../migration/2.0-to-3.0/)

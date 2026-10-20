@@ -47,6 +47,26 @@ When a parsed document or `DtcgList` is already available, use:
 const css = new CssTokenConverter().convertList(list);
 ```
 
+### Property references
+
+Platform converters materialize DTCG JSON Pointer references to composite
+properties before generating output.
+For example, a color can reference another color's `components` field and a
+separate opacity token through `{ "$ref": "#/..." }` objects.
+
+The original references remain unchanged when `DtcgWriter` serializes DTCG
+JSON.
+Generated platform values are concrete so the target platform can consume
+them.
+
+Materialization also applies to dimension, duration, cubic-bezier, border,
+transition, shadow, gradient, stroke-style, and typography values.
+An unresolved, circular, or type-incompatible property reference prevents
+conversion.
+
+When a theme changes a primitive used by a base property reference, converters
+generate the derived theme override as well.
+
 ## SCSS variables
 
 Use `ScssTokenConverter`.

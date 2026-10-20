@@ -56,6 +56,38 @@ References use token paths inside braces:
 {primitive.spacing.small}
 ```
 
+## JSON Pointer references
+
+DTCG also supports a reference object with a JSON Pointer.
+Use a pointer ending in `$value` to reference a whole token value:
+
+```json
+{
+  "$ref": "#/primitive/spacing/small/$value"
+}
+```
+
+Use a pointer below `$value` to reference a property inside a composite value:
+
+```json
+{
+  "colorSpace": "srgb",
+  "components": {
+    "$ref": "#/primitive/color/blue/$value/components"
+  },
+  "alpha": {
+    "$ref": "#/primitive/opacity/disabled/$value"
+  }
+}
+```
+
+The example composes a color from primitive color components and opacity.
+DTK validates nested pointers, detects cycles, and preserves property reference
+objects when it writes DTCG JSON.
+Platform outputs resolve property references to concrete fields because CSS,
+SwiftUI, Android resources, and Figma variables cannot represent every
+property-level reference directly.
+
 ## Recommended layers
 
 Design Token Kit lint rules support an ordered layer model.
