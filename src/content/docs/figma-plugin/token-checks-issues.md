@@ -60,6 +60,41 @@ fail because converted formats are built from the DTCG result.
 ## Individual checks
 
 <a id="root-layer"></a>
+### Tokens outside required layers
+
+**Description:** Some tokens are outside the primitive, semantic, or component
+layers.
+
+**Detects:** A token path does not start with `primitive`, `semantic`, or
+`component`.
+
+**Why it matters:** The first path segment identifies the token's role in the
+architecture.
+Without a required layer, the plugin cannot apply the layer rules reliably.
+
+**Correct:**
+
+```text
+primitive/color/blue/500
+semantic/color/text/primary
+component/button/primary/background
+```
+
+**Incorrect:**
+
+```text
+color/blue/500
+theme/color/text/primary
+```
+
+**How to fix in Figma:**
+
+1. Open the local Variables or Styles used by the export.
+2. Edit the name of each affected Variable or Style.
+3. Add `primitive`, `semantic`, or `component` as the first segment.
+4. Keep `/` between the path segments.
+5. Run the token analysis again.
+
 ### Non-standard layer names
 
 The plugin uses the first segment of a Variable or Style name as its
@@ -118,6 +153,10 @@ Rename the first segment in Figma and run the analysis again.
 
 <a id="layer-reference"></a>
 ### Invalid layer references
+
+**Description:** Semantic tokens must reference primitives, and component tokens
+must reference semantics.
+References within the same layer are not allowed.
 
 The plugin expects references to follow the architecture order:
 
@@ -183,7 +222,10 @@ For a component token, create or use a semantic token first.
 Do not bind the component directly to a primitive token.
 
 <a id="raw-value-usage"></a>
-### `raw-value-usage` - Raw values stay in primitive tokens
+### Raw values outside primitive
+
+**Description:** Semantic and component tokens contain raw values instead of
+references.
 
 **Detects:** A semantic or component token contains a raw value instead of a
 reference.
@@ -193,11 +235,14 @@ contracts harder to change across themes and modes.
 
 **Example:** `semantic/color/text/primary` contains `#172033` directly.
 
-**Fix:** Move the raw value to a primitive token and make the semantic token
-reference it.
+**How to fix:** Move the raw value to a primitive token and make the semantic
+or component token reference it.
 
 <a id="bad-reference"></a>
-### `bad-reference` - No broken token references
+### Token reference issues
+
+**Description:** Some references are missing, circular, point to groups, or use
+deprecated tokens.
 
 **Detects:** A missing reference target, a reference to a group instead of a
 token, a circular reference, or a reference to a deprecated token.
@@ -207,8 +252,14 @@ alias target is missing or ambiguous.
 
 **Example:** `{primitive.color.blue.500}` is used but that token does not exist.
 
-**Fix:** Create the missing target, correct the Variable alias, or break the
-cycle.
+Some reference problems can concern generated or externally edited DTCG data
+rather than a direct Figma setting.
+
+Missing, circular, and group references are errors.
+References to deprecated tokens are warnings.
+
+**How to fix:** Create the missing target, correct the Variable alias, or break
+the cycle.
 Do not point a token at a group path.
 
 <a id="ref-to-group"></a>
@@ -227,11 +278,15 @@ value.
 <a id="deprecated-reference"></a>
 #### `deprecated-reference`
 
-The reference resolves to a deprecated token.
+**Warning:** The reference resolves to a deprecated token.
+This is a warning because the reference can still be resolved.
+
 Replace it with the supported token before the deprecated token is removed.
 
 <a id="component-isolation"></a>
-### `component-isolation` - Component tokens stay independent
+### Component-to-component references
+
+**Description:** Component tokens reference other component tokens.
 
 **Detects:** A component token references another component token.
 
@@ -242,11 +297,13 @@ Component-to-component references create hidden coupling between components.
 **Example:** `component/card/background` references
 `component/button/primary/background`.
 
-**Fix:** Move the shared decision to a semantic token and reference that
+**How to fix:** Move the shared decision to a semantic token and reference that
 semantic token from both components.
 
 <a id="type-mismatch"></a>
-### `type-mismatch` - Token aliases keep their type
+### Token type mismatch
+
+**Description:** An alias points to a token with a different type.
 
 **Detects:** An aliased token declares a type that differs from the type of the
 token it resolves to.
@@ -256,11 +313,16 @@ used safely where another DTCG type is expected.
 
 **Example:** A token declares `$type: "color"` but aliases a `dimension` token.
 
-**Fix:** Correct the alias target or change the declared type to match the
-resolved token.
+This check can concern generated or externally edited DTCG data rather than a
+direct Figma setting.
+
+**How to fix:** Correct the alias target or change the declared type to match
+the resolved token.
 
 <a id="gradient-duplicate-stop"></a>
-### `gradient-duplicate-stop` - Gradient stops are unambiguous
+### Duplicate gradient stops
+
+**Description:** A gradient uses the same stop position more than once.
 
 **Detects:** Two stops in one gradient use the same numeric position.
 
@@ -269,11 +331,16 @@ positions are duplicated.
 
 **Example:** Two stops both use `position: 0.5`.
 
-**Fix:** Give each stop a distinct position and keep the stops ordered for the
-intended gradient.
+Figma Variables do not export gradients directly.
+This check usually concerns generated or externally edited DTCG data.
+
+**How to fix:** Give each stop a distinct position and keep the stops ordered
+for the intended gradient.
 
 <a id="empty-group"></a>
-### `empty-group` - Token groups are not empty
+### Empty token groups
+
+**Description:** Some groups contain no tokens or child groups.
 
 **Detects:** A named group contains no tokens and no child groups.
 
@@ -282,10 +349,13 @@ be left behind after a Variable is renamed or removed.
 
 **Example:** `semantic/color/status` exists as a group but has no children.
 
-**Fix:** Add the intended token or remove the empty group from the source.
+**How to fix:** Add the intended token or remove the empty group from the
+source.
 
 <a id="missing-description"></a>
-### `missing-description` - Tokens have descriptions
+### Missing token descriptions
+
+**Description:** Some tokens have no description.
 
 **Detects:** A token has no non-empty `$description`.
 
@@ -294,13 +364,15 @@ and developers understand how it should be used.
 
 **Example:** A Variable exports a token without a description in its settings.
 
-**Fix:** Add a description in Figma Variable settings, then run the analysis
-again.
+**How to fix:** Add a description in Figma Variable settings, then run the
+analysis again.
 This check is opt-in in the core library and is included by the plugin's All
 checks set.
 
 <a id="bad-tailwind-namespace"></a>
-### `bad-tailwind-namespace` - Tailwind namespaces are valid
+### Unsupported Tailwind namespace
+
+**Description:** Some tokens use unsupported Tailwind namespace values.
 
 **Detects:** A `design-token-kit.tailwindNamespace` extension contains an
 unsupported value.
@@ -311,11 +383,14 @@ An unsupported value makes the mapping unreliable.
 
 **Example:** A token declares `tailwindNamespace: "spacing"`.
 
-**Fix:** Remove the extension for automatic mapping or use the supported
-`breakpoint` value when the token is a breakpoint.
+**How to fix:** This check concerns generated or externally edited DTCG data.
+Remove the extension for automatic mapping or use the supported `breakpoint`
+value when the token is a breakpoint.
 
 <a id="bad-rem-base"></a>
-### `bad-rem-base` - The rem base is valid
+### Invalid rem base
+
+**Description:** The rem base must be a positive number.
 
 **Detects:** The root `design-token-kit.remBase` extension is present but is not
 a finite positive number.
@@ -325,14 +400,45 @@ dimension values to `rem`.
 
 **Example:** `remBase` is `0`, a string, or `null`.
 
-**Fix:** Set a positive number or remove the extension to use the converter's
-default.
+**How to fix:** This check concerns generated or externally edited DTCG data.
+Set a positive number or remove the extension to use the converter's default.
+
+## Analysis states
+
+<a id="no-tokens-found"></a>
+### No tokens found
+
+**Description:** Add local Variables or Styles in Figma to run token checks.
+
+No exportable tokens were found in the current Figma file.
+This is an informational state, not a validation error.
+No architecture checks have been performed.
+The plugin does not display an issue count or error details for this state.
+The **How to fix** link is hidden.
+
+Create supported local Variables or Styles in Figma and run the analysis again.
+
+<a id="dtcg-reader"></a>
+### Token data could not be checked
+
+**Description:** The plugin could not read the generated token data.
+
+This state is different from an empty Figma file.
+The plugin found token data to process, but the generated DTCG data could not be
+read successfully.
+
+The panel keeps the reader diagnostic details, such as the generated file name,
+source path, and error message when available.
+Use those details to find malformed generated tokens or an exporter warning.
+Correct the generated data and run the analysis again.
+
+This is a token data error, not an indication that the Figma file has no tokens.
 
 ## Readable token files
 
 Before the individual checks run, the plugin reads the generated DTCG files.
-If a generated file cannot be read, the panel reports that the token files are
-not readable and shows the reader issue.
+If a generated file cannot be read, the panel reports [Token data could not be
+checked](#dtcg-reader) and shows the reader issue.
 
 Fix the exporter warning or malformed generated data, then run the analysis
 again.

@@ -82,24 +82,29 @@ See [The rem base is valid](../../figma-plugin/token-checks-issues/#bad-rem-base
 <a id="text-contrast"></a>
 ### Text contrast
 
-See [Text contrast is below WCAG AA](../../figma-plugin/design-audit/#text-contrast).
+See [Text contrast - WCAG 1.4.3](../../figma-plugin/design-audit/#text-contrast).
 
 <a id="text-size"></a>
 ### Text size
 
-See [Text is smaller than 12px](../../figma-plugin/design-audit/#text-size).
+See [Core text-size readability rule](../../figma-plugin/design-audit/#text-size).
 
 <a id="line-height"></a>
 ### Line height
 
-See [Body text lines are too tight](../../figma-plugin/design-audit/#line-height).
+See [Core body line-height readability rule](../../figma-plugin/design-audit/#line-height).
 
 <a id="hardcoded-value"></a>
 ### Hard-coded values
 
-See [Values are not bound to variables](../../figma-plugin/design-audit/#hardcoded-value).
+See [Hard-coded colors and token-usage guidance](../../figma-plugin/design-audit/#hardcoded-value).
 
 <a id="primitive-binding"></a>
 ### Primitive bindings
 
-See [Layers use primitive variables directly](../../figma-plugin/design-audit/#primitive-binding).
+See [Direct primitive bindings](../../figma-plugin/design-audit/#primitive-binding).
+
+<a id="design-audit-manual-review"></a>
+### Accessibility manual review
+
+See [Contrast needs manual review](../../figma-plugin/design-audit/#design-audit-manual-review).

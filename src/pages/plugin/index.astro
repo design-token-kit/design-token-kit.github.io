@@ -70,7 +70,7 @@ const pluginSections = [
 
 <Layout
     title="Figma Plugin | Design Token Kit"
-    description="Export, analyze, and prepare Figma Variables and Styles for production-ready design token workflows."
+    description="Export, audit, and convert Figma Variables and Styles for production-ready design token workflows."
 >
     <Header />
 
@@ -111,6 +111,30 @@ const pluginSections = [
                     height={figmaPluginFlow.height}
                     alt="Figma Variables and Styles exported to DTCG JSON and converted into implementation formats."
                 />
+            </div>
+        </section>
+
+        <section class={styles.showcase} aria-labelledby="audit-title">
+            <div class={styles.showcaseHeader}>
+                <p class={styles.eyebrow}>Design Audit</p>
+                <h2 id="audit-title">Audit design quality before handoff</h2>
+                <p>
+                    Check text contrast, identify hard-coded values, and find opportunities to improve token usage
+                    directly in Figma. Review affected layers and suggested Variables or Styles without modifying your
+                    design.
+                </p>
+                <ul class={styles.showcaseBenefits}>
+                    <li>Automated WCAG 2.2 AA text contrast with manual review for uncertain contrast and graphical elements.</li>
+                    <li>Find hard-coded colors, spacing, radii, and font sizes, plus direct Primitive Variable bindings.</li>
+                    <li>Review mode-aware Variable suggestions and separate Accessibility and Token Usage scores.</li>
+                </ul>
+                <p>The read-only audit reports suggestions but does not automatically apply fixes or establish full WCAG conformance.</p>
+                <div class={styles.actions}>
+                    <a class={`${styles.secondaryAction} ${styles.action}`} href={`${baseUrl}docs/figma-plugin/design-audit/`}>
+                        <span>Read the Design Audit docs</span>
+                        <img src={arrowRightIcon.src} width="20" height="20" alt="" />
+                    </a>
+                </div>
             </div>
         </section>
 

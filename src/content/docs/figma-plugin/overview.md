@@ -59,9 +59,10 @@ individual issue fixes.
 The **Design** tab audits either the current page or the entire file.
 It reports:
 
-- text contrast and readability findings;
-- hard-coded fills, strokes, spacing, radii, and font sizes;
-- layers bound directly to primitive variables when a higher-level token exists;
+- automated WCAG AA text contrast and manual-review findings for graphical or
+  uncertain elements;
+- token-usage warnings for hard-coded colors, spacing and radii, unbound font
+  sizes, and direct primitive bindings;
 - token coverage and separate accessibility and token-usage scores.
 
 See [Design Audit](../design-audit/) for scan scopes, measurements, findings,
@@ -74,7 +75,8 @@ and limitations.
 3. Run **Essentials** first and fix broken references and architecture issues.
 4. Run **All checks** when you need validation and linting details.
 5. Open the **Design** tab and choose **Current page** or **Entire file**.
-6. Fix accessibility findings and bind hard-coded values to suggested tokens.
+6. Fix accessibility findings and manually bind hard-coded values to suitable
+   suggested tokens.
 7. Export DTCG JSON and review the generated files and warnings.
 8. Export a platform format only after the DTCG result is readable.
 
