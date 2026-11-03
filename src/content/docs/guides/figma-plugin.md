@@ -77,6 +77,11 @@ See [Tailwind namespaces are valid](../../figma-plugin/token-checks-issues/#bad-
 
 See [The rem base is valid](../../figma-plugin/token-checks-issues/#bad-rem-base).
 
+<a id="dtcg-reader"></a>
+### Token data could not be checked
+
+See [Token data could not be checked](../../figma-plugin/token-checks-issues/#dtcg-reader).
+
 ## Legacy design-audit anchors
 
 <a id="text-contrast"></a>

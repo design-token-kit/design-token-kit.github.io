@@ -18,12 +18,15 @@
     position: sticky;
     top: var(--semantic-space-6);
     align-self: start;
+    max-height: calc(100vh - (var(--semantic-space-6) * 2));
+    overflow-y: auto;
     padding: var(--semantic-space-5);
     background: var(--semantic-color-surface-glass);
     border: var(--primitive-size-borderWidthSm) solid var(--semantic-color-border-subtle);
     border-radius: var(--semantic-radius-lg);
     box-shadow: var(--semantic-shadow-sm);
     backdrop-filter: blur(1rem);
+    overscroll-behavior: contain;
 }
 
 .sidebarTitle {
@@ -51,7 +54,7 @@
 
     ul {
         display: grid;
-        gap: var(--semantic-space-2);
+        gap: var(--semantic-space-1);
         margin: var(--semantic-space-0);
         padding: var(--semantic-space-0);
         list-style: none;
@@ -59,7 +62,7 @@
 
     a {
         display: block;
-        padding: var(--semantic-space-2) var(--semantic-space-3);
+        padding: var(--semantic-space-1) var(--semantic-space-3);
         color: var(--semantic-color-text-secondary);
         font-size: var(--semantic-font-size-sm);
         font-weight: var(--semantic-font-weight-semibold);
@@ -235,6 +238,9 @@
 
     .sidebar {
         position: static;
+        max-height: none;
+        overflow: visible;
+        overscroll-behavior: auto;
     }
 }
 
