@@ -36,8 +36,8 @@ press **Run again**.
 
 Design Token Kit checks text contrast against WCAG 2.2 AA when the text and its
 background can be measured.
-It highlights graphical elements and other uncertain visual elements that need
-manual review.
+It reports supported symbolic text layers and other uncertain contrast cases
+that need manual review.
 The score shows the percentage of automated checks passed, not overall
 accessibility or WCAG conformance.
 Some requirements cannot be verified from a Figma design alone.
@@ -350,9 +350,11 @@ Use this workflow instead:
 
 ## Reading the results
 
-The audit shows separate blocks for **Accessibility** and **Token usage**.
-Each block has a score and grade.
-Findings can be filtered by **All**, **Errors**, **Warnings**, or **Not checked**.
+The audit shows separate blocks for **Accessibility** and **Token usage** when
+there is data for that category.
+Each available block has a score and grade, or shows **N/A** when no automated
+check can be evaluated.
+Expand finding groups to review their details and affected layers or properties.
 
 Each finding includes:
 

@@ -59,8 +59,8 @@ individual issue fixes.
 The **Design** tab audits either the current page or the entire file.
 It reports:
 
-- automated WCAG AA text contrast and manual-review findings for graphical or
-  uncertain elements;
+- automated WCAG AA text contrast and manual-review findings for supported
+  symbolic text or uncertain contrast cases;
 - token-usage warnings for hard-coded colors, spacing and radii, unbound font
   sizes, and direct primitive bindings;
 - token coverage and separate accessibility and token-usage scores.

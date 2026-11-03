@@ -23,7 +23,8 @@ selected validation and lint rules.
 **Essentials** covers the core architecture rules.
 It reviews token layers, reference order, raw values, broken references, and
 component independence.
-Violations are shown as warnings.
+Architecture findings are shown as warnings in this rule set.
+Broken references remain errors.
 
 ### All checks
 
@@ -40,12 +41,21 @@ The check set is selected before pressing **Analyze tokens** or **Run again**.
 
 ## Severity and results
 
-Each check card is shown as one of these states:
+Issue cards use these result states:
 
 - **OK** means that no issue was found.
 - **Warning** means that the token architecture or metadata needs review.
 - **Error** means that the token data cannot be safely resolved, or a core
   validation check reports an error.
+
+The panel also has informational states:
+
+- **No tokens found** means that no exportable local Variables or Styles were
+  found.
+- **Token data could not be checked** means that generated token data could not
+  be read.
+- **Architecture checks not run** means that validation errors caused later
+  checks to be skipped.
 
 In Essentials, architecture cards are presented as warnings for compatibility
 with the plugin workflow.
