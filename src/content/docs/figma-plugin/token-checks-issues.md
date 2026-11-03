@@ -300,6 +300,16 @@ Component-to-component references create hidden coupling between components.
 **How to fix:** Move the shared decision to a semantic token and reference that
 semantic token from both components.
 
+This card groups references between different components.
+The component name is the second path segment, so `component/card/...` and
+`component/button/...` are different components.
+
+A reference between two tokens in the same component is still invalid because
+it is a same-layer reference.
+For example, `component/button/background` referencing
+`component/button/text` remains under **Invalid layer references**, not this
+card.
+
 <a id="type-mismatch"></a>
 ### Token type mismatch
 
@@ -433,6 +443,23 @@ Use those details to find malformed generated tokens or an exporter warning.
 Correct the generated data and run the analysis again.
 
 This is a token data error, not an indication that the Figma file has no tokens.
+
+<a id="checks-not-run"></a>
+### Architecture checks not run
+
+**Description:** Architecture and lint checks were skipped because token
+validation failed.
+
+The plugin runs validation checks before the later architecture and lint checks.
+When validation reports an error, those later checks are not run.
+The plugin shows this informational state instead of treating skipped checks as
+passed checks.
+
+The **Architecture Score** is `N/A` when this state is present.
+The score is unavailable because the required checks did not all run.
+
+Resolve the validation errors shown in the analysis, then run **Analyze tokens**
+or **Run again** to execute the skipped checks.
 
 ## Readable token files
 

@@ -107,6 +107,14 @@ Use the primary names above in new code and documentation.
 - `createTokenHtmlShowcase()`
 - `createTokenStats()`
 
+### Design audits
+
+- `TokenAuditor`
+- `auditTextSamples()`
+- `auditTextContrastSamples()`
+- `auditUsageSamples()`
+- [Design Audit API](../audit/)
+
 ## Browser integration
 
 The [Browser API guide](../browser-api/) covers installation, file handling,

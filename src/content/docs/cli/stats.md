@@ -76,6 +76,7 @@ cat tokens.yaml | dtokens stats
 
 ## Related pages
 
+- [Audit design tokens](../audit/)
 - [Generate a showcase](../../cli/showcase/)
 - [Core overview](../../core/overview/)
 - [Core validation](../../core/validation/)

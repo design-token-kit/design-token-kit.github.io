@@ -1,6 +1,6 @@
 ﻿---
 title: Design Audit
-description: Check accessibility, readability, and token usage on the current page or entire Figma file.
+description: Check accessibility and token usage on the current page or entire Figma file.
 section: Figma Plugin
 order: 4
 ---
@@ -34,11 +34,14 @@ press **Run again**.
 
 ## Accessibility checks
 
-Design Token Kit checks text contrast against WCAG 2.2 AA and highlights graphical elements that need manual review. The score shows the percentage of automated checks passed, not overall accessibility or WCAG conformance. Some requirements cannot be verified from a Figma design alone.
-
-WCAG AA text contrast is checked automatically when the text and its background
-can be measured. Graphical symbols and other uncertain visual elements may need
-manual review. The audit does not modify the Figma file.
+Design Token Kit checks text contrast against WCAG 2.2 AA when the text and its
+background can be measured.
+It highlights graphical elements and other uncertain visual elements that need
+manual review.
+The score shows the percentage of automated checks passed, not overall
+accessibility or WCAG conformance.
+Some requirements cannot be verified from a Figma design alone.
+The audit does not modify the Figma file.
 
 <a id="text-contrast"></a>
 ### Text contrast - WCAG 1.4.3
@@ -81,6 +84,9 @@ not a current Figma Design tab Accessibility warning and is not itself a WCAG
 conformance requirement.
 
 This compatibility anchor is retained for existing links.
+
+These reusable readability rules are documented in the
+[Core Design Audit API](../../core/audit/).
 
 <a id="line-height"></a>
 ### Minimum body line height - Core readability rule
@@ -326,20 +332,9 @@ Token Coverage is calculated as:
 floor(100 * boundProperties / auditedProperties)
 ```
 
-The Token Usage Score is calculated as:
-
-```text
-floor(100 * propertiesWithoutFindings / auditedProperties)
-```
-
 Each warning group shows how many affected properties have a possible
 replacement match.
 This is not the number of properties automatically fixed.
-
-A property bound directly to a Primitive Variable can count toward Token
-Coverage while reducing the Token Usage Score when it produces a direct
-primitive-binding finding.
-Token Usage measures design-system usage and is not part of WCAG conformance.
 
 ### Manual workflow for warning groups
 
@@ -392,12 +387,13 @@ passed, `46` failed, and `112` require manual review, so the score is
 Token usage uses this formula:
 
 ```text
-100 x properties without findings / properties
+floor(100 x properties without findings / properties)
 ```
 
 The score treats direct primitive bindings as findings when a higher-level
 Variable exists.
 It is different from token coverage, which counts every bound property.
+Token Usage measures design-system usage and is not part of WCAG conformance.
 
 Both scores use these Design Token Kit grades:
 

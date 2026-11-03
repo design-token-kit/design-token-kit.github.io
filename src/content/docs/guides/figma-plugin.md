@@ -102,7 +102,9 @@ See [Core body line-height readability rule](../../figma-plugin/design-audit/#li
 <a id="hardcoded-value"></a>
 ### Hard-coded values
 
-See [Hard-coded colors and token-usage guidance](../../figma-plugin/design-audit/#hardcoded-value).
+See [Hard-coded colors](../../figma-plugin/design-audit/#hardcoded-value),
+[hard-coded spacing and radii](../../figma-plugin/design-audit/#hardcoded-spacing),
+and [unbound font sizes](../../figma-plugin/design-audit/#hardcoded-font-size).
 
 <a id="primitive-binding"></a>
 ### Primitive bindings

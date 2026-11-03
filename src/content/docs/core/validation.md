@@ -139,5 +139,6 @@ if (!hasErrors) {
 ## Related pages
 
 - [CLI validation](../../cli/validate/)
+- [Design Audit API](../audit/)
 - [Parse and load tokens](../../core/parsing/)
 - [Convert with the Core API](../../core/conversion/)

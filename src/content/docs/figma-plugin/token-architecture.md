@@ -34,8 +34,8 @@ The first segment should be `primitive`, `semantic`, or `component`.
 Use at least three segments and use lowercase kebab-case:
 
 ```text
-primitive/color/blue/500
-semantic/color/text/primary
+primitive/color/brand/500
+semantic/color/text-default
 component/button/primary/background
 ```
 
@@ -102,11 +102,9 @@ For example:
 {
   "semantic": {
     "color": {
-      "text": {
-        "primary": {
-          "$type": "color",
-          "$value": "{primitive.color.neutral.900}"
-        }
+      "text-default": {
+        "$type": "color",
+        "$value": "{primitive.color.slate.100}"
       }
     }
   }
@@ -126,19 +124,77 @@ Do not mix dimension and unitless number values in one alias chain.
 If an alias target is deleted, the exporter can continue with a warning.
 Always review exporter warnings before using the output.
 
+## Reference provenance
+
+When Figma composes a color from aliases to individual color properties, the
+exporter can preserve the original aliases in the optional DTCG extension
+`io.github.design-token-kit.referenceSources`:
+
+```json
+{
+  "$extensions": {
+    "io.github.design-token-kit": {
+      "referenceSources": {
+        "#/primitive/color/blue/$value/colorSpace":
+          "{semantic.color.action}"
+      }
+    }
+  }
+}
+```
+
+The `referenceSources` object maps a DTCG property pointer inside `$value` to
+the original Figma alias.
+Core's `layer-reference` check reads this metadata when a composed color's
+resolved property reference does not show the original alias layer.
+The CLI uses the same Core check for the exported file.
+
+This extension is optional metadata, not a fourth token layer.
+It does not change the semantic theme architecture or the recommended
+collection modes.
+Consumers that do not know this vendor extension can ignore it and use the
+token value normally.
+
 ## Collections, modes, and themes
 
 The token path comes from the Variable name, not the collection name.
 Collections organize Variables and modes but do not create token layers.
 
-Recommended collections are:
+The recommended Figma collection layout matches the token layers:
 
-- `primitive` for scales and usually one mode;
-- `theme` for semantic roles that change between Light and Dark modes;
-- `density` for optional semantic dimension modes;
-- `components` for component contracts that alias semantic tokens.
+- `Primitive` contains the raw palette and scales and uses one mode.
+- `Semantic` maps primitives to design roles and contains the Light and Dark
+  theme modes.
+- `Component` contains component contracts that alias semantic tokens and uses
+  one mode.
 
-Keep theme, brand, and density modes in separate collections.
+Primitive values stay stable between themes.
+The shared primitive palette must include the values needed by every theme.
+For example, the light theme can use `primitive/color/white`, while the dark
+theme maps `semantic/color/background-page` to
+`primitive/color/slate/900`.
+The primitive value is not overridden in a dark mode.
+
+Dark themes remap semantic roles to different existing primitives.
+For example, `semantic/color/action-primary` can reference
+`primitive/color/brand/500` in Light and `primitive/color/brand/400` in Dark.
+The component reference remains unchanged:
+
+```text
+component/button/primary/background
+    -> semantic/color/action-primary
+```
+
+This is the recommended architecture, not a limitation of the exporter.
+The plugin can export modes from multiple local collections.
+It writes the default mode to `tokens.json`, writes non-default modes to
+`tokens.<mode>.json`, and combines values with matching mode names.
+Use a single mode in the Primitive and Component collections so that theme
+changes stay in Semantic and the exported files preserve the intended token
+graph.
+
+If modes exist in multiple collections, agree on their names because matching
+mode names are combined into one exported file.
 Variable names must be unique across the file, and two Variables must not
 export to the same token path.
 
@@ -183,10 +239,10 @@ The following chain keeps a palette value separate from its role and component
 contract:
 
 ```text
-primitive/color/blue/500
+primitive/color/brand/500
         |
         v
-semantic/color/action/primary
+semantic/color/action-primary
         |
         v
 component/button/primary/background
@@ -201,6 +257,8 @@ renaming the component token.
 - Keep raw values in primitive tokens.
 - Keep aliases local and type-compatible.
 - Check that semantic and component references follow the layer order.
-- Keep theme, brand, and density modes separate.
+- Keep theme modes in the `Semantic` collection.
+- Use one mode in the `Primitive` and `Component` collections.
+- Include the primitive values needed by every theme in the shared palette.
 - Use component Variables in component layers where a contract exists.
 - Review architecture findings and exporter warnings.
