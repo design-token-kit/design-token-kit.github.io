@@ -12,13 +12,15 @@ interface Props {
 
 const { docs, currentSlug, frontmatter, Content } = Astro.props;
 
-const groupedDocs = docs.reduce<Record<string, DocEntry[]>>((groups, doc) => {
-    const sectionDocs = groups[doc.frontmatter.section] ?? [];
-    sectionDocs.push(doc);
-    groups[doc.frontmatter.section] = sectionDocs;
+const groupedDocs = docs
+    .filter((doc) => !doc.frontmatter.legacy)
+    .reduce<Record<string, DocEntry[]>>((groups, doc) => {
+        const sectionDocs = groups[doc.frontmatter.section] ?? [];
+        sectionDocs.push(doc);
+        groups[doc.frontmatter.section] = sectionDocs;
 
-    return groups;
-}, {});
+        return groups;
+    }, {});
 ---
 
 <main class={styles.docsPage}>

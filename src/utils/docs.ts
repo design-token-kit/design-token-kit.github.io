@@ -5,6 +5,7 @@ export interface DocFrontmatter {
     description: string;
     section: string;
     order: number;
+    legacy?: boolean;
 }
 
 export interface DocEntry {
@@ -16,7 +17,7 @@ export interface DocEntry {
 
 const docModules = import.meta.glob<MarkdownInstance<DocFrontmatter>>('../content/docs/**/*.md');
 
-const sectionOrder = ['Introduction', 'CLI', 'Core API', 'Formats'];
+const sectionOrder = ['Introduction', 'Core API', 'CLI', 'Figma Plugin', 'Formats'];
 
 const baseUrl = import.meta.env.BASE_URL.endsWith('/')
     ? import.meta.env.BASE_URL

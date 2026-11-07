@@ -155,6 +155,12 @@ npx @design-token-kit/cli stats tokens.json \
   --open
 ```
 
+### Design audit
+
+```bash
+npx @design-token-kit/cli audit tokens.json
+```
+
 ## Supported inputs
 
 Design Token Kit accepts:
@@ -191,6 +197,7 @@ files or a tar archive.
 ## Next steps
 
 - [Validate token files](../cli/validate/)
+- [Audit design tokens](../cli/audit/)
 - [Convert token files](../cli/convert/)
 - [Use the Core API](../core/overview/)
 - [Use supported formats](../formats/dtcg/)

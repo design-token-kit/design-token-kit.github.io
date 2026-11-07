@@ -194,6 +194,7 @@ This makes `check` suitable for CI pipelines and package scripts.
 ## Related pages
 
 - [Getting started](../../getting-started/)
+- [Audit design tokens](../audit/)
 - [DTCG JSON](../../formats/dtcg/)
 - [HRDT YAML](../../formats/hrdt/)
 - [DESIGN.md](../../formats/design-md/)
