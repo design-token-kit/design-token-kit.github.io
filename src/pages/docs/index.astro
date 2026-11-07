@@ -2,6 +2,7 @@
 import DocsPage from '#/components/docs-page/DocsPage.astro';
 import Footer from '#/components/Footer/Footer.astro';
 import Header from '#/components/Header/Header.astro';
+import JsonLdTechArticle from '#/components/json-ld/JsonLdTechArticle.astro';
 import Layout from '#/layouts/Layout.astro';
 import { getDocBySlug, getDocs } from '#/utils/docs';
 
@@ -17,6 +18,12 @@ if (!currentDoc) {
     title={`${currentDoc.frontmatter.title} | Design Token Kit`}
     description={currentDoc.frontmatter.description}
 >
+    <JsonLdTechArticle
+        title={currentDoc.frontmatter.title}
+        description={currentDoc.frontmatter.description}
+        url={Astro.url.href}
+        siteUrl={Astro.site.href}
+    />
     <Header />
     <DocsPage
         docs={docs}

@@ -1,0 +1,36 @@
+---
+/**
+ * Renders structured data for the Design Token Kit website and organization.
+ */
+interface Props {
+    url: string;
+    description: string;
+}
+
+const { url, description } = Astro.props;
+const organizationId = `${url}#organization`;
+const websiteId = `${url}#website`;
+const logoUrl = new URL('fav-logo.png', Astro.site).href;
+const jsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': [
+        {
+            '@type': 'Organization',
+            '@id': organizationId,
+            name: 'Design Token Kit',
+            url,
+            logo: logoUrl,
+        },
+        {
+            '@type': 'WebSite',
+            '@id': websiteId,
+            name: 'Design Token Kit',
+            description,
+            url,
+            publisher: { '@id': organizationId },
+        },
+    ],
+});
+---
+
+<script type="application/ld+json" set:html={jsonLd} />

@@ -8,6 +8,7 @@ import slide5 from '#/assets/slides/slide5.jpg';
 import slide1 from '#/assets/slides/slide1.jpg';
 import Footer from '#/components/Footer/Footer.astro';
 import Header from '#/components/Header/Header.astro';
+import JsonLdSoftwareApplication from '#/components/json-ld/JsonLdSoftwareApplication.astro';
 import Layout from '#/layouts/Layout.astro';
 import styles from '#/pages/plugin/plugin.module.scss';
 
@@ -59,6 +60,10 @@ const pluginSections = [
     title="Figma Plugin | Design Token Kit"
     description="Export, audit, and convert Figma Variables and Styles for production-ready design token workflows."
 >
+    <JsonLdSoftwareApplication
+        url={Astro.url.href}
+        description="Export, audit, and convert Figma Variables and Styles for production-ready design token workflows."
+    />
     <Header />
 
     <main class={styles.page}>

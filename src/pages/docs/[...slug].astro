@@ -2,6 +2,7 @@
 import DocsPage from '#/components/docs-page/DocsPage.astro';
 import Footer from '#/components/Footer/Footer.astro';
 import Header from '#/components/Header/Header.astro';
+import JsonLdTechArticle from '#/components/json-ld/JsonLdTechArticle.astro';
 import Layout from '#/layouts/Layout.astro';
 import { getDocs } from '#/utils/docs';
 
@@ -20,12 +21,23 @@ const currentDoc = docs.find((doc) => doc.slug === Astro.props.currentSlug);
 if (!currentDoc) {
     throw new Error(`Missing documentation page for "${Astro.props.currentSlug}".`);
 }
+
+const canonicalUrl =
+    currentDoc.slug === 'getting-started' ? new URL('docs/', Astro.site).href : undefined;
+const pageUrl = canonicalUrl ?? Astro.url.href;
 ---
 
 <Layout
     title={`${currentDoc.frontmatter.title} | Design Token Kit`}
     description={currentDoc.frontmatter.description}
+    canonicalUrl={canonicalUrl}
 >
+    <JsonLdTechArticle
+        title={currentDoc.frontmatter.title}
+        description={currentDoc.frontmatter.description}
+        url={pageUrl}
+        siteUrl={Astro.site.href}
+    />
     <Header />
     <DocsPage
         docs={docs}

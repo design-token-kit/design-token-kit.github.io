@@ -1,0 +1,58 @@
+---
+/**
+ * Renders technical article and breadcrumb structured data for documentation.
+ */
+interface Props {
+    title: string;
+    description: string;
+    url: string;
+    siteUrl: string;
+}
+
+const { title, description, url, siteUrl } = Astro.props;
+const breadcrumbId = `${url}#breadcrumb`;
+const jsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': [
+        {
+            '@type': 'TechArticle',
+            headline: title,
+            description,
+            url,
+            inLanguage: 'en',
+            isPartOf: {
+                '@type': 'WebSite',
+                name: 'Design Token Kit',
+                url: siteUrl,
+            },
+            breadcrumb: { '@id': breadcrumbId },
+        },
+        {
+            '@type': 'BreadcrumbList',
+            '@id': breadcrumbId,
+            itemListElement: [
+                {
+                    '@type': 'ListItem',
+                    position: 1,
+                    name: 'Home',
+                    item: siteUrl,
+                },
+                {
+                    '@type': 'ListItem',
+                    position: 2,
+                    name: 'Documentation',
+                    item: new URL('docs/', siteUrl).href,
+                },
+                {
+                    '@type': 'ListItem',
+                    position: 3,
+                    name: title,
+                    item: url,
+                },
+            ],
+        },
+    ],
+});
+---
+
+<script type="application/ld+json" set:html={jsonLd} />

@@ -41,7 +41,7 @@ const imageUrl = image ? new URL(image, Astro.site).href : undefined;
         <meta name="description" content={description} />
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
-        {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+            <link rel="canonical" href={canonicalUrl ?? pageUrl} />
 
         <OpenGraph
             title={title}

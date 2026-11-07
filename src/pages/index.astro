@@ -1,5 +1,6 @@
 ---
 import HomePage from '#/components/home-page/HomePage.astro';
+import JsonLdWebsite from '#/components/json-ld/JsonLdWebsite.astro';
 import Layout from '#/layouts/Layout.astro';
 ---
 
@@ -7,5 +8,9 @@ import Layout from '#/layouts/Layout.astro';
     title="Design Token Kit"
     description="Validate, convert, and showcase DTCG design tokens."
 >
+    <JsonLdWebsite
+        url={Astro.site.href}
+        description="Validate, convert, and showcase DTCG design tokens."
+    />
     <HomePage />
 </Layout>

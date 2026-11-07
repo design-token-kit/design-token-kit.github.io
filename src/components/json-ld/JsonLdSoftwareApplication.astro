@@ -1,0 +1,22 @@
+---
+/**
+ * Renders structured data for the Design Token Kit Figma plugin.
+ */
+interface Props {
+    url: string;
+    description: string;
+}
+
+const { url, description } = Astro.props;
+const jsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Design Token Kit Figma plugin',
+    description,
+    url,
+    applicationCategory: 'DeveloperApplication',
+    sameAs: 'https://www.figma.com/community/plugin/1661669063434861129/design-token-kit',
+});
+---
+
+<script type="application/ld+json" set:html={jsonLd} />
