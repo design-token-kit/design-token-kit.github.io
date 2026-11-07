@@ -18,14 +18,12 @@
     }
 
     p:last-child {
-        max-width: var(--primitive-size-copyMaxWidthXl);
         margin: var(--semantic-space-3) auto var(--semantic-space-0);
         color: var(--semantic-color-text-secondary);
-        font-size: var(--semantic-font-size-sm);
-        font-weight: var(--semantic-font-weight-semibold);
-        line-height: var(--semantic-font-lineHeight-normal);
+        font-size: var(--semantic-font-size-base);
+        font-weight: var(--semantic-font-weight-normal);
+        line-height: normal;
         text-align: center;
-        text-wrap: balance;
     }
 }
 
