@@ -1,9 +1,11 @@
+import type { BrowserInputFormat } from '@design-token-kit/core/browser';
+
 /** A sample token document that visitors can load into the playground. */
 export interface PlaygroundExample {
     readonly id: string;
     readonly label: string;
     readonly fileName: string;
-    readonly inputFormat: 'dtcg' | 'hrdt' | 'design-md';
+    readonly inputFormat: BrowserInputFormat;
     readonly content: string;
 }
 
@@ -119,9 +121,13 @@ components:
 A calm, editorial palette with a teal primary color and warm accents.
 `;
 
+const dtcgFormat = 'dtcg' as BrowserInputFormat;
+const hrdtFormat = 'hrdt' as BrowserInputFormat;
+const designMdFormat = 'design-md' as BrowserInputFormat;
+
 export const playgroundExamples: readonly PlaygroundExample[] = [
-    { id: 'dtcg', label: 'DTCG JSON', fileName: 'tokens.json', inputFormat: 'dtcg', content: `${JSON.stringify(dtcg, null, 2)}\n` },
-    { id: 'dtcg-property-references', label: 'DTCG JSON with property references', fileName: 'tokens.json', inputFormat: 'dtcg', content: `${JSON.stringify(dtcgPropertyReferences, null, 2)}\n` },
-    { id: 'hrdt', label: 'HRDT YAML with a theme', fileName: 'tokens.yaml', inputFormat: 'hrdt', content: hrdt },
-    { id: 'design-md', label: 'DESIGN.md', fileName: 'DESIGN.md', inputFormat: 'design-md', content: designMd },
+    { id: 'dtcg', label: 'DTCG JSON', fileName: 'tokens.json', inputFormat: dtcgFormat, content: `${JSON.stringify(dtcg, null, 2)}\n` },
+    { id: 'dtcg-property-references', label: 'DTCG JSON with property references', fileName: 'tokens.json', inputFormat: dtcgFormat, content: `${JSON.stringify(dtcgPropertyReferences, null, 2)}\n` },
+    { id: 'hrdt', label: 'HRDT YAML with a theme', fileName: 'tokens.yaml', inputFormat: hrdtFormat, content: hrdt },
+    { id: 'design-md', label: 'DESIGN.md', fileName: 'DESIGN.md', inputFormat: designMdFormat, content: designMd },
 ];

@@ -12,6 +12,8 @@
     "tokens:check": "dtokens check --scope validate --inform dtcg src/styles/tokens/tokens.json",
     "tokens:build": "dtokens convert --inform dtcg --outform css --out src/styles/tokens/tokens.css src/styles/tokens/tokens.json",
     "lint:styles": "stylelint \"src/**/*.scss\"",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "build": "npm run lint:styles && astro build",
     "preview": "astro preview",
     "astro": "astro"
@@ -25,10 +27,13 @@
   "devDependencies": {
     "@design-token-kit/cli": "3.2.0",
     "@types/node": "22.20.1",
+    "@vitest/coverage-v8": "4.1.7",
+    "happy-dom": "21.0.4",
     "postcss-scss": "4.0.9",
     "stylelint": "16.23.1",
     "stylelint-config-standard-scss": "15.0.1",
     "stylelint-declaration-strict-value": "1.10.11",
-    "typescript": "5.9.2"
+    "typescript": "5.9.2",
+    "vitest": "4.1.7"
   }
 }

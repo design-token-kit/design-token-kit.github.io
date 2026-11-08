@@ -185,7 +185,12 @@ export function initTokenPlayground(root: HTMLElement): void {
         const hasOutputs = outputs.length > 0;
         outputFileSelect.hidden = outputs.length < 2;
         outputFileSelect.parentElement?.toggleAttribute('hidden', outputs.length < 2);
-        outputFileSelect.replaceChildren(...outputs.map((output, index) => new Option(output.fileName, String(index))));
+        outputFileSelect.replaceChildren(...outputs.map((output, index) => {
+            const option = document.createElement('option');
+            option.value = String(index);
+            option.textContent = output.fileName;
+            return option;
+        }));
         outputFileSelect.value = String(selectedOutput);
 
         const outputContent = outputs[selectedOutput]?.content ?? '';
@@ -404,12 +409,12 @@ function fill(item: HTMLElement, name: string, text: string): void {
     target.hidden = text === '';
 }
 
-function lineNumbers(content: string): string {
+export function lineNumbers(content: string): string {
     const count = Math.max(1, content.split('\n').length);
     return Array.from({ length: count }, (_, index) => String(index + 1)).join('\n');
 }
 
-function highlightInput(content: string): string {
+export function highlightInput(content: string): string {
     const tokenPattern = /"(?:\\.|[^"\\])*"|-?\d+(?:\.\d+)?/g;
     let highlighted = '';
     let cursor = 0;
@@ -427,7 +432,7 @@ function highlightInput(content: string): string {
     return highlighted + escapeHtml(content.slice(cursor));
 }
 
-function highlightOutput(content: string): string {
+export function highlightOutput(content: string): string {
     const escaped = escapeHtml(content);
     return escaped.replace(
         /(&lt;!--[\s\S]*?--&gt;)|(&lt;\/?[\w:.-]+[\s\S]*?&gt;)/g,
@@ -435,16 +440,16 @@ function highlightOutput(content: string): string {
     );
 }
 
-function escapeHtml(content: string): string {
+export function escapeHtml(content: string): string {
     return content.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 }
 
-function plural(count: number, noun: string): string {
+export function plural(count: number, noun: string): string {
     if (count === 0) return '';
     return `${count} ${noun}${count === 1 ? '' : 's'}`;
 }
 
 /** Android outputs use resource paths such as values-night/colors.xml. */
-function baseName(fileName: string): string {
+export function baseName(fileName: string): string {
     return fileName.replaceAll('/', '_');
 }
