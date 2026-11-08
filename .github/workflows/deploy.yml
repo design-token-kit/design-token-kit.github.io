@@ -27,6 +27,9 @@ jobs:
         with:
           node-version: 22
 
+      - name: Setup npm
+        run: npm install --global npm@11.19.0 --no-audit --no-fund
+
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
